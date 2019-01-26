@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Things Counter</string>
+    <string name="action_settings">Einstellung</string>
+    <string name="navigation_drawer_open">Navigationsleiste öffnen</string>
+    <string name="navigation_drawer_close">Navigationsleiste schließen</string>
+    <string name="nav_header_title">Things Counter</string>
+    <string name="home_positiv_summary_txt">Positiv.Zusammenfassung</string>
+    <string name="home_neutral_summary_txt">Negativ.Zusammenfassung</string>
+    <string name="home_negative_summary_txt">Neutral.Zusammenfassung</string>
+    <string name="name_doublepoint">Name :</string>
+    <string name="count_slach_goal_doublepoint">Anzahl / Ziel :</string>
+    <string name="day_doublepoint">Tag :</string>
+    <string name="show_history_btn_txt">Verlauf Anzeigen</string>
+    <string name="reset_history_btn_txt">Zurücksetzen</string>
+    <string name="delete_thing_btn_txt">Löschen</string>
+    <string name="edit_thing_btn_txt">Bearbeiten</string>
+    <string name="catagory_doublepoint">Katagorie :</string>
+    <string name="goal_doublepoint">Ziel :</string>
+    <string name="type_doublepoint">Art :</string>
+    <string name="positive">Positiv</string>
+    <string name="negative">Negativ</string>
+    <string name="neutral">Neutral</string>
+    <string name="cancel">Beenden</string>
+    <string name="add">Hinzufügen</string>
+    <string name="more_details">"........ Weitere Details........ "</string>
+    <string name="name_hint">Name Eingeben</string>
+    <string name="options">Einstellung</string>
+    <string name="allow_notifications">Benachrichtigungen zulassen</string>
+    <string name="notification_time">Benachrichtigungen Zeit</string>
+    <string name="notification_type">Benachrichtigungen Type</string>
+    <string name="ongoing">Fortlaufend</string>
+    <string name="daily">Tägliche Erinnerung</string>
+    <string name="data_to_show">Angezeigte Daten</string>
+    <string name="completed_total">Abgeschlossen / Total</string>
+    <string name="counts_goals">Anzahl / Ziele</string>
+    <string name="current_cycle">Aktuell Tag</string>
+    <string name="date_doublepoint">Datum :</string>
+    <string name="count_doublepoint">Zahl :</string>
+    <string name="nr_day_doublepoint">#Tag :</string>
+    <string name="reset_time">Zeit Zurucksetzen</string>
+    <string name="edit_thing">Bearbeiten</string>
+    <string name="add_btn_txt">Hinzufügen</string>
+    <string name="language">Sprache</string>
+    <string name="home">Hauptseite</string>
+    <string-array name="languages_arr">
+        <item>Englisch</item>
+        <item>Deutsch</item>
+        <item>Arabisch</item>
+    </string-array>
+    <string name="all">Alles</string>
+    <string name="change">ändern</string>
+    <string name="go_back">zurück</string>
+    <string name="disabled_things">Deaktiviert Dinge</string>
+    <string name="status_doublepoint">Status :</string>
+    <string name="enabled">Aktiviert</string>
+    <string name="enable">Aktivieren</string>
+    <string name="previous_counts">Vorherige Zählungen</string>
+    <string name="previous_goals">Vorherige Ziele</string>
+    <string name="completed">Abgeschlossen</string>
+    <string-array name="Catagories">
+        <item>Ernährung</item>
+        <item>Unterhaltung</item>
+        <item>Notwendigkeit</item>
+        <item>Sucht</item>
+        <item>Keine Kategorie</item>
+    </string-array>
+    <string name="history_data">Verlauf Daten</string>
+    <string name="completion_ratio">Fertigstellungsgrad</string>
+    <string name="total_number">Gesamtzahl</string>
+    <string name="allow_overcounting">Überzählen zulassen</string>
+    <string name="ok">OK</string>
+    <string name="contunue">Weiter</string>
+    <string name="proceed">Weiter</string>
+    <string name="erase">Löschen</string>
+    <string name="allow_overcounting_diag_msg">Wenn Sie fortfahren, werden alle aktuellen Daten mit einer höheren Anzahl
+        als ihre Ziele auf den Wert ihrer Ziele zurückgesetzt
+    </string>
+    <string name="delete_thing_diag_msg">Wenn Sie fortfahren, wird das Ding und sein Verlauf entfernt</string>
+    <string name="delete_thing_prompt_delete_prev_diag_msg">Möchten Sie die vorherigen Verlaufsdaten des Dings von der
+        Seite \"Verlaufsdaten\" entfernen?
+    </string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="reset_one_his_diag_msg">Wenn Sie fortfahren, werden die vorherigen Verlaufsdaten von Thing gelöscht
+    </string>
+    <string name="things_display_type">Wie werden die Dinge angezeigt?</string>
+    <string name="notype">Ohne Art</string>
+    <string name="positive_negative_neutral">Positiv-Negativ-Neutral</string>
+    <string name="disabled_preview">Vorschau der deaktivierte Dinge</string>
+    <string name="enabled_preview">Vorschau der aktivierte Dinge</string>
+    <string name="color_doublepoint">Farbe :</string>
+    <string name="change_color">Farbe ändern</string>
+    <string name="choose_color">Wähle eine Farbe</string>
+    <string name="preview">Vorschau</string>
+    <string-array name="colors_arr">
+        <item>Gelb</item>
+        <item>Orange</item>
+        <item>Braun</item>
+        <item>Dunkelblau</item>
+        <item>Blau</item>
+        <item>Lila</item>
+        <item>Rosa</item>
+        <item>Grün</item>
+        <item>Rot</item>
+        <item>Grau</item>
+        <item>Schwarz</item>
+        <item>Dunkelorange</item>
+        <item>MilitaryGreen</item>
+        <item>Dunkelgrün</item>
+        <item>DarkerBlue</item>
+        <item>Morasaki</item>
+        <item>Dunkelrot</item>
+    </string-array>
+</resources>

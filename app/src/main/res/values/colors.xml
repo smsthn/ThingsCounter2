@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00c853</color>
+    <color name="colorPrimaryDark">#009624</color>
+    <color name="colorAccent">@android:color/black</color>
+
+    <color name="colorAccent3">#be7c4755</color>
+    <color name="colorAccent4">#be767877</color>
+    <color name="colorAccent5">#be477c7a</color>
+
+
+    <color name="PosProg">#00c853</color>
+    <color name="PosLinClr">#5efc82</color>
+    <color name="PosBtn">#1faa00</color>
+    <color name="PosDetailsBtn">#64dd17</color>
+
+    <color name="NegProg">#b61827</color>
+    <color name="NegLinClr">#ef5350</color>
+    <color name="NegBtn">#e53935</color>
+    <color name="NegDetailsBtn">#ef5350</color>
+
+    <color name="NeuProg">#8d8d8d</color>
+    <color name="NeuLinClr">#bdbdbd</color>
+    <color name="NeuBtn">#babdbe</color>
+    <color name="NeuDetailsBtn">#eceff1</color>
+
+    <color name="light_gray">#edf5f5f5</color>
+
+    <color name="transparant_green">#20338a3e</color>
+    <color name="transparant_red">#20b61827</color>
+    <color name="transparant_gray">#208d8d8d</color>
+
+</resources>

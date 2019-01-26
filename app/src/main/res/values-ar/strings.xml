@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Things Counter</string>
+    <string name="action_settings">الإعدادات</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Things Counter</string>
+    <string name="home_positiv_summary_txt">موجز الأشياء الإيجابية</string>
+    <string name="home_neutral_summary_txt">موجز الأشياء السلبية</string>
+    <string name="home_negative_summary_txt">موجز الأشياء العادية</string>
+    <string name="name_doublepoint">الاسم :</string>
+    <string name="count_slach_goal_doublepoint">العدد / الهدف:</string>
+    <string name="day_doublepoint">اليوم :</string>
+    <string name="show_history_btn_txt">عرض التاريخ</string>
+    <string name="reset_history_btn_txt">إعادة ضبط التاريخ</string>
+    <string name="delete_thing_btn_txt">حذف</string>
+    <string name="edit_thing_btn_txt">ضبط</string>
+    <string name="catagory_doublepoint">الفئة</string>
+    <string name="goal_doublepoint">الهدف :</string>
+    <string name="type_doublepoint">النوع :</string>
+    <string name="positive">إيجابي</string>
+    <string name="negative">سلبي</string>
+    <string name="neutral">عادي</string>
+    <string name="cancel">إلغاء</string>
+    <string name="add">إضف</string>
+    <string name="more_details">........ المزيد من التفاصيل ........</string>
+    <string name="name_hint">أدخل الاسم هنا</string>
+    <string name="options">خيارات</string>
+    <string name="allow_notifications">السماح بإلاشعارات</string>
+    <string name="notification_time">"وقت إلاشعار "</string>
+    <string name="notification_type">"نوع إلاشعار "</string>
+    <string name="ongoing">مستمر</string>
+    <string name="daily">تذكير يوميا</string>
+    <string name="data_to_show">نوع البيانات المراد إظهارها</string>
+    <string name="completed_total">"المجموع / مكتمل "</string>
+    <string name="counts_goals">" هدف/ عدد"</string>
+    <string name="current_cycle">اليوم الحالي</string>
+    <string name="date_doublepoint">تاريخ :</string>
+    <string name="count_doublepoint">العدد:</string>
+    <string name="nr_day_doublepoint">#يوم :</string>
+    <string name="reset_time">إعادة تعيين الوقت</string>
+    <string name="edit_thing">ضبط</string>
+    <string name="add_btn_txt">إضف</string>
+    <string name="language">اللغة</string>
+    <string name="home">الصفحة الرئيسية</string>
+    <string-array name="languages_arr">
+        <item>الإنجليزية</item>
+        <item>ألمانية</item>
+        <item>العربية</item>
+    </string-array>
+    <string name="all">الكل</string>
+    <string name="change">بدل</string>
+    <string name="go_back">الى الخلف</string>
+    <string name="disabled_things">الاشياء المتوقفة</string>
+    <string name="status_doublepoint">الحالة :</string>
+    <string name="enabled">مفعل</string>
+    <string name="enable">فعل</string>
+    <string name="previous_counts">العدادت السابقة</string>
+    <string name="previous_goals">الأهداف السابقة</string>
+    <string name="completed">المكتملة</string>
+    <string name="history_data">بيانات التاريخ</string>
+    <string-array name="Catagories">
+        <item>التغذية</item>
+        <item>الترفيه</item>
+        <item>ضرورة</item>
+        <item>إدمان</item>
+        <item>لا تصنيف</item>
+    </string-array>
+    <string name="completion_ratio">نسبة الإكمال</string>
+    <string name="total_number">العدد الإجمالي</string>
+    <string name="allow_overcounting">السماح بالعد أكثر من الهدف</string>
+    <string name="ok">موافق</string>
+    <string name="contunue">استمر</string>
+    <string name="proceed">واصل</string>
+    <string name="erase">احذف</string>
+    <string name="allow_overcounting_diag_msg">إذا تابعت جميع البيانات الحالية مع أعداد أكبر من أهدافها ، فسيتم إعادتها
+        إلى قيمة أهدافها
+    </string>
+    <string name="delete_thing_diag_msg">إذا تابعت ستتم إزالة الشيء وتاريخه</string>
+    <string name="delete_thing_prompt_delete_prev_diag_msg">هل ترغب في إزالة بيانات السجل السابقة لـالشيء من صفحة
+        \'بيانات التاريخ\'
+    </string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="reset_one_his_diag_msg">إذا تابعت سيتم حذف بيانات السجل السابقة لهذا الشيء</string>
+    <string name="things_display_type">كيفية عرض الأشياء</string>
+    <string name="positive_negative_neutral">إيجابي، سلبي، عادي</string>
+    <string name="notype">بدون نوع</string>
+    <string name="enabled_preview">معاينة الأشياء النشطة</string>
+    <string name="disabled_preview">معاينة الأشياء المعطلة</string>
+    <string name="color_doublepoint">اللون :</string>
+    <string name="change_color">غير اللون</string>
+    <string name="choose_color">اختر اللون</string>
+    <string name="preview">معاينة</string>
+    <string-array name="colors_arr">
+        <item>الأصفر</item>
+        <item>البرتقالي</item>
+        <item>بنى</item>
+        <item>أزرق غامق</item>
+        <item>أزرق</item>
+        <item>أرجواني</item>
+        <item>زهري</item>
+        <item>أخضر</item>
+        <item>أحمر</item>
+        <item>رمادي</item>
+        <item>أسود</item>
+        <item>برتقالي قاتم</item>
+        <item>الأخضر زيتي</item>
+        <item>أخضر غامق</item>
+        <item>المزيد من الأزرق الداكن</item>
+        <item>البنفسجي</item>
+        <item>احمر غامق</item>
+    </string-array>
+</resources>
