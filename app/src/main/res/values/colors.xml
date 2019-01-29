@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00c853</color>
-    <color name="colorPrimaryDark">#009624</color>
+    <color name="colorPrimary">#4f5b62</color>
+    <color name="colorPrimaryDark">#263238</color>
+    <color name="colorPrimarylight">@android:color/white</color>
     <color name="colorAccent">@android:color/black</color>
 
     <color name="colorAccent3">#be7c4755</color>
@@ -9,25 +10,107 @@
     <color name="colorAccent5">#be477c7a</color>
 
 
-    <color name="PosProg">#00c853</color>
-    <color name="PosLinClr">#5efc82</color>
-    <color name="PosBtn">#1faa00</color>
-    <color name="PosDetailsBtn">#64dd17</color>
+    <color name="yellow_dk">#fdd835</color>
+    <color name="yellow_pr">#ffff6b</color>
+    <color name="yellow_lt">#ffff6b</color>
+    <color name="yellow_trans">#20fdd835</color>
+    <color name="orange_pr">#ffa726</color>
+    <color name="orange_lt">#ffd95b</color>
+    <color name="orange_trans">#20ffa726</color>
+    <color name="brown_pr">#795548</color>
+    <color name="brown_lt">#a98274</color>
+    <color name="brown_trans">#20795548</color>
+    <color name="darkBlue_pr">#607d8b</color>
+    <color name="darkBlue_lt">#8eacbb</color>
+    <color name="darkBlue_trans">#20607d8b</color>
+    <color name="blue_pr">#29b6f6</color>
+    <color name="blue_lt">#73e8ff</color>
+    <color name="blue_trans">#2029b6f6</color>
+    <color name="purple_pr">#ab47bc</color>
+    <color name="purple_lt">#df78ef</color>
+    <color name="purple_trans">#20ab47bc</color>
+    <color name="pink_pr">#f06292</color>
+    <color name="pink_lt">#ff94c2</color>
+    <color name="pink_trans">#20f06292</color>
+    <color name="black_pr">#263238</color>
+    <color name="black_lt">#4f5b62</color>
+    <color name="black_trans">#22263238</color>
+    <color name="darkOrange_pr">#bf360c</color>
+    <color name="darkOrange_lt">#f9683a</color>
+    <color name="darkOrange_trans">#22bf360c</color>
+    <color name="militaryGreen_pr">#827717</color>
+    <color name="militaryGreen_lt">#b4a647</color>
+    <color name="militaryGreen_trans">#22827717</color>
+    <color name="darkGreen_pr">#1b5e20</color>
+    <color name="darkGreen_lt">#4c8c4a</color>
+    <color name="darkGreen_trans">#20003300</color>
+    <color name="darkerblue_pr">#0d47a1</color>
+    <color name="darkerblue_lt">#5472d3</color>
+    <color name="darkerBlue_trans">#220d47a1</color>
+    <color name="morasaki_pr">#4a148c</color>
+    <color name="morasaki_lt">#7c43bd</color>
+    <color name="morasaki_trans">#114a148c</color>
+    <color name="darkRed_pr">#b71c1c</color>
+    <color name="darkRed_lt">#f05545</color>
+    <color name="darkRed_trans">#26b71c1c</color>
 
-    <color name="NegProg">#b61827</color>
-    <color name="NegLinClr">#ef5350</color>
-    <color name="NegBtn">#e53935</color>
-    <color name="NegDetailsBtn">#ef5350</color>
+    <color name="darkOrange_dk">#827717</color>
+    <color name="orange_dk2">#c6a700</color>
+    <color name="orange_dk">#c77800</color>
+    <color name="brown_dk">#4b2c20</color>
+    <color name="darkBlue_dk">#34515e</color>
+    <color name="blue_dk">#0086c3</color>
+    <color name="purple_dk">#790e8b</color>
+    <color name="pink_dk">#ba2d65</color>
+    <color name="black_dk">#000a12</color>
+    <color name="darkRed_dk">#870000</color>
+    <color name="militaryGreen_dk">#524c00</color>
+    <color name="darkGreen_dk">#003300</color>
+    <color name="darkerBlue_dk">#002f6c</color>
+    <color name="morasaki_dk">#12005e</color>
 
-    <color name="NeuProg">#8d8d8d</color>
-    <color name="NeuLinClr">#bdbdbd</color>
-    <color name="NeuBtn">#babdbe</color>
-    <color name="NeuDetailsBtn">#eceff1</color>
+    <color name="green_pr">#00c853</color>
+    <color name="green_lt2">#5efc82</color>
+    <color name="green_dk">#1faa00</color>
+    <color name="green_lt1">#64dd17</color>
+
+    <color name="red_pr">#b61827</color>
+    <color name="red_lt2">#ef5350</color>
+    <color name="red_dk">#e53935</color>
+    <color name="red_lt1">#ef5350</color>
+
+    <color name="gray_dk">#8d8d8d</color>
+    <color name="gray_lt1">#bdbdbd</color>
+    <color name="gray_pr">#babdbe</color>
+    <color name="gray_lt2">#eceff1</color>
 
     <color name="light_gray">#edf5f5f5</color>
 
-    <color name="transparant_green">#20338a3e</color>
-    <color name="transparant_red">#20b61827</color>
-    <color name="transparant_gray">#208d8d8d</color>
+    <color name="green_trans">#20338a3e</color>
+    <color name="red_trans">#20b61827</color>
+    <color name="gray_trans">#208d8d8d</color>
+
+
+   <!-- <color name="green_pr">#bb00c853</color>
+    <color name="green_lt2">#bb5efc82</color>
+    <color name="green_dk">#bb1faa00</color>
+    <color name="green_lt1">#bb64dd17</color>
+
+    <color name="red_pr">#bbb61827</color>
+    <color name="red_lt2">#bbef5350</color>
+    <color name="red_dk">#bbe53935</color>
+    <color name="red_lt1">#bbef5350</color>
+
+    <color name="gray_dk">#bb8d8d8d</color>
+    <color name="gray_lt1">#bbbdbdbd</color>
+    <color name="gray_pr">#bbbabdbe</color>
+    <color name="gray_lt2">#bbeceff1</color>
+
+    <color name="light_gray">#edf5f5f5</color>
+
+    <color name="green_trans">#20338a3e</color>
+    <color name="red_trans">#20b61827</color>
+    <color name="gray_trans">#208d8d8d</color>-->
+
 
 </resources>

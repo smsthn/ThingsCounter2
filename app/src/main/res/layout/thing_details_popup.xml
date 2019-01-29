@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+              android:layout_height="wrap_content" android:padding="7dp" android:background="@color/yellow_trans"
+              android:id="@+id/DetailsMainLinLay"
+              android:orientation="vertical" android:layout_marginBottom="120dp" android:layout_marginTop="70dp"
+              android:layout_marginStart="20dp" android:layout_marginEnd="20dp">
+   
+   <LinearLayout android:orientation="vertical"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/ThingDetailsTableLayout" android:padding="5dp">
+   
+      <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp" android:layout_marginBottom="3dp">
+         <TextView
+                 android:text="@string/name_doublepoint"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" android:id="@+id/textView3" android:textSize="18sp"
+                 android:textStyle="bold" android:layout_marginStart="10dp" android:layout_marginEnd="10dp"/>
+         <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content" android:id="@+id/PopUpThingNameTxt"
+                 android:textColor="@android:color/black" android:textAlignment="center"/>
+      </LinearLayout>
+      <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" android:layout_marginTop="3dp" android:layout_marginBottom="3dp">
+         <TextView
+                 android:text="@string/catagory_doublepoint"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" android:id="@+id/textView13"
+                 android:textSize="18sp"
+                 android:textStyle="bold" android:layout_marginStart="10dp" android:layout_marginEnd="10dp"/>
+         <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content" android:id="@+id/PopupCatagoryTxt"
+                 android:textColor="@android:color/black" android:textAlignment="center"/>
+      </LinearLayout>
+      <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp" android:layout_marginBottom="3dp">
+         <TextView
+                 android:text="@string/count_slach_goal_doublepoint"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" android:id="@+id/textView4" android:textSize="18sp"
+                 android:textStyle="bold" android:layout_marginStart="10dp" android:layout_marginEnd="10dp"/>
+         <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content" android:id="@+id/PopUpThingCount_GoaleTxt"
+                 android:textColor="@android:color/black" android:textAlignment="center"/>
+      </LinearLayout>
+      <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp" android:layout_marginBottom="3dp">
+         <TextView
+                 android:text="@string/day_doublepoint"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" android:id="@+id/textView5" android:textSize="18sp"
+                 android:textStyle="bold" android:layout_marginStart="10dp" android:layout_marginEnd="10dp"/>
+         <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content" android:id="@+id/PopUpThingCycleTxt"
+                 android:textColor="@android:color/black" android:textAlignment="center"/>
+      </LinearLayout>
+      <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp" android:layout_marginBottom="3dp">
+         <TextView
+                 android:text="@string/status_doublepoint"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" android:textSize="18sp"
+                 android:textStyle="bold" android:layout_marginRight="5dp" android:layout_marginStart="10dp"
+                 android:layout_marginEnd="10dp"/>
+         <CheckBox
+                 android:text="@string/enabled"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content" android:id="@+id/PopupThingStatusChkBtn"
+                 android:textColor="@android:color/black" android:textAlignment="gravity"
+         />
+      </LinearLayout>
+      <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:baselineAligned="false">
+         <LinearLayout
+                 android:orientation="vertical"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent" android:layout_weight="1">
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/ic_menu_edit"
+                    android:id="@+id/EditThingBtn"
+                    android:layout_marginBottom="5dp" app:backgroundTint="@color/yellow_dk"
+                    android:layout_marginTop="5dp" app:elevation="3dp" android:layout_marginEnd="50dp"
+                    android:layout_marginStart="50dp" android:layout_gravity="center_horizontal"/>
+            <Button
+                    android:text="@string/show_history_btn_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/ShowHistoryBtn"
+                    android:layout_marginEnd="5dp"
+                    android:textSize="14sp" android:layout_margin="5dp"
+                    android:paddingStart="5dp" android:paddingEnd="5dp"
+                    android:elevation="20dp" android:textColor="@android:color/black"
+                    android:textColorHighlight="@android:color/black" android:shadowColor="@android:color/black"
+                    android:shadowRadius="2"
+                    android:background="@color/yellow_dk"/>
+         </LinearLayout>
+         <LinearLayout
+                 android:orientation="vertical"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent" android:layout_weight="1">
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@android:drawable/ic_menu_delete"
+                    android:id="@+id/DeleteThingBtn"
+                    android:layout_marginTop="5dp" app:backgroundTint="@color/yellow_dk"
+                    android:layout_marginBottom="5dp" app:elevation="3dp"
+                    android:layout_marginEnd="50dp" android:layout_marginStart="50dp"
+                    android:layout_gravity="center_horizontal"/>
+            <Button
+                    android:text="@string/reset_history_btn_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/ResetHistoryBtn"
+                    android:layout_marginEnd="5dp" android:textSize="14sp"
+                    android:layout_margin="5dp"
+                    android:lines="2"
+                    android:maxLines="10" android:minLines="2" android:paddingStart="5dp" android:paddingEnd="5dp"
+                    android:elevation="20dp"
+                    android:textColor="@android:color/black" android:textColorHighlight="@android:color/black"
+                    android:shadowColor="@android:color/black" android:shadowRadius="2"
+                    android:background="@color/yellow_dk"/>
+         </LinearLayout>
+      </LinearLayout>
+   </LinearLayout>
+</LinearLayout>

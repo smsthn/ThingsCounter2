@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingTop="10dp" android:background="@android:color/white">
+	
+	
+	<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingBottom="1dp" android:layout_marginBottom="5dp"
+			android:layout_marginEnd="10dp">
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1"
+				android:textAlignment="center" android:layout_marginLeft="1dp" android:layout_marginRight="1dp"
+		/>
+		<TextView
+				android:text="@string/previous_counts"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1"
+				android:background="#01010101" android:textAlignment="center"
+				android:layout_marginLeft="1dp" android:layout_marginRight="1dp"/>
+		<TextView
+				android:text="@string/previous_goals"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1"
+				android:background="#01010101" android:textAlignment="center"
+				android:layout_marginLeft="1dp" android:layout_marginRight="1dp"/>
+		<TextView
+				android:text="@string/completed"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1"
+				android:background="#01010101" android:textAlignment="center"
+				android:layout_marginLeft="1dp" android:layout_marginRight="1dp"/>
+		<TextView
+				android:text="@string/total_number"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1"
+				android:background="#01010101" android:textAlignment="center"
+				android:layout_marginLeft="1dp" android:layout_marginRight="1dp" android:id="@+id/textView20"/>
+	</LinearLayout>
+	<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingBottom="1dp" android:layout_marginBottom="5dp"
+			android:layout_marginEnd="10dp">
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1" android:text="@string/positive"
+				android:background="#01010101" android:textAlignment="center"
+				android:layout_marginLeft="1dp" android:layout_marginRight="1dp"/>
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1"
+				android:id="@+id/Prev_His_Pos_Count"
+				android:background="@android:color/white" android:textAlignment="center"
+				android:backgroundTint="@color/green_trans"
+				android:textColor="@android:color/black"/>
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1" android:id="@+id/Prev_His_Pos_Goal"
+				android:background="@android:color/white" android:textAlignment="center"
+				android:backgroundTint="@color/green_trans"
+				android:textColor="@android:color/black"/>
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1"
+				android:id="@+id/Prev_His_Pos_Completed"
+				android:background="@android:color/white" android:textAlignment="center"
+				android:backgroundTint="@color/green_trans"
+				android:textColor="@android:color/black"/>
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1"
+				android:id="@+id/Prev_His_Pos_Total_Num"
+				android:background="@android:color/white" android:textAlignment="center"
+				android:backgroundTint="@color/green_trans"
+				android:textColor="@android:color/black"/>
+	</LinearLayout>
+	<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingBottom="1dp" android:layout_marginBottom="5dp"
+			android:layout_marginEnd="10dp">
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1" android:text="@string/negative"
+				android:background="#01010101" android:textAlignment="center"
+				android:layout_marginLeft="1dp" android:layout_marginRight="1dp"/>
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1"
+				android:id="@+id/Prev_His_Neg_Count"
+				android:background="@color/red_trans" android:textAlignment="center"
+				android:textColor="@android:color/black"/>
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1" android:id="@+id/Prev_His_Neg_Goal"
+				android:background="@color/red_trans" android:textAlignment="center"
+				android:textColor="@android:color/black"/>
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1"
+				android:background="@color/red_trans" android:textAlignment="center"
+				android:id="@+id/Prev_His_Neg_Completed" android:textColor="@android:color/black"/>
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1"
+				android:background="@color/red_trans" android:textAlignment="center"
+				android:id="@+id/Prev_His_Neg_Total_Num" android:textColor="@android:color/black"
+		/>
+	</LinearLayout>
+	<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingBottom="1dp" android:layout_marginBottom="5dp"
+			android:layout_marginEnd="10dp">
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1" android:text="@string/neutral"
+				android:background="#01010101" android:textAlignment="center"
+				android:layout_marginLeft="1dp" android:layout_marginRight="1dp"/>
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1"
+				android:id="@+id/Prev_His_Neu_Count"
+				android:background="@color/gray_trans" android:textAlignment="center"
+				android:textColor="@android:color/black"/>
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1" android:id="@+id/Prev_His_Neu_Goal"
+				android:background="@color/gray_trans" android:textAlignment="center"
+				android:textColor="@android:color/black"/>
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1"
+				android:id="@+id/Prev_His_Neu_Completed"
+				android:background="@color/gray_trans" android:textAlignment="center"
+				android:textColor="@android:color/black"/>
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1"
+				android:id="@+id/Prev_His_Neu_Total_Number"
+				android:background="@color/gray_trans" android:textAlignment="center"
+				android:textColor="@android:color/black"/>
+	</LinearLayout>
+	<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+		<com.razerdp.widget.animatedpieview.AnimatedPieView android:layout_width="wrap_content"
+		                                                    android:layout_height="wrap_content"
+		                                                    android:id="@+id/PosPieView" android:layout_weight="1"/>
+		<com.razerdp.widget.animatedpieview.AnimatedPieView android:layout_width="wrap_content"
+		                                                    android:layout_height="wrap_content"
+		                                                    android:id="@+id/NegPieView" android:layout_weight="1"/>
+		<com.razerdp.widget.animatedpieview.AnimatedPieView android:layout_width="wrap_content"
+		                                                    android:layout_height="wrap_content"
+		                                                    android:id="@+id/NeuPieView" android:layout_weight="1"/>
+	</LinearLayout>
+	<TextView
+			android:text="@string/completion_ratio"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/textView" android:textAlignment="center"
+			android:textSize="18sp" android:textColor="@android:color/black"/>
+	<com.razerdp.widget.animatedpieview.AnimatedPieView android:layout_width="match_parent"
+	                                                    android:layout_height="0dp"
+	                                                    android:id="@+id/AllPieView" android:layout_weight="1"/>
+</LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".MainActivity">
+
+    <group
+            android:id="@+id/testGroup">
+        <item android:title="testaddthing" android:id="@+id/testaddthing"/>
+        <item android:title="testaddmanythings" android:id="@+id/testaddmanythings"/>
+        <item android:title="testresetthing" android:id="@+id/testresetthing"/>
+        <item android:title="testdeleteall" android:id="@+id/testdeleteall"/>
+    </group>
+    <item
+            android:id="@+id/go_to_add_frag"
+            android:orderInCategory="300"
+            android:title="@string/edit_thing"
+            android:icon="@drawable/black_add"
+            app:showAsAction="ifRoom"/>
+
+</menu>

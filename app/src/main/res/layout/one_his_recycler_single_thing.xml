@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@android:drawable/screen_background_dark_transparent">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" android:padding="2dp" android:paddingTop="3dp"
+            android:layout_weight="1">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/OneHistoryDayTxt" android:layout_weight="1"
+                android:textAlignment="center" android:layout_marginEnd="1dp"
+                android:background="@android:drawable/screen_background_light_transparent"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/OneHistoryDateTxt" android:layout_weight="1"
+                android:textAlignment="center" android:layout_marginRight="1dp" android:layout_marginLeft="1dp"
+                android:background="@android:drawable/screen_background_light_transparent"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/OneHistoryCountTxt" android:layout_weight="1"
+                android:textAlignment="center" android:layout_marginRight="1dp" android:layout_marginLeft="1dp"
+                android:background="@android:drawable/screen_background_light_transparent"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/OneHistoryGoalTxt" android:layout_weight="1"
+                android:textAlignment="center" android:layout_marginStart="1dp"
+                android:background="@android:drawable/screen_background_light_transparent"/>
+    </LinearLayout>
+</LinearLayout>

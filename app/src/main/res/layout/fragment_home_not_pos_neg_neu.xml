@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+            
+              android:orientation="vertical">
+
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_weight="0"
+                    android:background="@color/gray_trans"/>
+            <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_weight="0" tools:layout_editor_absoluteY="77dp"
+                    tools:layout_editor_absoluteX="2dp" android:id="@+id/MainCtgFrameLay"
+                    android:layout_gravity="center">
+
+                <com.smsthn.thingscounter.CustomViews.Spinners.CustomCtgSpinner
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:id="@+id/MainCatagoriesSpinner"
+                        android:backgroundTint="@android:color/black" style="@style/Widget.AppCompat.Spinner"
+                        android:layout_marginBottom="3dp" android:layout_marginTop="3dp"/>
+                <TextView
+                        android:text="@string/catagory_doublepoint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" android:id="@+id/textView17"
+                        android:textColor="@android:color/white"
+                        android:background="@android:color/black" android:paddingStart="10dp"
+                        android:paddingEnd="10dp"/>
+                <TextView
+                        android:text="All"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/MainCtgTxt"
+                        android:textColor="@android:color/black" android:layout_gravity="center"/>
+            </FrameLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/NotPosHomeSumLay">
+                <ProgressBar
+                        style="@style/MsProg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/SumRowProgBar" android:progress="0"
+                        android:progressDrawable="@android:drawable/progress_horizontal"
+                        android:progressTint="@color/green_lt1" android:progressBackgroundTint="@color/green_pr"
+                        android:max="100"
+                        xmlns:android="http://schemas.android.com/apk/res/android"/>
+            </LinearLayout>
+            <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_weight="0"
+                    tools:layout_editor_absoluteY="77dp"
+                    tools:layout_editor_absoluteX="2dp" android:id="@+id/MainTypeFrameLay"
+                    android:layout_gravity="center">
+
+                <com.smsthn.thingscounter.CustomViews.Spinners.CustomTypeSpinner
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:id="@+id/MainTypeSpinner"
+                        android:backgroundTint="@android:color/black" style="@style/Widget.AppCompat.Spinner"
+                        android:layout_marginBottom="3dp" android:layout_marginTop="3dp"
+                        android:foreground="@android:color/white"/>
+                <TextView
+                        android:text="@string/color_doublepoint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/white"
+                        android:background="@android:color/black" android:paddingStart="10dp"
+                        android:paddingEnd="10dp" android:id="@+id/TypeSpinnerTitleTxt"/>
+                <TextView
+                        android:text="All"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/MainTypeTxt"
+                        android:textColor="@android:color/black" android:layout_gravity="center"/>
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/AllThingsRecycleView"
+            android:visibility="visible"/>
+</LinearLayout>

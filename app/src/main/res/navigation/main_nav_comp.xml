@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main_nav_comp"
+            app:startDestination="@id/thing_frag_dest"
+            
+>
+	<fragment android:id="@+id/thing_frag_dest"
+	          android:name="com.smsthn.thingscounter.Fragments.ThingFragment"
+	          android:label="Things Counter"
+	          tools:layout="@layout/thing_fragment">
+		<argument android:name="isPosNegNeu"
+		          app:argType="boolean"
+		          android:defaultValue="true"/>
+		<argument android:name="Type"
+		          app:argType="string"
+		          android:defaultValue="All" app:nullable="true"/>
+		<action android:id="@+id/action_things_charts" app:destination="@+id/charts_frag_dest"
+		        app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left">
+			<argument android:defaultValue="All" android:name="catagory"/>
+		</action>
+		<action android:id="@+id/action_thing_frag_dest_to_option_frag_dest" app:destination="@id/option_frag_dest"
+		        app:enterAnim="@anim/slide_in_right_long" app:exitAnim="@anim/slide_out_left"/>
+		<action android:id="@+id/action_thing_frag_dest_to_addThingFragment" app:destination="@+id/add_thing_dest"
+		        app:enterAnim="@anim/slide_down_enter"
+		
+		        app:exitAnim="@anim/fade_out">
+			<argument android:defaultValue="-1L" android:name="thingId"/>
+			<argument android:defaultValue="false" android:name="isEdit"/>
+		</action>
+		<action android:id="@+id/action_thing_frag_dest_self_right" app:destination="@id/thing_frag_dest"
+		        app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"/>
+		<action android:id="@+id/action_thing_frag_dest_self_left" app:destination="@id/thing_frag_dest"
+		        app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"/>
+	</fragment>
+	<fragment android:id="@+id/charts_frag_dest"
+	          android:name="com.smsthn.thingscounter.Fragments.ChartsFragment"
+	          android:label="Stats"
+	          tools:layout="@layout/charts_fragment">
+		<action android:id="@+id/action_charts_frag_dest_to_option_frag_dest" app:destination="@id/option_frag_dest"
+		        app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"/>
+		<action android:id="@+id/action_charts_things" app:destination="@+id/thing_frag_dest"
+		        app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"
+		/>
+		<argument android:name="catagory" app:argType="string" android:defaultValue="All"/>
+	</fragment>
+	<fragment android:id="@+id/option_frag_dest"
+	          android:name="com.smsthn.thingscounter.Fragments.OptionsFragment"
+	          android:label="Options"
+	          tools:layout="@layout/fragment_options">
+		<action android:id="@+id/action_options_thing" app:destination="@id/thing_frag_dest"
+		        app:enterAnim="@anim/slide_in_left_long" app:exitAnim="@anim/slide_out_right"
+		        app:popUpToInclusive="false" app:launchSingleTop="false"/>
+		<action android:id="@+id/action_options_charts" app:destination="@+id/charts_frag_dest"
+		        app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"
+		>
+			<argument android:defaultValue="All" android:name="catagory"/>
+		</action>
+	</fragment>
+	<fragment android:id="@+id/add_thing_dest"
+	          android:name="com.smsthn.thingscounter.Fragments.SecondaryFragments.AddThingFragment"
+	          android:label="add_thing_fragment" tools:layout="@layout/add_thing_fragment">
+		<action android:id="@+id/action_add_thing_dest_to_thing_frag_dest" app:destination="@id/thing_frag_dest"
+		        app:enterAnim="@anim/fade_in" app:exitAnim="@anim/slide_down_exit"/>
+		<argument android:name="thingId" app:argType="long" android:defaultValue="-1L"/>
+		<argument android:name="isEdit" app:argType="boolean" android:defaultValue="false"/>
+	</fragment>
+	<action android:id="@+id/action_main_nav_comp_pop" app:popUpTo="@id/main_nav_comp" app:popUpToInclusive="true"
+	        app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"
+	        app:launchSingleTop="true"/>
+</navigation>

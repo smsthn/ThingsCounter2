@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".Fragments.OptionsFragment" android:orientation="vertical"
+              android:background="@android:color/white">-->
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            tools:context=".Fragments.OptionsFragment" android:orientation="vertical"
+            android:layout_height="match_parent" android:background="@color/gray_trans">
+	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+	              android:orientation="vertical" android:id="@+id/tableLayout"
+	              android:background="@android:color/white">
+		<TextView
+				android:text="@string/options"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" android:id="@+id/textView2"
+				android:textSize="30sp"
+				android:background="@color/gray_trans" android:textAlignment="center"
+				android:paddingTop="3dp" android:paddingBottom="3dp"/>
+		<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:paddingTop="15dp"
+				android:paddingBottom="15dp" android:paddingEnd="15dp" android:paddingStart="15dp"
+				android:background="@android:color/white">
+			<TextView
+					android:text="@string/allow_notifications"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:id="@+id/textView8" android:textSize="20sp"
+					android:textStyle="bold" android:textAlignment="viewStart"/>
+			<Switch
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content" android:id="@+id/AllowNotificationSwitch"
+			/>
+		</LinearLayout>
+		<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" android:id="@+id/NotTypeTableRow"
+				android:paddingTop="15dp" android:paddingBottom="15dp" android:paddingEnd="15dp"
+				android:paddingStart="15dp" android:layout_marginStart="15dp" android:layout_marginTop="2dp"
+				android:background="@android:color/white">
+			<TextView
+					android:text="@string/notification_type"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:id="@+id/textView15" android:textSize="18sp"
+					android:textColor="@android:color/black" android:textAlignment="center"/>
+			<RadioGroup
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content" android:id="@+id/NotificationTypeRadioGroup"
+					android:gravity="center">
+				<RadioButton
+						android:text="@string/ongoing"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:id="@+id/Not_Type_Ongoing"
+				/>
+				<RadioButton
+						android:text="@string/daily"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:id="@+id/Not_Type_Daily"
+				/>
+			</RadioGroup>
+		</LinearLayout>
+		<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" android:id="@+id/NotTimeTableRow"
+				android:paddingTop="20dp" android:paddingBottom="20dp" android:paddingEnd="15dp"
+				android:paddingStart="15dp" android:layout_marginStart="25dp" android:layout_marginTop="2dp"
+				android:layout_marginBottom="2dp" android:background="@android:color/white">
+			<TextView
+					android:text="@string/notification_time"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:id="@+id/textView9" android:textSize="16sp"
+					android:textAlignment="center"/>
+			<FrameLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent" android:id="@+id/NotTimeFrameLay">
+				<Button
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:id="@+id/NotificationChangeTimeBtn"
+						android:background="@drawable/white_round_thing"
+						android:layout_marginStart="3dp" android:layout_marginEnd="3dp"
+						android:layout_gravity="center" style="@style/Widget.AppCompat.Button.Borderless"/>
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:id="@+id/NotTimeTxt" android:clickable="false"
+						android:focusable="false"
+						android:textColor="@android:color/black" android:textSize="18sp"
+						android:textAlignment="center" android:textDirection="ltr" android:layout_gravity="center"
+				/>
+			</FrameLayout>
+		</LinearLayout>
+		<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/NotificationDataTypeRow" android:paddingTop="15dp" android:paddingBottom="15dp"
+				android:paddingEnd="15dp" android:paddingStart="15dp" android:layout_marginStart="15dp"
+				android:layout_marginBottom="2dp" android:background="@android:color/white" android:visibility="gone">
+			<TextView
+					android:text="@string/data_to_show"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:id="@+id/textView125" android:textSize="18sp"
+					android:textColor="@android:color/black" android:textAlignment="center"/>
+			<RadioGroup
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content" android:id="@+id/NotificationDataTypeRadioGroup"
+					android:gravity="center">
+				<RadioButton
+						android:text="@string/completed_total"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:id="@+id/Not_Data_Type_Completed_Total"
+						android:layout_weight="1"/>
+				<RadioButton
+						android:text="@string/counts_goals"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:id="@+id/Not_Data_Type_Count_Goal"
+						android:layout_weight="1"/>
+			</RadioGroup>
+		</LinearLayout>
+		<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" android:paddingTop="15dp"
+				android:paddingBottom="15dp" android:paddingEnd="15dp" android:paddingStart="15dp"
+				android:background="@android:color/white">
+			<TextView
+					android:text="@string/reset_time"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:textSize="20sp"
+					android:textStyle="bold" android:textAlignment="viewStart"/>
+			<FrameLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent" android:id="@+id/CycleTimeFramLay">
+				
+				<Button
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:id="@+id/CycleTimeChangeBtn"
+						style="@style/Widget.AppCompat.Button.Borderless"
+						android:background="@drawable/white_round_thing"
+						android:layout_marginStart="3dp" android:layout_marginEnd="3dp"
+						android:layout_gravity="center"/>
+				<TextView
+						android:layout_width="wrap_content" android:clickable="false"
+						android:layout_height="wrap_content" android:focusable="false"
+						android:textColor="@android:color/black" android:textSize="18sp"
+						android:textAlignment="center" android:id="@+id/CycleTimeTxt" android:textDirection="ltr"
+						android:layout_gravity="center"/>
+			</FrameLayout>
+		</LinearLayout>
+		<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" android:paddingTop="15dp"
+				android:paddingBottom="15dp" android:paddingEnd="15dp" android:paddingStart="15dp"
+				android:background="@android:color/white">
+			<TextView
+					android:text="@string/language"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:textSize="20sp"
+					android:id="@+id/textView21"
+					android:textStyle="bold" android:textAlignment="viewStart"/>
+			<Spinner
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content" android:id="@+id/Languages_Spinner"
+					android:entries="@array/languages_arr" android:textAlignment="center"/>
+		</LinearLayout>
+		<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" android:paddingTop="15dp"
+				android:paddingBottom="15dp" android:paddingEnd="15dp" android:paddingStart="15dp"
+				android:background="@android:color/white">
+			<TextView
+					android:text="@string/allow_overcounting"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:textSize="20sp"
+					android:textStyle="bold" android:textAlignment="viewStart"/>
+			<Switch
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content" android:id="@+id/Allow_Overcounting_Switch"
+					android:paddingEnd="10dp" android:paddingStart="10dp"/>
+		</LinearLayout>
+		<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" android:paddingTop="15dp"
+				android:paddingBottom="15dp" android:paddingEnd="15dp" android:paddingStart="15dp"
+				android:background="@android:color/white">
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:textSize="20sp"
+					android:textStyle="bold" android:text="@string/things_display_type"
+					android:textAlignment="viewStart" android:layout_marginTop="@dimen/options_row_padding"
+			/>
+			<RadioGroup
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:id="@+id/Pos_Neg_Neu_RadioGroup"
+					android:orientation="vertical">
+				<RadioButton
+						android:text="@string/positive_negative_neutral"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:id="@+id/Pos_Neg_Neu_RadBtn"
+						android:layout_weight="1" android:layout_marginEnd="2dp" android:lines="3"
+						android:minLines="3" android:maxLines="3"/>
+				<RadioButton
+						android:text="@string/notype"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:id="@+id/Not_Pos_Neg_Neu_RadBtn"
+						android:layout_weight="1"/>
+			</RadioGroup>
+		</LinearLayout>
+	</LinearLayout>
+</ScrollView>
+		
+		<!--
+		</LinearLayout>-->

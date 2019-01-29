@@ -112,4 +112,7 @@
         <item>Morasaki</item>
         <item>Dunkelrot</item>
     </string-array>
+	<string name="title_dashboard" translatable="false">Deaktiviert Dinge</string>
+    <string name="title_notifications">Einstellung</string>
+    <string name="no_data_to_show">Keine Daten zum Anzeigen</string>
 </resources>

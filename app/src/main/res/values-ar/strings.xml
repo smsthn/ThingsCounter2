@@ -111,4 +111,7 @@
         <item>البنفسجي</item>
         <item>احمر غامق</item>
     </string-array>
+	<string name="title_dashboard" translatable="false">الاشياء المتوقفة</string>
+    <string name="title_notifications">الإعدادات</string>
+    <string name="no_data_to_show">لا توجد بيانات للعرض</string>
 </resources>

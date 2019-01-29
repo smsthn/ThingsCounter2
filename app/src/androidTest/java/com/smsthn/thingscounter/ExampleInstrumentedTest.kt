@@ -1,12 +1,19 @@
 package com.smsthn.thingscounter
 
-import androidx.test.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
 
+
+import androidx.test.core.app.ActivityScenario
+import androidx.test.espresso.Espresso.*
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import org.junit.Assert.*
+import org.junit.Before
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -15,10 +22,12 @@ import org.junit.Assert.*
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+    @Before
+    fun launchActivity(){
+        ActivityScenario.launch(MainActivity::class.java)
+    }
     @Test
     fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.smsthn.thingscounter", appContext.packageName)
+
     }
 }

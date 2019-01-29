@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" android:id="@+id/adv_det_main_lay"
+              android:visibility="visible"
+              android:layout_marginBottom="4dp" android:layout_marginEnd="2dp" android:layout_marginStart="2dp"
+              android:layout_marginTop="4dp">
+	
+	<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:layout_margin="0dp" android:layout_weight="0">
+
+		<ProgressBar
+				style="@style/MsProg"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:id="@+id/adv_der_prog" android:progress="60"
+				android:progressDrawable="@android:drawable/progress_horizontal"
+				android:progressTint="@color/yellow_dk"
+				android:layout_margin="0dp" android:progressBackgroundTint="@color/black_lt"/>
+		<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" android:id="@+id/adv_nm_txt"
+				android:foregroundGravity="center" android:gravity="center" android:textSize="18sp"
+				android:textColor="@android:color/white" android:layout_margin="0dp"/>
+	</FrameLayout>
+	<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/adv_trans_lay" android:layout_margin="0dp" android:layout_weight="1">
+		<Button
+				android:text="@string/minus_sign"
+				android:layout_width="20dp"
+				android:layout_height="match_parent" android:id="@+id/adv_minus_btn" android:layout_weight="0"
+				style="@style/Widget.AppCompat.Button.Borderless" android:textSize="30sp"
+				android:textColor="@android:color/black" android:background="#ffea00" android:layout_margin="0dp"
+				android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_marginTop="7dp"
+				android:layout_marginBottom="7dp"/>
+		<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" android:layout_weight="1">
+			<include layout="@layout/thing_details_popup" android:layout_width="match_parent"
+			         android:layout_height="match_parent"/>
+		</LinearLayout>
+		<Button
+				android:text="@string/plus_sign"
+				android:layout_width="20dp"
+				android:layout_height="match_parent" android:id="@+id/adv_pls_btn" android:layout_weight="0"
+				style="@style/Widget.AppCompat.Button.Borderless" android:textSize="30sp"
+				android:textColor="@android:color/black" android:background="@color/yellow_pr"
+				android:layout_margin="0dp"
+				android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_marginTop="7dp"
+				android:layout_marginBottom="7dp"/>
+	</LinearLayout>
+	<com.google.android.material.bottomnavigation.BottomNavigationView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" app:menu="@menu/navigation" android:background="@color/yellow_lt"
+			android:id="@+id/adv_btm_nav"/>
+</LinearLayout>

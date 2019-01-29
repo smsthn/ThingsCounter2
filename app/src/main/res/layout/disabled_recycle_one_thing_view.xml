@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" android:id="@+id/DisabledThingMainLayout"
+              android:paddingBottom="5dp"
+              android:paddingEnd="5dp" android:paddingStart="2dp" android:visibility="visible"
+              android:layout_marginBottom="2dp" android:layout_marginEnd="2dp" android:layout_marginStart="2dp"
+              android:layout_marginTop="2dp">
+
+    <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp">
+
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:layout_marginTop="3dp" android:layout_marginBottom="3dp"
+        >
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" android:layout_weight="1"
+            >
+                <TextView
+                        android:text="@string/name_doublepoint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView3" android:textSize="18sp"
+                        android:layout_marginEnd="15dp" android:layout_marginStart="15dp"
+                        android:textStyle="bold" android:textAlignment="viewStart" android:textAllCaps="false"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/DisabledThingNameTxt"
+                        android:textColor="@android:color/black" android:layout_marginEnd="15dp"
+                        android:layout_marginStart="15dp"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_weight="1"
+            >
+                <TextView
+                        android:text="@string/catagory_doublepoint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView13"
+                        android:textSize="18sp"
+                        android:layout_marginStart="15dp" android:layout_marginEnd="15dp"
+                        android:textStyle="bold"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/DisabledThingCatagoryTxt"
+                        android:textColor="@android:color/black" android:layout_marginEnd="15dp"
+                        android:layout_marginStart="15dp"/>
+            </LinearLayout>
+        </TableRow>
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:layout_marginTop="3dp" android:layout_marginBottom="3dp" android:gravity="center"
+        >
+            <TextView
+                    android:text="@string/goal_doublepoint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView4" android:textSize="18sp"
+                    android:layout_marginStart="15dp" android:layout_marginEnd="15dp"
+                    android:textStyle="bold"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/DisabledThingGoal"
+                    android:textColor="@android:color/black" android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"/>
+        </TableRow>
+    </TableLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <Button
+                android:text="@string/enable"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_marginEnd="5dp" android:padding="3dp"
+                android:textSize="14sp" android:layout_weight="1" android:layout_margin="5dp"
+                android:layout_gravity="center"
+                android:id="@+id/DisabledThingEnableBtn" android:background="@drawable/outline_gray_trans_not_round"/>
+        <Button
+                android:text="@string/show_history_btn_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" android:id="@+id/DisabledThingShowHistoryBtn"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_marginEnd="5dp" android:padding="3dp"
+                android:textSize="14sp" android:layout_weight="1" android:layout_margin="5dp"
+                android:layout_gravity="center" android:background="@drawable/outline_gray_trans_not_round"/>
+    </LinearLayout>
+</LinearLayout>
