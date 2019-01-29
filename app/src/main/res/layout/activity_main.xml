@@ -37,7 +37,7 @@
 					app:defaultNavHost="true"
 					android:id="@+id/host_fragment"
 					app:layout_collapseMode="pin"
-					android:layout_weight="0" app:layout_scrollFlags="scroll|exitUntilCollapsed"/>
+					app:layout_scrollFlags="scroll|exitUntilCollapsed"/>
 			<TextView
 					android:layout_width="match_parent"
 					android:layout_height="match_parent" android:id="@+id/gsgs"
@@ -45,13 +45,14 @@
 					android:visibility="gone"/>
 		</FrameLayout>
 	</com.google.android.material.appbar.AppBarLayout>
-	<com.google.android.material.bottomnavigation.BottomNavigationView
-			android:id="@+id/navigation"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginEnd="0dp"
-			android:layout_marginStart="0dp"
-			app:menu="@menu/navigation" android:layout_gravity="bottom" android:layout_weight="0"
-			android:background="@color/colorPrimarylight"/>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="0dp"
+            app:menu="@menu/navigation" android:layout_gravity="bottom" android:layout_weight="0"
+            android:background="@color/colorPrimarylight" app:elevation="10dp"
+            app:itemIconTint="@android:color/black" app:itemTextColor="@android:color/black"/>
 
 </LinearLayout>
