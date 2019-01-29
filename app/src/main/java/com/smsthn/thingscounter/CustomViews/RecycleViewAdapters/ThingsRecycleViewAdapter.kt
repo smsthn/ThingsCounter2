@@ -126,6 +126,7 @@ class ThingsRecycleViewAdapter(
         val moreDetailsBtn: Button
         val thingTransLayout: LinearLayout
         val prog: ProgressBar
+        val prog2: ProgressBar
         val handler: Handler
 
         init {
@@ -138,6 +139,7 @@ class ThingsRecycleViewAdapter(
             plusBtn = view.ThingPlusBtn
             thingTransLayout = view.ThingTransLayout
             prog = view.ThingProgressBar
+            prog2 = view.ThingProgressBar2
             moreDetailsBtn = view.MoreDetailsBtn
             handler = Handler(Looper.getMainLooper())
             view.setBackgroundColor(Color.WHITE)
@@ -174,14 +176,26 @@ class ThingsRecycleViewAdapter(
                     thing.type
                 )
             )
-            prog.progressDrawable.setTint(
-                getLightColor(
+            prog.progressTintList = ColorStateList.valueOf(
+                getTransparantColor(
                     this.itemView.context,
                     thing.type
                 )
             )
+            prog2.progressTintList = ColorStateList.valueOf(
+                getTransparantColor(
+                    this.itemView.context,
+                    thing.type
+                )
+            )
+            /*nameTxt.setBackgroundColor(
+                getTransparantColor(
+                    this.itemView.context,
+                    thing.type
+                )
+            )*/
 
-            val isDark = isColorDark(
+            /*val isDark = isColorDark(
                 getPrimColor(
                     this.itemView.context,
                     thing.type
@@ -190,9 +204,9 @@ class ThingsRecycleViewAdapter(
             val txtclr = if (isDark) Color.WHITE else Color.BLACK
             plusBtn.setTextColor(Color.WHITE)
             minusBtn.setTextColor(txtclr)
-            moreDetailsBtn.setTextColor(txtclr)
+            moreDetailsBtn.setTextColor(txtclr)*/
 
-            prog.progressBackgroundTintList = ColorStateList.valueOf(Color.BLACK)
+            /*prog.progressBackgroundTintList = ColorStateList.valueOf(getLightColor(this.itemView.context,"Gray"))*/
         }
 
 
@@ -203,7 +217,9 @@ class ThingsRecycleViewAdapter(
             countTxt.setText(co)
             goalTxt.setText(go)
             prog.max = thing.goal
+            prog2.max = thing.goal
             prog.setProgress(thing.count)
+            prog2.setProgress(thing.count)
         }
 
         private fun initBtns() {
@@ -236,6 +252,7 @@ class ThingsRecycleViewAdapter(
                                 count++
                                 countTxt.setText("" + (count + thing!!.count))
                                 prog.setProgress(count + thing!!.count)
+                                prog2.setProgress(count + thing!!.count)
                                 time = if (time < 30) 30 else (if (time <= 100) time - 10 else time - 100)
                                 busy = false
 
@@ -262,6 +279,7 @@ class ThingsRecycleViewAdapter(
                                 count--
                                 countTxt.setText("" + (thing!!.count + count))
                                 prog.setProgress(thing!!.count + count)
+                                prog2.setProgress(thing!!.count + count)
                                 time = if (time < 30) 30 else (if (time <= 100) time - 10 else time - 100)
                                 busy = false
 

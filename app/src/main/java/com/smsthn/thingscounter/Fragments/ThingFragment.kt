@@ -188,7 +188,7 @@ class ThingFragment : ThingAbsFragment() {
 
         typerad.apply {
             when (currentType) {
-                "All"->check(R.id.HomeTypeAllBtn)
+                "All" -> check(R.id.HomeTypeAllBtn)
                 "Positive" -> check(R.id.HomeTypePosBtn)
                 "Negative" -> check(R.id.HomeTypeNegBtn)
                 "Neutral" -> check(R.id.HomeTypeNeuBtn)
@@ -205,8 +205,6 @@ class ThingFragment : ThingAbsFragment() {
         ctgSpinner.setup(null, localCtgs!!, engCtgs!!, { s -> currentCatagory = s }, true)
 
     }
-
-
 
 
     companion object {
@@ -233,33 +231,37 @@ class ThingFragment : ThingAbsFragment() {
                 prtxt1?.setText(getString(R.string.no_data_to_show))
                 val clr = ColorStateList.valueOf(Color.LTGRAY)
                 pr.forEachIndexed { i, p ->
+
                     if (i == 0) p?.apply {
                         progress = 0;progressBackgroundTintList = clr
-                    } else p?.visibility = View.GONE
+                    } else p?.visibility = View.INVISIBLE
                 }
             } else {
-                val l = lst.filter(notZero)
-                var i = 3 - l.size
-                l.forEachIndexed { i, tc ->
-                    prtxt[i]?.apply { setText("" + tc.countsum + " / " + tc.goalsum) }
-                    pr[i]?.apply {
-                        max = tc.goalsum;progress = tc.countsum
-                        progressBackgroundTintList = ColorStateList.valueOf(getDarkColor(context ?: return, tc.type))
-                        progressTintList = ColorStateList.valueOf(getLightColor(context ?: return, tc.type))
+                val l = lst.filter(notZero).sortedByDescending { it.countsum.toDouble() / it.goalsum.toDouble()  }.take(3)
+                val i = 3 - l.size
+                l.forEachIndexed { i2, tc2 ->
+                    prtxt[i2]?.apply { setText("" + tc2.countsum + " / " + tc2.goalsum) }
+                    pr[i2]?.apply {
+                        visibility = View.VISIBLE
+                        max = tc2.goalsum;progress = tc2.countsum
+                        progressBackgroundTintList = ColorStateList.valueOf(if(tc2.type != "Black")getDarkColor(context!!, tc2.type) else Color.WHITE )
+                        progressTintList = ColorStateList.valueOf(getLightColor(context!!, tc2.type))
                     }
-                    if (i != 0) {
-                        val clr = ColorStateList.valueOf(Color.LTGRAY)
-                        for (ii in 2.downTo(i)) {
-                            if (ii == 0) {
-                                pr[ii]?.apply { progress = 0;progressBackgroundTintList = clr }
-                                prtxt1?.setText(getString(R.string.no_data_to_show))
-                            } else {
-                                pr[ii]?.visibility = View.GONE
-                            }
+                }
+                if (i != 0) {
+                    val clr = ColorStateList.valueOf(Color.LTGRAY)
+                    for (ii in i..2) {
+                        if (ii == 0) {
+                            pr[ii]?.apply { progress = 0;progressBackgroundTintList = clr }
+                            prtxt1?.setText(getString(R.string.no_data_to_show))
+                        } else {
+                            pr[ii]?.visibility = View.INVISIBLE
                         }
                     }
-
                 }
+
+                view?.invalidate()
+
             }
         }
     }

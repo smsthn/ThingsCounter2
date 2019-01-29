@@ -90,7 +90,7 @@ fun resetThingsAndAddCycle(context: Context,tries:Int = 0){
                 }
 
             }
-            if(context as? MainActivity? != null){
+            /*if(context as? MainActivity? != null){
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                     context.mainExecutor.execute {
                         (context as Activity).recreate()
@@ -101,7 +101,7 @@ fun resetThingsAndAddCycle(context: Context,tries:Int = 0){
                     }
                 }
 
-            }
+            }*/
         } else {
             if(tr < 30){
                 Thread.sleep(10000)

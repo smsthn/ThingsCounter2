@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.razerdp.widget.animatedpieview.AnimatedPieView
@@ -71,42 +72,45 @@ class ChartsFragment :ThingAbsFragment()  {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ChartsViewModel::class.java)
-        // TODO: Allow Change Type Of Catagory
-	    viewModel.initThis(activity!!.application,"All")
-	    viewModel.prevHisLive?.observe(this, object : Observer<PrevHistories>
-	    {
-		    override fun onChanged(t: PrevHistories?)
-		    {
-			   t?.apply {
-				   poscounts.setText(""+posCounts);posgoals.setText(""+posGoals)
-                   poscompleted.setText(""+posCompleteds); postotal.setText(""+posTotals)
-				   
-				   negcounts.setText(""+negCounts); neggoals.setText(""+negGoals)
-				   negcompleted.setText(""+negCompleteds);negtotal.setText(""+negTotals)
-				   
-				   neucounts.setText(""+neuCounts); neugoals.setText(""+neuGoals)
-				   neucompleted.setText(""+neuCompleteds);neutotal.setText(""+neuTotals)
-				   val names2 = resources.getString(R.string.counts_goals).split("/",limit = 2).toTypedArray()
-				   val clrs = arrayOf("Positive","Negative","Neutral","Black").map {
-					   getPrimColor(context!!,it)
-				   }.toTypedArray()
-				   makePie(posPie, arrayOf(posCompleteds,posTotals), names2, arrayOf(clrs[0], Color.BLACK),true,14)
-				   makePie(negPie, arrayOf(negCompleteds,negTotals), names2, arrayOf(clrs[0], Color.BLACK),true,14)
-				   makePie(neuPie, arrayOf(neuCompleteds,neuTotals), names2, arrayOf(clrs[0], Color.BLACK),true,14)
-				   val allcmpl = posCompleteds+negCompleteds+negCompleteds
-				   val alltotal = posTotals+negTotals+neuTotals
-				   val pos = if(posTotals == 0)0 else ((posCompleteds.toDouble()/ posTotals.toDouble())*100).toInt()
-				   val neg = if(negTotals == 0)0 else ((negCompleteds.toDouble()/ negTotals.toDouble())*100).toInt()
-				   val neu = if(neuTotals == 0)0 else ((neuCompleteds.toDouble()/ neuTotals.toDouble())*100).toInt()
-				   val all = if(alltotal == 0)0 else ((allcmpl.toDouble() / alltotal.toDouble())*100).toInt()
-				   
-				   
-				   
-				   makePie(allPie, arrayOf(pos,neg,neu,100-all), arrayOf("Positive","Negative","Neutral","Uncompleted"), clrs,false,18)
-			   }
-		    }
-	    })
+        viewModel = ViewModelProviders.of(this).get(ChartsViewModel::class.java).apply {
+            initThis(activity!!.application,"All")
+            prevHisLive?.observe(this@ChartsFragment, object : Observer<PrevHistories>
+            {
+                override fun onChanged(t: PrevHistories?)
+                {
+                    t?.apply {
+                        Toast.makeText(context!!,"AT LEASE TRIED",Toast.LENGTH_LONG).show()
+                        poscounts.setText(""+posCounts);posgoals.setText(""+posGoals)
+                        poscompleted.setText(""+posCompleteds); postotal.setText(""+posTotals)
+
+                        negcounts.setText(""+negCounts); neggoals.setText(""+negGoals)
+                        negcompleted.setText(""+negCompleteds);negtotal.setText(""+negTotals)
+
+                        neucounts.setText(""+neuCounts); neugoals.setText(""+neuGoals)
+                        neucompleted.setText(""+neuCompleteds);neutotal.setText(""+neuTotals)
+                        val names2 = resources.getString(R.string.counts_goals).split("/",limit = 2).toTypedArray()
+                        val clrs = arrayOf("Positive","Negative","Neutral","Black").map {
+                            getPrimColor(context!!,it)
+                        }.toTypedArray()
+                        makePie(posPie, arrayOf(posCompleteds,posTotals), names2, arrayOf(clrs[0], Color.BLACK),true,14)
+                        makePie(negPie, arrayOf(negCompleteds,negTotals), names2, arrayOf(clrs[1], Color.BLACK),true,14)
+                        makePie(neuPie, arrayOf(neuCompleteds,neuTotals), names2, arrayOf(clrs[2], Color.BLACK),true,14)
+                        val allcmpl = posCompleteds+negCompleteds+negCompleteds
+                        val alltotal = posTotals+negTotals+neuTotals
+                        val pos = if(posTotals == 0)0 else ((posCompleteds.toDouble()/ posTotals.toDouble())*100).toInt()
+                        val neg = if(negTotals == 0)0 else ((negCompleteds.toDouble()/ negTotals.toDouble())*100).toInt()
+                        val neu = if(neuTotals == 0)0 else ((neuCompleteds.toDouble()/ neuTotals.toDouble())*100).toInt()
+                        val all = if(alltotal == 0)0 else ((allcmpl.toDouble() / alltotal.toDouble())*100).toInt()
+
+
+
+                        makePie(allPie, arrayOf(pos,neg,neu,100-all), arrayOf("Positive","Negative","Neutral","Uncompleted"), clrs,false,18)
+                        view!!.invalidate()
+                    }?:Toast.makeText(context!!,"COULD NOT LOAD DATA",Toast.LENGTH_LONG).show()
+                }
+            })
+        }
+
         
     }
 
