@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.AsyncTask
+import android.os.Build
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -31,9 +33,15 @@ import kotlin.properties.Delegates
 import android.text.method.Touch.onTouchEvent
 import android.util.Log
 import android.view.*
+import androidx.core.view.NestedScrollingChild
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.smsthn.thingscounter.Data.ThingsDb
+import com.smsthn.thingscounter.MainActivity
 import com.smsthn.thingscounter.SharedData.MiscSharedData
+import com.smsthn.thingscounter.SharedData.resetThingsAndAddCycle
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.random.Random
 
 
 class ThingFragment : ThingAbsFragment() {
@@ -145,6 +153,7 @@ class ThingFragment : ThingAbsFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.thing_fragment, container, false)
         pr1 = view.ProgBar1;prtxt1 = view.Prog1SumTxt
         pr2 = view.ProgBar2;prtxt2 = view.Prog2SumTxt
@@ -274,6 +283,16 @@ class ThingFragment : ThingAbsFragment() {
             }
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater!!.inflate(R.menu.toolbar_menu,menu)
+    }
+
+
+}
+
+class rec(context: Context) :RecyclerView(context), NestedScrollingChild {
+
 }
 
 

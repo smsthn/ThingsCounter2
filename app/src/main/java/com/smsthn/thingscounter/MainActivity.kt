@@ -31,9 +31,13 @@ import android.text.method.Touch.onTouchEvent
 import android.view.GestureDetector
 import android.view.View.OnTouchListener
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.smsthn.thingscounter.Data.Entities.Thing
 import com.smsthn.thingscounter.Data.ThingsDb
+import com.smsthn.thingscounter.Fragments.BottomNavigationDrawerFragment
 import com.smsthn.thingscounter.SharedData.resetThingsAndAddCycle
 import kotlin.random.Random
 
@@ -47,6 +51,8 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
 
     private var localCtgs: Array<String>? = arrayOf()
     private var engCtgs: Array<String>? = arrayOf()
+
+    private var down = false
 
     override fun attachBaseContext(newBase: Context?) {
 
@@ -63,7 +69,14 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
         buildNotificationGeneral(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+
+        setSupportActionBar(bar)
+        bar.setNavigationOnClickListener {
+            Toast.makeText(this,"Clicked The Nav",Toast.LENGTH_LONG).show()
+        }
+
+
+
         /* Here Init Ctgs And Types*/
         localTypes = if (MiscSharedData(this).is_pos_neg_neu_allowed()) {
             arrayOf(getString(R.string.positive), getString(R.string.negative), getString(R.string.neutral))
@@ -84,15 +97,22 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
         val appBarConfiguration = AppBarConfiguration(setOf(R.id.thing_frag_dest, R.id.charts_frag_dest))
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        navigation.setupWithNavController(navController)
+        bar.setupWithNavController(navController)
+        /*navigation.setupWithNavController(navController)*/
 
-        initNavigation()
+        initappbar()
 
 
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            toolbar.menu.findItem(R.id.go_to_add_frag)?.isVisible = destination.id == R.id.thing_frag_dest
-                /*findNavController(R.id.host_fragment).currentDestination?.id != R.id.thing_frag_dest*/
+        fab.setOnClickListener {
+            findNavController(R.id.host_fragment).navigate(R.id.action_thing_frag_dest_to_addThingFragment)
+
+
         }
+
+        /*navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            bar.menu.findItem(R.id.go_to_add_frag)?.isVisible = destination.id == R.id.thing_frag_dest
+
+        }*/
 
         mLifecycleRegistry = LifecycleRegistry(this)
         mLifecycleRegistry.markState(Lifecycle.State.CREATED)
@@ -103,17 +123,21 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
         }, 2000)
     }
 
-    fun initNavigation(): Unit {
-        navigation.setOnNavigationItemSelectedListener {
-
-
-
+    fun initappbar(): Unit {
+        bar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.things_nav -> goHome()
                 R.id.charts_nav -> goToCharts()
                 R.id.options_nav -> goToOptions()
+                /*R.id.options_nav2->{
+                    val bottomNavDrawerFragment = BottomNavigationDrawerFragment()
+                    bottomNavDrawerFragment.show(supportFragmentManager, bottomNavDrawerFragment.tag)
+                }*/
             }
             true
+        }
+        bar.setNavigationOnClickListener {
+            //TODO ADD OPTION TO OPEN NAVIGATOIN BAR HERE
         }
     }
 
@@ -145,6 +169,7 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
             R.id.charts_frag_dest ->/* nav.navigate(R.id.action_charts_frag_dest_to_option_frag_dest)*/nav.navigate(R.id.go_to_perfer)
             R.id.option_frag_dest -> return
         }
+
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.host_fragment).navigateUp()
@@ -152,27 +177,47 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        menuInflater.inflate(R.menu.navigation, menu)
         return true
     }
-
+/*
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        val id = item.getItemId()
-        when (id) {
-            R.id.go_to_add_frag -> findNavController(R.id.host_fragment).navigate(R.id.action_thing_frag_dest_to_addThingFragment)
-            R.id.testaddthing -> testAddThing()
-            R.id.testaddmanythings -> testAddManythings()
-            R.id.testdeleteall -> testDeleteAllThings()
-            R.id.testresetthing -> testResetThings()
-        }
 
 
-        return /*item.onNavDestinationSelected(findNavController(R.id.host_fragment)) ||*/  super.onOptionsItemSelected(
+
+        return *//*item.onNavDestinationSelected(findNavController(R.id.host_fragment)) ||*//*  super.onOptionsItemSelected(
             item
         )
+    }*/
+
+
+
+    fun showShadow() {
+        /*val txt = findViewById<TextView>(R.id.gsgs)
+        txt.visibility = if (txt.visibility == View.VISIBLE) View.GONE else View.VISIBLE*/
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val id = item!!.getItemId()
+        when (id) {
+/*
+            *//* R.id.go_to_add_frag ->*//*
+            R.id.things_nav->goHome()
+            R.id.charts_nav->goToCharts()
+            R.id.options_nav->goToOptions()
+            R.id.options_nav2->{
+                val bottomNavDrawerFragment = BottomNavigationDrawerFragment()
+                bottomNavDrawerFragment.show(supportFragmentManager, bottomNavDrawerFragment.tag)
+            }
+           *//* R.id.testaddthing -> testAddThing()
+            R.id.testaddmanythings -> testAddManythings()
+            R.id.testdeleteall -> testDeleteAllThings()
+            R.id.testresetthing -> testResetThings()*/
+        }
+        return true
+
+    }
     /**
      * Here Are The Test Functions
      */
@@ -225,11 +270,6 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
 
     fun testResetThings() {
         resetThingsAndAddCycle(this)
-    }
-
-    fun showShadow() {
-        val txt = findViewById<TextView>(R.id.gsgs)
-        txt.visibility = if (txt.visibility == View.VISIBLE) View.GONE else View.VISIBLE
     }
 }
 

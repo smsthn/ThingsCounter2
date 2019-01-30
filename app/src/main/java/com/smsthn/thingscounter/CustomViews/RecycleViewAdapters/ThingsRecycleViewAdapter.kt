@@ -40,6 +40,7 @@ class ThingsRecycleViewAdapter(
     private val VIEW_TYPE_DISABLED = 2
 
 
+
     init {
 
         displayedThings = allThingss
