@@ -79,7 +79,7 @@ class ChartsFragment :ThingAbsFragment()  {
                 override fun onChanged(t: PrevHistories?)
                 {
                     t?.apply {
-                        Toast.makeText(context!!,"AT LEASE TRIED",Toast.LENGTH_LONG).show()
+
                         poscounts.setText(""+posCounts);posgoals.setText(""+posGoals)
                         poscompleted.setText(""+posCompleteds); postotal.setText(""+posTotals)
 
@@ -106,7 +106,7 @@ class ChartsFragment :ThingAbsFragment()  {
 
                         makePie(allPie, arrayOf(pos,neg,neu,100-all), arrayOf("Positive","Negative","Neutral","Uncompleted"), clrs,false,18)
                         view!!.invalidate()
-                    }?:Toast.makeText(context!!,"COULD NOT LOAD DATA",Toast.LENGTH_LONG).show()
+                    }
                 }
             })
         }

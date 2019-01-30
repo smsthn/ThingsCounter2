@@ -31,6 +31,7 @@ import android.text.method.Touch.onTouchEvent
 import android.view.GestureDetector
 import android.view.View.OnTouchListener
 import android.widget.TextView
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.smsthn.thingscounter.Data.Entities.Thing
 import com.smsthn.thingscounter.Data.ThingsDb
 import com.smsthn.thingscounter.SharedData.resetThingsAndAddCycle
@@ -80,14 +81,18 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
         val host: NavHostFragment = supportFragmentManager.findFragmentById(R.id.host_fragment) as NavHostFragment
 
         val navController = host.navController
-
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.thing_frag_dest, R.id.charts_frag_dest))
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
         navigation.setupWithNavController(navController)
 
         initNavigation()
 
 
-
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            toolbar.menu.findItem(R.id.go_to_add_frag)?.isVisible = destination.id == R.id.thing_frag_dest
+                /*findNavController(R.id.host_fragment).currentDestination?.id != R.id.thing_frag_dest*/
+        }
 
         mLifecycleRegistry = LifecycleRegistry(this)
         mLifecycleRegistry.markState(Lifecycle.State.CREATED)
@@ -100,6 +105,8 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
 
     fun initNavigation(): Unit {
         navigation.setOnNavigationItemSelectedListener {
+
+
 
             when (it.itemId) {
                 R.id.things_nav -> goHome()
@@ -151,12 +158,12 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         val id = item.getItemId()
-        when(id){
-            R.id.go_to_add_frag->findNavController(R.id.host_fragment).navigate(R.id.action_thing_frag_dest_to_addThingFragment)
-            R.id.testaddthing->testAddThing()
-            R.id.testaddmanythings->testAddManythings()
-            R.id.testdeleteall->testDeleteAllThings()
-            R.id.testresetthing->testResetThings()
+        when (id) {
+            R.id.go_to_add_frag -> findNavController(R.id.host_fragment).navigate(R.id.action_thing_frag_dest_to_addThingFragment)
+            R.id.testaddthing -> testAddThing()
+            R.id.testaddmanythings -> testAddManythings()
+            R.id.testdeleteall -> testDeleteAllThings()
+            R.id.testresetthing -> testResetThings()
         }
 
 
@@ -173,9 +180,9 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
             val db = ThingsDb.getAppDataBase(this)
             val dao = db?.thingDao()
             val t = Thing(
-                type = engTypes!![Random.nextInt(engTypes!!.size )],
-                catagory = engCtgs!![Random.nextInt(engCtgs!!.size )],
-                goal = Random.nextInt(1,300),
+                type = engTypes!![Random.nextInt(engTypes!!.size)],
+                catagory = engCtgs!![Random.nextInt(engCtgs!!.size)],
+                goal = Random.nextInt(1, 300),
                 count = Random.nextInt(320), name = "thing" + Random.nextInt(), enabled = true
 
             )
@@ -191,8 +198,8 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
             for (i in 1..100) {
                 things.add(
                     Thing(
-                        type = engTypes!![Random.nextInt(engTypes!!.size )],
-                        catagory = engCtgs!![Random.nextInt(engCtgs!!.size )],
+                        type = engTypes!![Random.nextInt(engTypes!!.size)],
+                        catagory = engCtgs!![Random.nextInt(engCtgs!!.size)],
                         goal = Random.nextInt(300),
                         count = Random.nextInt(320), name = "thing" + Random.nextInt(), enabled = true
 
@@ -206,19 +213,22 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
             )
         }
     }
-    fun testDeleteAllThings(){
+
+    fun testDeleteAllThings() {
         AsyncTask.execute {
             val db = ThingsDb.getAppDataBase(this)
             val dao = db?.thingDao()
             dao?.deleteAllThings()
         }
     }
-    fun testResetThings(){
+
+    fun testResetThings() {
         resetThingsAndAddCycle(this)
     }
-    fun showShadow(){
+
+    fun showShadow() {
         val txt = findViewById<TextView>(R.id.gsgs)
-        txt.visibility = if(txt.visibility == View.VISIBLE)View.GONE else View.VISIBLE
+        txt.visibility = if (txt.visibility == View.VISIBLE) View.GONE else View.VISIBLE
     }
 }
 

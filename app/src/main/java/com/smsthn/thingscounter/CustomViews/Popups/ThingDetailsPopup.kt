@@ -7,8 +7,10 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.transition.TransitionManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.smsthn.thingscounter.CustomViews.CustomStyles.*
@@ -17,6 +19,7 @@ import com.smsthn.thingscounter.CustomViews.Dialogs.buildYesNoDialog
 import com.smsthn.thingscounter.Data.Entities.Thing
 import com.smsthn.thingscounter.MainActivity
 import com.smsthn.thingscounter.R
+import com.smsthn.thingscounter.getDeviceHeight
 import com.smsthn.thingscounter.getDeviceWidth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.advanced_thing_details_popup.view.*
@@ -90,9 +93,10 @@ class ThingDetailsPopup(context: Context?,private val updateFunc:(Thing)->Unit,p
         popup.setOnDismissListener {
             dismissPopup()
         }
+        /*popup.animationStyle = R.style.details_popup_animaton*/
         addBtnLsners()
     }
-    fun openPopup(thing: Thing){
+    fun openPopup(thing: Thing,view:View? = null){
         this.thing = thing
         madeReset = false
         statusChkBtn.apply {
@@ -120,13 +124,16 @@ class ThingDetailsPopup(context: Context?,private val updateFunc:(Thing)->Unit,p
         editBtn.backgroundTintList = ColorStateList.valueOf(lit)
 	    plsbtn.setBackgroundColor(prim+trans);minusbtn.setBackgroundColor(prim+trans)
 	    btmnav.setBackgroundColor(prim+trans);prog.progressTintList = ColorStateList.valueOf(lit)
-
+        val arr = IntArray(2)
+        view?.getLocationOnScreen(arr)
 
         nameTxt.setText(thing.name)
         catagoryTxt.setText(localCtgs[engCtgs.indexOf(thing.catagory)])
         count_Goal_Txt.setText(""+thing.count+" / "+thing.goal)
         cycleTxt.setText(thing.currentCycle.toString())
-        popup.showAtLocation((mainLay.context as MainActivity).container,Gravity.CENTER,0,0)
+        //TODO CHECK THIS OUT
+        TransitionManager.beginDelayedTransition((mainLay.context as MainActivity).container);
+        popup.showAtLocation(view?:(mainLay.context as MainActivity).container,Gravity.NO_GRAVITY,arr[0],arr[1])
 
     }
     private fun dismissPopup(){

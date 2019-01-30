@@ -24,7 +24,7 @@ import com.smsthn.thingscounter.SharedData.LanguageSharedData
 import com.smsthn.thingscounter.SharedData.MiscSharedData
 
 class ThingsRecycleViewAdapter(
-    allThingss: MutableList<Thing>/*, private val context: Context*/,private val countFunc:(Long,Int)->Unit,private val detailsFunc:(Thing)->Unit
+    allThingss: MutableList<Thing>/*, private val context: Context*/,private val countFunc:(Long,Int)->Unit,private val detailsFunc:(Thing,View)->Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var displayedThings: MutableList<Thing>
@@ -233,8 +233,11 @@ class ThingsRecycleViewAdapter(
 	            countFunc.invoke(thing!!.id,thing!!.count + 1)
 
             }
-            moreDetailsBtn.setOnClickListener {
-                detailsFunc.invoke(thing!!)
+            prog.setOnClickListener {
+                detailsFunc.invoke(thing!!,this.itemView)
+            }
+            prog2.setOnClickListener {
+                detailsFunc.invoke(thing!!,this.itemView)
             }
             plusBtn.setOnLongClickListener {
                 var count = 0

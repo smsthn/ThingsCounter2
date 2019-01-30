@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:background="@color/gray_lt2" android:orientation="vertical">
+
+    <!--<LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="0" android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp" android:layout_marginStart="7dp" android:layout_marginEnd="7dp"
+            android:background="@color/darkBlue_trans">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="0">
+            <ToggleButton
+                    android:text="ToggleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton" android:layout_weight="2"
+                    style="@android:style/Widget.Material.Light.Button.Toggle"
+                    android:background="@color/darkBlue_trans"
+                    android:textColor="@android:color/black" android:backgroundTint="@color/darkBlue_trans"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_weight="1"
+                    android:background="@color/darkBlue_trans">
+                <TextView
+                        android:text="Allow Notificaitons"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:id="@+id/textView7" android:layout_weight="1"
+                        android:gravity="center" android:textColor="@android:color/black" android:textStyle="bold"
+                        android:background="@color/darkBlue_trans"/>
+            </LinearLayout>
+            <ToggleButton
+                    android:text="ToggleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton2" android:layout_weight="2"
+                    style="@android:style/Widget.Material.Light.Button.Toggle"
+                    android:background="@color/darkBlue_dk" android:checked="true"
+                    android:textColor="@android:color/white"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="0" android:visibility="gone">
+            <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton"
+                    android:layout_weight="2" android:background="@android:color/transparent" android:textOff=" "
+                    android:textOn=" " android:backgroundTint="@color/darkBlue_trans"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_weight="1"
+                    android:background="@color/gray_trans" android:backgroundTint="@color/darkBlue_trans">
+                <TextView
+                        android:text="This Will Allow To Display notifications"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:id="@+id/textView7" android:layout_weight="1"
+                        android:gravity="center" android:textStyle="italic"/>
+            </LinearLayout>
+            <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton2" android:layout_weight="2"
+                    android:background="@android:color/transparent" android:checked="false"
+                    android:textOn=" " android:textOff=" " android:backgroundTint="@color/darkBlue_trans"/>
+        </LinearLayout>
+        <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textView29" android:layout_weight="0"
+                android:textAlignment="center" android:background="@color/darkBlue_trans"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="0" android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp">
+            <ToggleButton
+                    android:text="ToggleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton" android:layout_weight="2"
+                    style="@android:style/Widget.Material.Light.Button.Toggle"
+                    android:background="@color/darkBlue_trans"
+                    android:textColor="@android:color/black" android:textOff="@string/ongoing"
+                    android:textOn="@string/ongoing" android:layout_margin="1dp"
+                    android:backgroundTint="@color/darkBlue_trans"/>
+            <ToggleButton
+                    android:text="ToggleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton2" android:layout_weight="2"
+                    style="@android:style/Widget.Material.Light.Button.Toggle"
+                    android:background="@color/darkBlue_pr" android:checked="true"
+                    android:textColor="@android:color/white" android:textOff="@string/daily"
+                    android:textOn="@string/daily" android:layout_margin="1dp"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_weight="0" android:visibility="visible"
+                android:layout_marginLeft="10dp" android:layout_marginRight="10dp">
+            <TimePicker
+                    android:text="Allow Notificaitons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" android:textColor="@android:color/black" android:textStyle="bold"
+                    android:layout_weight="0" android:timePickerMode="clock" android:visibility="gone"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="0" android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp">
+            <ToggleButton
+                    android:text="ToggleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton" android:layout_weight="2"
+                    style="@android:style/Widget.Material.Light.Button.Toggle"
+                    android:background="@color/darkBlue_trans"
+                    android:textColor="@android:color/black" android:textOff="@string/counts_goals"
+                    android:textOn="@string/ongoing" android:layout_margin="1dp"
+                    android:backgroundTint="@color/darkBlue_trans"/>
+            <ToggleButton
+                    android:text="ToggleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton2" android:layout_weight="2"
+                    style="@android:style/Widget.Material.Light.Button.Toggle"
+                    android:background="@color/darkBlue_lt" android:checked="true"
+                    android:textColor="@android:color/white" android:textOff="@string/completed_total"
+                    android:textOn="@string/completed_total" android:layout_margin="1dp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="0" android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp" android:layout_marginStart="7dp" android:layout_marginEnd="7dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="0">
+            <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton"
+                    android:layout_weight="2" android:background="@color/morasaki_trans" android:textOff="OFF"
+                    android:textOn="ON"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_weight="1"
+                    android:background="@color/morasaki_trans">
+                <TextView
+                        android:text="Allow Notificaitons"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:id="@+id/textView7" android:layout_weight="1"
+                        android:gravity="center" android:textColor="@android:color/black" android:textStyle="bold"/>
+            </LinearLayout>
+            <ToggleButton
+                    android:text="ToggleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton2" android:layout_weight="2"
+                    style="@android:style/Widget.Material.Light.Button.Toggle"
+                    android:background="@color/darkerBlue_dk" android:checked="true"
+                    android:textColor="@android:color/white"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="0"
+                android:background="@color/morasaki_trans">
+            <ToggleButton
+                    android:text="ToggleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton" android:layout_weight="2"
+                    style="@android:style/Widget.Material.Light.Button.Toggle"
+                    android:background="@color/darkerBlue_dk"
+                    android:textColor="@android:color/white"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_weight="1"
+                    android:background="@color/gray_trans">
+                <TextView
+                        android:text="This Will Allow To Display notifications"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:id="@+id/textView7" android:layout_weight="1"
+                        android:gravity="center" android:textStyle="italic"/>
+            </LinearLayout>
+            <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton2" android:layout_weight="2"
+                    android:background="@color/morasaki_trans"
+                    android:textOn="ON" android:textOff="OFF" android:checked="true"
+            />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_weight="0" android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp" android:layout_marginStart="7dp" android:layout_marginEnd="7dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="0">
+            <ToggleButton
+                    android:text="ToggleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton" android:layout_weight="2"
+                    style="@android:style/Widget.Material.Light.Button.Toggle"
+                    android:background="@color/darkBlue_trans"
+                    android:textColor="@android:color/black"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_weight="1"
+                    android:background="@color/darkBlue_trans">
+                <TextView
+                        android:text="Cycles Mode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:layout_weight="1"
+                        android:gravity="center" android:textColor="@android:color/black" android:textStyle="bold"/>
+            </LinearLayout>
+            <ToggleButton
+                    android:text="ToggleButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton2" android:layout_weight="2"
+                    style="@android:style/Widget.Material.Light.Button.Toggle"
+                    android:background="@color/darkBlue_dk" android:checked="true"
+                    android:textColor="@android:color/white"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="0">
+            <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton"
+                    android:layout_weight="2" android:background="@android:color/transparent" android:textOff=" "
+                    android:textOn=" "/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_weight="1"
+                    android:background="@color/gray_trans">
+                <TextView
+                        android:text="This Will Allow To Display notifications"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:id="@+id/textView7" android:layout_weight="1"
+                        android:gravity="center" android:textStyle="italic"/>
+            </LinearLayout>
+            <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/toggleButton2" android:layout_weight="2"
+                    android:background="@android:color/transparent" android:checked="false"
+                    android:textOn=" " android:textOff=" "/>
+        </LinearLayout>
+    </LinearLayout>-->
+</LinearLayout>
