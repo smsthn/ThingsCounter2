@@ -115,4 +115,9 @@
 	<string name="title_dashboard" translatable="false">Deaktiviert Dinge</string>
     <string name="title_notifications">Einstellung</string>
     <string name="no_data_to_show">Keine Daten zum Anzeigen</string>
+    <string name="notifications_doublepoint">Benachrichtigungen:</string>
+    <string name="daily_reset_doublepoint">Täglicher Zurücksetzen :</string>
+    <string name="allow_daily_reset">Tägliches Zurücksetzen zulassen</string>
+    <string name="mode">Modus</string>
+    <string name="title_activity_settings">Einstellungen :</string>
 </resources>

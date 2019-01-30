@@ -114,4 +114,9 @@
 	<string name="title_dashboard" translatable="false">الاشياء المتوقفة</string>
     <string name="title_notifications">الإعدادات</string>
     <string name="no_data_to_show">لا توجد بيانات للعرض</string>
+    <string name="notifications_doublepoint">الإشعارات:</string>
+    <string name="allow_daily_reset">السماح بإعادة التعيين اليومي</string>
+    <string name="daily_reset_doublepoint">إعادة التعيين</string>
+    <string name="mode">الوضع</string>
+    <string name="title_activity_settings">الإعدادات :</string>
 </resources>

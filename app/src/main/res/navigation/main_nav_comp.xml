@@ -68,4 +68,8 @@
 	<action android:id="@+id/action_main_nav_comp_pop" app:popUpTo="@id/main_nav_comp" app:popUpToInclusive="true"
 	        app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"
 	        app:launchSingleTop="true"/>
+    <fragment android:id="@+id/perference_activity_dest" android:name="com.smsthn.thingscounter.NorificationSettings"
+              android:label="NorificationSettings"/>
+    <action android:id="@+id/go_to_perfer" app:destination="@id/perference_activity_dest" app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"/>
 </navigation>

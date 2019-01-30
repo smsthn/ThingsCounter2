@@ -1,10 +1,12 @@
 package com.smsthn.thingscounter.Fragments
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.widget.AbsSpinner
 import android.widget.ProgressBar
 import android.widget.RadioGroup
@@ -22,7 +24,6 @@ import com.smsthn.thingscounter.CustomViews.Spinners.CustomCtgSpinner
 import com.smsthn.thingscounter.Data.Daos.TypeAndCount
 import com.smsthn.thingscounter.Data.Entities.Thing
 import com.smsthn.thingscounter.Fragments.ViewModels.ThingViewModel
-import com.smsthn.thingscounter.SharedData.MiscSharedData
 
 import com.smsthn.thingscounter.R
 import kotlinx.android.synthetic.main.thing_fragment.view.*
@@ -32,6 +33,7 @@ import android.util.Log
 import android.view.*
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.smsthn.thingscounter.SharedData.MiscSharedData
 
 
 class ThingFragment : ThingAbsFragment() {
@@ -44,6 +46,9 @@ class ThingFragment : ThingAbsFragment() {
     private lateinit var thingDetailsPopup: ThingDetailsPopup
     private lateinit var typerad: RadioGroup
     private lateinit var ctgSpinner: CustomCtgSpinner
+    private lateinit var prefs:SharedPreferences
+    private var isposnegneu = true
+
 
 
     private var isEnabled: Boolean by Delegates.observable(true) { d, old, new ->
@@ -104,17 +109,21 @@ class ThingFragment : ThingAbsFragment() {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         context?.also {
-            val posNegNeu = MiscSharedData(it).is_pos_neg_neu_allowed()
+
+            prefs= PreferenceManager.getDefaultSharedPreferences(context)
+            Log.e("THE CURRENT LANGUAGE IS",prefs.getString(getString(R.string.settings_languagees_key),"English"))
+            isposnegneu = MiscSharedData(context).is_pos_neg_neu_allowed()
             localCtgs = getStringArrayInLocale(it, "Catagories")
 
             engCtgs = getStringArrayInLocale(it, "Catagories", "en")
-            localTypes = if (posNegNeu) {
+            localTypes = if (isposnegneu) {
                 arrayOf(getString(R.string.positive), getString(R.string.negative), getString(R.string.neutral))
             } else getStringArrayInLocale(it, "colors_arr")
-            engTypes = if (posNegNeu) {
+            engTypes = if (isposnegneu) {
                 arrayOf("Positive", "Negative", "Neutral")
             } else getStringArrayInLocale(it, "colors_arr", "en")
         }
+
     }
 
     /**
@@ -157,7 +166,7 @@ class ThingFragment : ThingAbsFragment() {
 
 
         viewModel = ViewModelProviders.of(this).get(ThingViewModel::class.java).apply {
-            initViewModel(activity!!.application, MiscSharedData(context!!).is_pos_neg_neu_allowed())
+            initViewModel(activity!!.application, isposnegneu)
             enabledThngs.observe(this@ThingFragment, object : Observer<MutableList<Thing>> {
                 override fun onChanged(t: MutableList<Thing>?) {
                     recAdapter.refreshThings(t ?: return, true)
@@ -218,7 +227,7 @@ class ThingFragment : ThingAbsFragment() {
 
         val pr = arrayOf(pr1, pr2, pr3)
         val prtxt = arrayOf(prtxt1, prtxt2, prtxt3)
-        if (MiscSharedData(context ?: return).is_pos_neg_neu_allowed()) {
+        if (isposnegneu) {
             listOf("Negative", "Positive", "Neutral").forEachIndexed { i, s ->
                 lst.firstOrNull { tc -> tc.type == s } ?: TypeAndCount("").apply {
                     pr[i]?.apply { max = goalsum;progress = countsum }

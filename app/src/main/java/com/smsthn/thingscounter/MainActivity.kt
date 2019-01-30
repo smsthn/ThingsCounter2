@@ -139,9 +139,10 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
         val nav = findNavController(R.id.host_fragment)
         when (nav.currentDestination?.id) {
             R.id.thing_frag_dest -> {
-                nav.navigate(R.id.action_thing_frag_dest_to_option_frag_dest)
+                /*nav.navigate(R.id.action_thing_frag_dest_to_option_frag_dest)*/
+                nav.navigate(R.id.go_to_perfer)
             }
-            R.id.charts_frag_dest -> nav.navigate(R.id.action_charts_frag_dest_to_option_frag_dest)
+            R.id.charts_frag_dest ->/* nav.navigate(R.id.action_charts_frag_dest_to_option_frag_dest)*/nav.navigate(R.id.go_to_perfer)
             R.id.option_frag_dest -> return
         }
     }

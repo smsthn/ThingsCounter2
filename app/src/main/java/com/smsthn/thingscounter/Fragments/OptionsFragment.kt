@@ -191,14 +191,7 @@ class OptionsFragment : ThingAbsFragment() {
 }
 
 
-/*fun TimePickerDialog.createThingDialog(context: Context,reson:TimePickerReason):TimePickerDialog{
-    val notif = NotificationSharedData(context)
-    val cyc = CycleSharedData(context)
-    val h = if (reson == TimePickerReason.Cycle) cyc.get_hour() else notif.get_hour()
-    val m = if (reson == TimePickerReason.Cycle) cyc.get_minute() else notif.get_min()
 
-    return TimePickerDialog(context,null,h,m,true)
-}*/
 
 enum class TimePickerReason{
     Notification,
