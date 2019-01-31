@@ -37,13 +37,12 @@
                     android:id="@+id/ThingProgressBar" android:progress="50"
                     android:progressDrawable="@android:drawable/progress_horizontal"
                     android:progressTint="#ffff56"
-                    android:layout_margin="0dp" android:progressBackgroundTint="@android:color/white"
-            />
+                    android:layout_margin="0dp" android:progressBackgroundTint="@color/black_pr"
+                    android:foreground="@color/gray_trans"/>
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:gravity="center"
-                    android:background="@color/black_pr"
                     android:backgroundTintMode="src_over"
             >
                 <TextView
@@ -95,13 +94,12 @@
                     android:progress="50"
                     android:progressDrawable="@android:drawable/progress_horizontal"
                     android:progressTint="#ffff56"
-                    android:layout_margin="0dp" android:progressBackgroundTint="@android:color/white"
-                    android:id="@+id/ThingProgressBar2"/>
+                    android:layout_margin="0dp" android:progressBackgroundTint="@color/black_pr"
+                    android:id="@+id/ThingProgressBar2" android:foreground="@color/gray_trans"/>
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:gravity="center"
-                    android:background="@color/black_pr"
                     android:backgroundTintMode="src_over"
             >
                 <TextView
