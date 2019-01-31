@@ -91,26 +91,7 @@
     <color name="gray_trans">#208d8d8d</color>
 
 
-   <!-- <color name="green_pr">#bb00c853</color>
-    <color name="green_lt2">#bb5efc82</color>
-    <color name="green_dk">#bb1faa00</color>
-    <color name="green_lt1">#bb64dd17</color>
 
-    <color name="red_pr">#bbb61827</color>
-    <color name="red_lt2">#bbef5350</color>
-    <color name="red_dk">#bbe53935</color>
-    <color name="red_lt1">#bbef5350</color>
-
-    <color name="gray_dk">#bb8d8d8d</color>
-    <color name="gray_lt1">#bbbdbdbd</color>
-    <color name="gray_pr">#bbbabdbe</color>
-    <color name="gray_lt2">#bbeceff1</color>
-
-    <color name="light_gray">#edf5f5f5</color>
-
-    <color name="green_trans">#20338a3e</color>
-    <color name="red_trans">#20b61827</color>
-    <color name="gray_trans">#208d8d8d</color>-->
 
 
 </resources>

@@ -1,3 +1,4 @@
+/*
 package com.smsthn.thingscounter.CustomViews.Popups
 
 import android.app.Activity
@@ -52,6 +53,9 @@ class ThingDetailsPopup(context: Context?,private val updateFunc:(Thing)->Unit,p
 
 
     init {
+        madeReset = false
+        thing = null
+
         localCtgs = getStringArrayInLocale(context!!, "Catagories")!!
         engCtgs = getStringArrayInLocale(
             context,
@@ -60,9 +64,9 @@ class ThingDetailsPopup(context: Context?,private val updateFunc:(Thing)->Unit,p
         )!!
         
         
-        madeReset = false
 
-        thing = null
+
+
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     val view = inflater.inflate(R.layout.advanced_thing_details_popup,null)
         popup = PopupWindow(view,
@@ -93,7 +97,9 @@ class ThingDetailsPopup(context: Context?,private val updateFunc:(Thing)->Unit,p
         popup.setOnDismissListener {
             dismissPopup()
         }
-        /*popup.animationStyle = R.style.details_popup_animaton*/
+        */
+/*popup.animationStyle = R.style.details_popup_animaton*//*
+
         addBtnLsners()
     }
     fun openPopup(thing: Thing,view:View? = null){
@@ -103,7 +109,9 @@ class ThingDetailsPopup(context: Context?,private val updateFunc:(Thing)->Unit,p
             setOnCheckedChangeListener { buttonView, isChecked ->  }
             isChecked = thing.enabled
             setOnCheckedChangeListener { buttonView, isChecked ->
-               /* detailsOrganizer.changeStatus(this@ThingDetailsPopup.thing,isChecked)*/
+               */
+/* detailsOrganizer.changeStatus(this@ThingDetailsPopup.thing,isChecked)*//*
+
             }
         }
 
@@ -132,7 +140,9 @@ class ThingDetailsPopup(context: Context?,private val updateFunc:(Thing)->Unit,p
         count_Goal_Txt.setText(""+thing.count+" / "+thing.goal)
         cycleTxt.setText(thing.currentCycle.toString())
         //TODO CHECK THIS OUT
-        TransitionManager.beginDelayedTransition((mainLay.context as MainActivity).container);
+        */
+/*TransitionManager.beginDelayedTransition((mainLay.context as MainActivity).container);*//*
+
         popup.showAtLocation(view?:(mainLay.context as MainActivity).container,Gravity.NO_GRAVITY,arr[0],arr[1])
 
     }
@@ -177,12 +187,17 @@ class ThingDetailsPopup(context: Context?,private val updateFunc:(Thing)->Unit,p
             )
         }
         showHistoryBtn.setOnClickListener {
-            /*detailsOrganizer.openOneHistoryPopup(thing)*/
+            */
+/*detailsOrganizer.openOneHistoryPopup(thing)*//*
+
         }
         editBtn.setOnClickListener {
-            /*detailsOrganizer.openEditPopup(thing)*/
+            */
+/*detailsOrganizer.openEditPopup(thing)*//*
+
 
         }
     }
 
 }
+*/

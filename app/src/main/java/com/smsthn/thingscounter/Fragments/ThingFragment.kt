@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.smsthn.thingscounter.CustomViews.CustomStyles.getDarkColor
 import com.smsthn.thingscounter.CustomViews.CustomStyles.getLightColor
 import com.smsthn.thingscounter.CustomViews.CustomStyles.getStringArrayInLocale
-import com.smsthn.thingscounter.CustomViews.Popups.ThingDetailsPopup
 import com.smsthn.thingscounter.CustomViews.RecycleViewAdapters.ThingsRecycleViewAdapter
 import com.smsthn.thingscounter.CustomViews.Spinners.CustomCtgSpinner
 import com.smsthn.thingscounter.Data.Daos.TypeAndCount
@@ -30,6 +29,7 @@ import kotlin.properties.Delegates
 import android.util.Log
 import android.view.*
 import com.smsthn.thingscounter.CustomViews.Popups.CtgChipsPopup
+import com.smsthn.thingscounter.Fragments.BottomNavigationDrawerFragment.Companion.newInstance
 import com.smsthn.thingscounter.SharedData.MiscSharedData
 
 
@@ -40,7 +40,8 @@ class ThingFragment : ThingAbsFragment() {
     private lateinit var thingRecyclerView: RecyclerView
     private lateinit var viewModel: ThingViewModel
     private lateinit var recAdapter: ThingsRecycleViewAdapter
-    private lateinit var thingDetailsPopup: ThingDetailsPopup
+    /*private lateinit var thingDetailsPopup: ThingDetailsPopup*/
+    private lateinit var thingDetailsBtmSheet:BottomNavigationDrawerFragment
     private lateinit var typerad: RadioGroup
     private lateinit var ctgSpinner: CustomCtgSpinner
     private lateinit var prefs:SharedPreferences
@@ -215,12 +216,14 @@ class ThingFragment : ThingAbsFragment() {
 
             })
         }
-        thingDetailsPopup =
-            ThingDetailsPopup(context, viewModel::updateThing, viewModel::deleteThing, viewModel::resetOneHis)
+        /*thingDetailsPopup =
+            ThingDetailsPopup(context, viewModel::updateThing, viewModel::deleteThing, viewModel::resetOneHis)*/
+
         thingRecyclerView.apply {
             layoutManager = LinearLayoutManager(view!!.context)
             recAdapter =
-                ThingsRecycleViewAdapter(mutableListOf(), viewModel::updateThingCount, thingDetailsPopup::openPopup)
+                ThingsRecycleViewAdapter(mutableListOf(), viewModel::updateThingCount, {thing, view -> BottomNavigationDrawerFragment
+                    .newInstance(thing).show(fragmentManager,thing.name) })
             adapter = recAdapter
         }
 

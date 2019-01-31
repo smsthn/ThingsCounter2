@@ -1,10 +1,10 @@
 <PreferenceScreen
 
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <PreferenceCategory android:layout="@android:layout/preference_category"
-            android:title="Notification :">
+                        android:title="Notification :">
 
         <SwitchPreference
                 android:key="@string/settings_allow_notificaitons_key"
@@ -18,7 +18,7 @@
         <Preference android:dependency="@string/settings_notoficaiton_ongoing_key"
                     android:title="@string/notification_time"
                     android:key="@string/setting_notification_time_key"
-                    android:selectable="true"/>
+                    android:selectable="true" android:icon="@android:drawable/ic_lock_idle_alarm"/>
         <ListPreference
                 android:defaultValue="1"
                 android:title="@string/things_display_type" android:entries="@array/display_types_arr"
@@ -37,7 +37,9 @@
                     android:title="@string/reset_time"
                     android:key="@string/settings_daily_reset_time_key"
                     android:selectable="true" android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:id="@+id/preference"/>
+                    android:id="@+id/preference"
+                    android:icon="@android:drawable/ic_lock_idle_alarm"
+        />
     </PreferenceCategory>
     <PreferenceCategory android:layout="@android:layout/preference_category"
                         android:title=" ">
@@ -49,11 +51,12 @@
                 android:defaultValue="1"
                 android:entries="@array/posnegneu_arr"
                 android:entryValues="@array/posnegneu_arr" android:key="@string/stng_posnegneu_key"
-                android:title="@string/mode"/>
+                android:title="@string/mode" android:icon="@android:drawable/ic_menu_sort_by_size"/>
         <ListPreference
                 android:defaultValue="1"
                 android:title="@string/language" android:entries="@array/languages_arr"
-                android:entryValues="@array/languages_arr" android:key="@string/settings_languagees_key"/>
+                android:entryValues="@array/languages_arr" android:key="@string/settings_languagees_key"
+                android:icon="@android:drawable/ic_menu_sort_alphabetically"/>
     </PreferenceCategory>
 
 
