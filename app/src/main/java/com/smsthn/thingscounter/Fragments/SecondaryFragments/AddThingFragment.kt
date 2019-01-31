@@ -307,7 +307,7 @@ class AddThingFragment : Fragment()
 								paintThing(this)
 								type = contentDescription.toString()
 							}
-							color = engTypes[localTypes.indexOf(contentDescription.toString())]
+							color = contentDescription.toString()
 						}
 					}
 				}
@@ -341,7 +341,7 @@ class AddThingFragment : Fragment()
 								paintThing(this)
 								type = contentDescription.toString()
 							}
-							color = engTypes[localTypes.indexOf(contentDescription.toString())]
+							color = contentDescription.toString()
 						}
 					}
 				}

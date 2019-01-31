@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             app:navigationIcon="@mipmap/ic_launcher_round" app:fabCradleMargin="3dp"
             app:fabCradleRoundedCornerRadius="20dp"
-            app:fabAlignmentMode="end"
+            app:fabAlignmentMode="center"
             app:buttonGravity="top|bottom"
 
             app:hideOnScroll="true"

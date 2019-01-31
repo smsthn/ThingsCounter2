@@ -72,4 +72,9 @@
               android:label="NorificationSettings"/>
     <action android:id="@+id/go_to_perfer" app:destination="@id/perference_activity_dest" app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"/>
+	<fragment android:id="@+id/thingContainerFragment"
+			  android:name="com.smsthn.thingscounter.Fragments.containers.ThingContainerFragment"
+			  android:label="fragment_thing_container" tools:layout="@layout/fragment_thing_container"/>
+	<action android:id="@+id/action_global_thingContainerFragment" app:destination="@id/thingContainerFragment"
+			app:launchSingleTop="true"/>
 </navigation>

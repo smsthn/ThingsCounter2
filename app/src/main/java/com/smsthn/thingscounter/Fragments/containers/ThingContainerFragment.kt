@@ -25,7 +25,7 @@ class ThingContainerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_thing_container, container, false)
+        return inflater.inflate(R.layout.all_popup_thing_fragment, container, false)
     }
 
 

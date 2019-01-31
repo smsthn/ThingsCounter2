@@ -24,12 +24,14 @@ import com.smsthn.thingscounter.SharedData.LanguageSharedData
 import com.smsthn.thingscounter.SharedData.MiscSharedData
 
 class ThingsRecycleViewAdapter(
-    allThingss: MutableList<Thing>/*, private val context: Context*/,private val countFunc:(Long,Int)->Unit,private val detailsFunc:(Thing,View)->Unit
+    allThingss: MutableList<Thing>/*, private val context: Context*/,
+    private val countFunc: (Long, Int) -> Unit,
+    private val detailsFunc: (Thing, View) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var displayedThings: MutableList<Thing>
-	
-	private var isOverCountingAllowed = false
+
+    private var isOverCountingAllowed = false
 
     private var lastPosition = -1
     private var delayTime: Long = 0
@@ -38,7 +40,6 @@ class ThingsRecycleViewAdapter(
 
     private val VIEW_TYPE_ENABLED = 1
     private val VIEW_TYPE_DISABLED = 2
-
 
 
     init {
@@ -73,6 +74,23 @@ class ThingsRecycleViewAdapter(
         displayedThings = lst
     }
 
+    fun filterThings(ctgs: MutableList<String>, types: MutableList<String>, enabled: Boolean = true) {
+        val backupThings = if (enabled) backupEnabled else backupDisabled
+        val lst = backupThings.filter {
+            (ctgs.isNullOrEmpty().or(ctgs.contains(it.catagory)))
+                .and(types.isNullOrEmpty().or(types.contains(it.type)))
+        }
+            .toMutableList()
+        val diff = DiffUtil.calculateDiff(
+            ThingRecycleDiffCallback(
+                this.displayedThings,
+                lst
+            )
+        )
+        diff.dispatchUpdatesTo(this)
+        displayedThings = lst
+    }
+
     override fun getItemViewType(position: Int): Int {
         if (displayedThings[position].enabled) return VIEW_TYPE_ENABLED
         else return VIEW_TYPE_DISABLED
@@ -80,8 +98,8 @@ class ThingsRecycleViewAdapter(
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-	    isOverCountingAllowed = MiscSharedData(recyclerView.context!!).is_over_counting_allowed()
-     
+        isOverCountingAllowed = MiscSharedData(recyclerView.context!!).is_over_counting_allowed()
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -226,19 +244,19 @@ class ThingsRecycleViewAdapter(
         private fun initBtns() {
             minusBtn.setOnClickListener {
 
-                if(thing!!.count -1 >= 0)
-                    countFunc.invoke(thing!!.id,thing!!.count - 1)
+                if (thing!!.count - 1 >= 0)
+                    countFunc.invoke(thing!!.id, thing!!.count - 1)
             }
             plusBtn.setOnClickListener {
-                if(!isOverCountingAllowed && thing!!.count+1>thing!!.goal)return@setOnClickListener
-	            countFunc.invoke(thing!!.id,thing!!.count + 1)
+                if (!isOverCountingAllowed && thing!!.count + 1 > thing!!.goal) return@setOnClickListener
+                countFunc.invoke(thing!!.id, thing!!.count + 1)
 
             }
             prog.setOnClickListener {
-                detailsFunc.invoke(thing!!,this.itemView)
+                detailsFunc.invoke(thing!!, this.itemView)
             }
             prog2.setOnClickListener {
-                detailsFunc.invoke(thing!!,this.itemView)
+                detailsFunc.invoke(thing!!, this.itemView)
             }
             plusBtn.setOnLongClickListener {
                 var count = 0
@@ -264,7 +282,7 @@ class ThingsRecycleViewAdapter(
                         }
 
                     }
-                    if (count != 0) countFunc.invoke(thing!!.id,thing!!.count + count)
+                    if (count != 0) countFunc.invoke(thing!!.id, thing!!.count + count)
                 }
                 true
             }
@@ -292,97 +310,98 @@ class ThingsRecycleViewAdapter(
 
 
                     }
-                    if (count != 0) countFunc.invoke(thing!!.id,thing!!.count + count)
+                    if (count != 0) countFunc.invoke(thing!!.id, thing!!.count + count)
                 }
                 true
             }
         }
-        
+
     }
-        inner class DisabledThingsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val nameTxt: TextView
-            val ctgTxt: TextView
-            val goalTxt: TextView
-            val showHistoryBtn: Button
-            val disabledThingMainLay: LinearLayout
-            val enableThngBtn: Button
-            var thing: Thing?
-            val localCtgs: Array<String>
-            val engCtgs: Array<String>
-            var engIsLocale: Boolean = false
 
-            init {
-                thing = null
-                nameTxt = view.DisabledThingNameTxt.apply { paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG }
-                ctgTxt = view.DisabledThingCatagoryTxt.apply { paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG }
-                goalTxt = view.DisabledThingGoal.apply { paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG }
-                showHistoryBtn = view.DisabledThingShowHistoryBtn
-                disabledThingMainLay = view.DisabledThingMainLayout
-                enableThngBtn = view.DisabledThingEnableBtn.apply {
-                    setOnClickListener {
-                        /* organizer.enableThing(thing)*/
-                    }
+    inner class DisabledThingsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val nameTxt: TextView
+        val ctgTxt: TextView
+        val goalTxt: TextView
+        val showHistoryBtn: Button
+        val disabledThingMainLay: LinearLayout
+        val enableThngBtn: Button
+        var thing: Thing?
+        val localCtgs: Array<String>
+        val engCtgs: Array<String>
+        var engIsLocale: Boolean = false
+
+        init {
+            thing = null
+            nameTxt = view.DisabledThingNameTxt.apply { paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG }
+            ctgTxt = view.DisabledThingCatagoryTxt.apply { paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG }
+            goalTxt = view.DisabledThingGoal.apply { paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG }
+            showHistoryBtn = view.DisabledThingShowHistoryBtn
+            disabledThingMainLay = view.DisabledThingMainLayout
+            enableThngBtn = view.DisabledThingEnableBtn.apply {
+                setOnClickListener {
+                    /* organizer.enableThing(thing)*/
                 }
-                view.setBackgroundColor(Color.WHITE)
-                view.elevation = 10f
-                localCtgs = getStringArrayInLocale(
+            }
+            view.setBackgroundColor(Color.WHITE)
+            view.elevation = 10f
+            localCtgs = getStringArrayInLocale(
+                this.itemView.context,
+                "Catagories"
+            )!!
+            if (LanguageSharedData(this.itemView.context).get_lang_code() == "en") {
+                engCtgs = localCtgs;engIsLocale = true
+            } else engCtgs = getStringArrayInLocale(
+                this.itemView.context,
+                "Catagories",
+                "en"
+            )!!
+        }
+
+        private fun getCtgEngToLocale(ctg: String): String {
+            if (engIsLocale) return ctg
+            return localCtgs[engCtgs.indexOf(ctg)]
+        }
+
+        private fun getCtgLocaleToEng(ctg: String): String {
+            if (engIsLocale) return ctg
+            return engCtgs[localCtgs.indexOf(ctg)]
+        }
+
+        fun setup(thing: Thing) {
+            this.thing = thing
+            disabledThingMainLay.setBackgroundColor(
+                getTransparantColor(
                     this.itemView.context,
-                    "Catagories"
-                )!!
-                if (LanguageSharedData(this.itemView.context).get_lang_code() == "en") {
-                    engCtgs = localCtgs;engIsLocale = true
-                } else engCtgs = getStringArrayInLocale(
-                    this.itemView.context,
-                    "Catagories",
-                    "en"
-                )!!
-            }
-
-            private fun getCtgEngToLocale(ctg: String): String {
-                if (engIsLocale) return ctg
-                return localCtgs[engCtgs.indexOf(ctg)]
-            }
-
-            private fun getCtgLocaleToEng(ctg: String): String {
-                if (engIsLocale) return ctg
-                return engCtgs[localCtgs.indexOf(ctg)]
-            }
-
-            fun setup(thing: Thing) {
-                this.thing = thing
-                disabledThingMainLay.setBackgroundColor(
-                    getTransparantColor(
-                        this.itemView.context,
-                        thing.type
-                    )
+                    thing.type
                 )
-                nameTxt.setText(thing.name)
-                ctgTxt.setText(getCtgEngToLocale(thing.catagory))
-                goalTxt.setText("" + thing.goal)
-                showHistoryBtn.setOnClickListener {
-                    /*organizer.openOneHistoryPopup(thing)*/
-                }
+            )
+            nameTxt.setText(thing.name)
+            ctgTxt.setText(getCtgEngToLocale(thing.catagory))
+            goalTxt.setText("" + thing.goal)
+            showHistoryBtn.setOnClickListener {
+                /*organizer.openOneHistoryPopup(thing)*/
             }
         }
     }
+}
 
-    class ThingRecycleDiffCallback(private val oldList: MutableList<Thing>, private val newList: MutableList<Thing>) :
-        DiffUtil.Callback() {
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition].id == newList[newItemPosition].id
-        }
+class ThingRecycleDiffCallback(private val oldList: MutableList<Thing>, private val newList: MutableList<Thing>) :
+    DiffUtil.Callback() {
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldList[oldItemPosition].id == newList[newItemPosition].id
+    }
 
-        override fun getOldListSize(): Int {
-            return oldList.size
-        }
+    override fun getOldListSize(): Int {
+        return oldList.size
+    }
 
-        override fun getNewListSize(): Int {
-            return newList.size
-        }
+    override fun getNewListSize(): Int {
+        return newList.size
+    }
 
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition].compareToThing(newList[newItemPosition])
-
-        }
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldList[oldItemPosition].compareToThing(newList[newItemPosition])
 
     }
+
+}

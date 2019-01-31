@@ -48,6 +48,7 @@ class NorificationSettings : PreferenceFragmentCompat() {
                     )
                     else -> MiscSharedData(context!!).set_pos_neg_neu_allowed(false)
                 }
+                activity!!.recreate()
                 true
             }
         }

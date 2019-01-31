@@ -4,12 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.os.AsyncTask
-import android.os.Build
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.widget.AbsSpinner
 import android.widget.ProgressBar
 import android.widget.RadioGroup
 import android.widget.TextView
@@ -30,18 +27,10 @@ import com.smsthn.thingscounter.Fragments.ViewModels.ThingViewModel
 import com.smsthn.thingscounter.R
 import kotlinx.android.synthetic.main.thing_fragment.view.*
 import kotlin.properties.Delegates
-import android.text.method.Touch.onTouchEvent
 import android.util.Log
 import android.view.*
-import androidx.core.view.NestedScrollingChild
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import com.smsthn.thingscounter.Data.ThingsDb
-import com.smsthn.thingscounter.MainActivity
+import com.smsthn.thingscounter.CustomViews.Popups.CtgChipsPopup
 import com.smsthn.thingscounter.SharedData.MiscSharedData
-import com.smsthn.thingscounter.SharedData.resetThingsAndAddCycle
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.random.Random
 
 
 class ThingFragment : ThingAbsFragment() {
@@ -55,8 +44,35 @@ class ThingFragment : ThingAbsFragment() {
     private lateinit var typerad: RadioGroup
     private lateinit var ctgSpinner: CustomCtgSpinner
     private lateinit var prefs:SharedPreferences
+    private lateinit var ctgsPopup:CtgChipsPopup
     private var isposnegneu = true
 
+
+    private fun filterThings(){
+        try {
+            val c = mutableListOf<String>()
+            val t = mutableListOf<String>()
+            currentCatagories!!.theMutableList.forEach {
+                c.add(engCtgs!![localCtgs!!.indexOf(it)])
+            }
+            currentTypes!!.theMutableList.forEach {
+                c.add(engTypes!![localTypes!!.indexOf(it)])
+            }
+            if (isVisible)recAdapter.filterThings(c,
+                t,
+                    isEnabled
+                )
+        }catch (e:java.lang.Exception){Log.d("ThingFragment","Tries to access the adapter befor init")}
+    }
+
+
+   /* private var currentCatagories:ThingObservalbeList? =null
+    private var currentTypes:ThingObservalbeList? =null
+        init {
+
+            currentCatagories= ThingObservalbeList(this::filterThings,this::filterThings)
+            currentTypes= ThingObservalbeList(this::filterThings,this::filterThings)
+        }*/
 
 
     private var isEnabled: Boolean by Delegates.observable(true) { d, old, new ->
@@ -109,7 +125,7 @@ class ThingFragment : ThingAbsFragment() {
 
     /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-	    
+
     }*/
     /**
      * onAttach
@@ -155,13 +171,17 @@ class ThingFragment : ThingAbsFragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.thing_fragment, container, false)
-        pr1 = view.ProgBar1;prtxt1 = view.Prog1SumTxt
-        pr2 = view.ProgBar2;prtxt2 = view.Prog2SumTxt
-        pr3 = view.ProgBar3;prtxt3 = view.Prog3SumTxt
+        pr1 = view.progBar1
+        pr2 = view.progBar2
+        pr3 = view.progBar3
         thingRecyclerView = view.AllThingsRecycleView
 
-        typerad = view.findViewById(R.id.HomeTypeRadioGroup)
-        ctgSpinner = view.findViewById(R.id.MainCatagoriesSpinner)
+        ctgsPopup = CtgChipsPopup(view.context!!,localCtgs!!.toList(),currentCatagories!!)
+        view.thing_ctg_btn.setOnClickListener {
+            ctgsPopup.openPopup(it,currentCatagories!!.theMutableList)
+        }
+        /*typerad = view.findViewById(R.id.HomeTypeRadioGroup)
+        ctgSpinner = view.findViewById(R.id.MainCatagoriesSpinner)*/
 
         return view
     }
@@ -204,7 +224,7 @@ class ThingFragment : ThingAbsFragment() {
             adapter = recAdapter
         }
 
-        typerad.apply {
+       /* typerad.apply {
             when (currentType) {
                 "All" -> check(R.id.HomeTypeAllBtn)
                 "Positive" -> check(R.id.HomeTypePosBtn)
@@ -220,7 +240,7 @@ class ThingFragment : ThingAbsFragment() {
                 }
             }
         }
-        ctgSpinner.setup(null, localCtgs!!, engCtgs!!, { s -> currentCatagory = s }, true)
+        ctgSpinner.setup(null, localCtgs!!, engCtgs!!, { s -> currentCatagory = s }, true)*/
 
     }
 
@@ -291,9 +311,10 @@ class ThingFragment : ThingAbsFragment() {
 
 }
 
-class rec(context: Context) :RecyclerView(context), NestedScrollingChild {
-
+class ThingObservalbeList(private val addFunc:()->Unit, private val removeFunc:()->Unit){
+    val theMutableList = mutableListOf<String>()
+    fun add(value:String){theMutableList.add(value);addFunc.invoke()}
+    fun remove(value:String){theMutableList.remove(value);removeFunc.invoke()}
+    fun contains(element:String)=theMutableList.contains(element)
+    fun clear(){theMutableList.clear();removeFunc.invoke()}
 }
-
-
-

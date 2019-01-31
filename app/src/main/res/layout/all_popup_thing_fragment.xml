@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:background="@color/gray_trans"
+              android:theme="@style/Base.Theme.MaterialComponents">
+
+
+    <ProgressBar
+            style="@style/MsProg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ProgBar2" android:progress="20"
+            android:progressDrawable="@android:drawable/progress_horizontal"
+            android:progressTint="@color/green_lt1"
+            android:progressBackgroundTint="@color/darkGreen_pr"
+            android:max="100" android:background="@color/gray_pr"/>
+    <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ProgBar3" android:max="100"
+            android:progressDrawable="@android:drawable/progress_horizontal"
+            android:progress="20"
+            android:progressTint="@color/gray_lt1"
+            android:progressBackgroundTint="@color/black_lt" android:background="@color/gray_pr"/>
+    <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ProgBar1" android:max="100"
+            android:progressDrawable="@android:drawable/progress_horizontal"
+            android:progress="20"
+            android:progressTint="@color/red_lt2"
+            android:progressBackgroundTint="@color/darkRed_pr" android:background="@color/gray_pr"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:background="@color/gray_pr">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="1">
+            <TextView
+                    android:text="@string/catagory_doublepoint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView6" android:layout_weight="0"
+                    android:background="@color/black_lt" android:textColor="@color/gray_lt2"
+                    android:textAlignment="center"/>
+            <Button
+                    android:text="@string/all"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/button" android:layout_weight="1"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:textAppearance="@style/TextAppearance.AppCompat" android:fontFamily="monospace"
+                    android:typeface="monospace" android:elevation="5dp" android:background="@color/gray_lt1"/>
+        </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true" app:srcCompat="@android:drawable/ic_menu_search"
+                android:id="@+id/floatingActionButton" android:layout_weight="0"
+                app:backgroundTint="@color/black_lt"
+                app:elevation="5dp"/>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="1">
+            <TextView
+                    android:text="@string/type_doublepoint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView7" android:layout_weight="0"
+                    android:background="@color/black_lt" android:textColor="@color/gray_lt2"
+                    android:textAlignment="center"/>
+            <Button
+                    android:text="@string/all"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/button2" android:layout_weight="1"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:textAppearance="@style/TextAppearance.AppCompat" android:fontFamily="monospace"
+                    android:typeface="monospace" android:elevation="5dp" android:background="@color/gray_lt1"
+            />
+        </LinearLayout>
+    </LinearLayout>
+    <!--<androidx.recyclerview.widget.RecyclerView
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/AllThingsRecycleView"
+            android:visibility="visible" app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:background="@color/gray_dk" android:layout_weight="1"/>-->
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical" android:background="@android:color/white">
+            <com.google.android.material.chip.ChipGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/chip7"
+                        style="@style/Widget.MaterialComponents.Chip.Action"
+                        android:text="@android:string/defaultMsisdnAlphaTag"/>
+                <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/chip2"
+                        style="@style/Widget.MaterialComponents.Chip.Choice" android:text="sckml"/>
+                <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/chip3"
+                        style="@style/Widget.MaterialComponents.Chip.Choice" android:text="sckml"/>
+                <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/chip4"
+                        style="@style/Widget.MaterialComponents.Chip.Choice" android:text="sckml"/>
+                <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/chip5"
+                        style="@style/Widget.MaterialComponents.Chip.Choice" android:text="sckml"/>
+                <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/chip6"
+                        style="@style/Widget.MaterialComponents.Chip.Choice" android:text="sckml"/>
+                <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/chip"
+                        style="@style/Widget.MaterialComponents.Chip.Choice" android:text="sckml"/>
+            </com.google.android.material.chip.ChipGroup>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
