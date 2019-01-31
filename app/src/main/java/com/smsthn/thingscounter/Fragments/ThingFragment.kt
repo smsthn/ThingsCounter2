@@ -46,6 +46,7 @@ class ThingFragment : ThingAbsFragment() {
     private lateinit var ctgSpinner: CustomCtgSpinner
     private lateinit var prefs:SharedPreferences
     private lateinit var ctgsPopup:CtgChipsPopup
+    private lateinit var typesPopup:CtgChipsPopup
     private var isposnegneu = true
 
 
@@ -57,7 +58,7 @@ class ThingFragment : ThingAbsFragment() {
                 c.add(engCtgs!![localCtgs!!.indexOf(it)])
             }
             currentTypes!!.theMutableList.forEach {
-                c.add(engTypes!![localTypes!!.indexOf(it)])
+                t.add(engTypes!![localTypes!!.indexOf(it)])
             }
             if (isVisible)recAdapter.filterThings(c,
                 t,
@@ -177,10 +178,16 @@ class ThingFragment : ThingAbsFragment() {
         pr3 = view.progBar3
         thingRecyclerView = view.AllThingsRecycleView
 
-        /*ctgsPopup = CtgChipsPopup(view.context!!,localCtgs!!.toList(),currentCatagories!!)
+        ctgsPopup = CtgChipsPopup(view.context!!,localCtgs!!.toList(),currentCatagories!!,this::restartRecTouch)
+        typesPopup = CtgChipsPopup(view.context!!,localTypes!!.toList(),currentTypes!!,this::restartRecTouch,true)
         view.thing_ctg_btn.setOnClickListener {
+            stopRecTouch()
             ctgsPopup.openPopup(it,currentCatagories!!.theMutableList)
-        }*/
+        }
+        view.thing_type_btn.setOnClickListener {
+            stopRecTouch()
+            typesPopup.openPopup(it,currentTypes!!.theMutableList)
+        }
         /*typerad = view.findViewById(R.id.HomeTypeRadioGroup)
         ctgSpinner = view.findViewById(R.id.MainCatagoriesSpinner)*/
 
@@ -309,6 +316,27 @@ class ThingFragment : ThingAbsFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater!!.inflate(R.menu.toolbar_menu,menu)
+    }
+
+    val lsnr = object : RecyclerView.OnItemTouchListener{
+        override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
+
+        }
+
+        override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+
+        }
+
+        override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+            return true
+        }
+    }
+
+    fun stopRecTouch(){
+        thingRecyclerView.addOnItemTouchListener(lsnr)
+    }
+    fun restartRecTouch(){
+        thingRecyclerView.removeOnItemTouchListener(lsnr)
     }
 
 

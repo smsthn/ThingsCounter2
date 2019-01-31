@@ -5,6 +5,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.lifecycle.Lifecycle
@@ -56,10 +57,8 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(bar)
-        bar.setNavigationOnClickListener {
-            Toast.makeText(this,"Clicked The Nav",Toast.LENGTH_LONG).show()
-        }
+        setSupportActionBar(toolbar)
+
 
 
 
@@ -86,14 +85,10 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
         bar.setupWithNavController(navController)*/
         /*navigation.setupWithNavController(navController)*/
 
-        initappbar()
+        /*initappbar()*/
 
 
-        fab.setOnClickListener {
-            findNavController(R.id.host_fragment).navigate(R.id.action_thing_frag_dest_to_addThingFragment)
 
-
-        }
 
 
 
@@ -106,23 +101,23 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
         }, 2000)
     }
 
-    fun initappbar(): Unit {
+    /*fun initappbar(): Unit {
         bar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.things_nav -> goHome()
                 R.id.charts_nav -> goToCharts()
                 R.id.options_nav -> goToOptions()
-                /*R.id.options_nav2->{
+                *//*R.id.options_nav2->{
                     val bottomNavDrawerFragment = BottomNavigationDrawerFragment()
                     bottomNavDrawerFragment.show(supportFragmentManager, bottomNavDrawerFragment.tag)
-                }*/
+                }*//*
             }
             true
         }
         bar.setNavigationOnClickListener {
             //TODO ADD OPTION TO OPEN NAVIGATOIN BAR HERE
         }
-    }
+    }*/
 
     private fun goHome() {
 
@@ -194,7 +189,7 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.navigation, menu)
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
         return true
     }
 /*
@@ -210,10 +205,14 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
 
 
 
-    fun showShadow() {
-        /*val txt = findViewById<TextView>(R.id.gsgs)
-        txt.visibility = if (txt.visibility == View.VISIBLE) View.GONE else View.VISIBLE*/
+    /*fun showShadow() {
+        val txt = findViewById<View>(R.id.screen_text_view)
+        txt.visibility = if (txt.visibility == View.VISIBLE) View.GONE else View.VISIBLE
     }
+    fun hideShadow(){
+        val txt = findViewById<View>(R.id.screen_text_view)
+        txt.visibility = if (txt.visibility == View.VISIBLE) View.GONE else View.GONE
+    }*/
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item!!.getItemId()
@@ -227,10 +226,10 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
                 val bottomNavDrawerFragment = BottomNavigationDrawerFragment()
                 bottomNavDrawerFragment.show(supportFragmentManager, bottomNavDrawerFragment.tag)
             }
-           *//* R.id.testaddthing -> testAddThing()
+           */ R.id.testaddthing -> testAddThing()
             R.id.testaddmanythings -> testAddManythings()
             R.id.testdeleteall -> testDeleteAllThings()
-            R.id.testresetthing -> testResetThings()*/
+            R.id.testresetthing -> testResetThings()
         }
         return true
 
