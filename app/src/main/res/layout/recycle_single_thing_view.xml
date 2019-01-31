@@ -7,7 +7,9 @@
               android:visibility="visible"
               android:layout_marginBottom="10dp" android:layout_marginEnd="5dp" android:layout_marginStart="5dp"
               android:layout_marginTop="10dp"
->
+              android:background="@drawable/outline_gray" android:padding="1dp"
+              android:backgroundTint="@android:color/black" android:backgroundTintMode="multiply"
+              android:foreground="@color/gray_trans">
 
     <LinearLayout
             android:orientation="horizontal"
@@ -26,7 +28,7 @@
         <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:layout_margin="0dp" android:layout_weight="1"
-                android:background="@color/black_pr">
+        >
 
             <ProgressBar
                     style="@style/MsProg"
@@ -35,11 +37,15 @@
                     android:id="@+id/ThingProgressBar" android:progress="50"
                     android:progressDrawable="@android:drawable/progress_horizontal"
                     android:progressTint="#ffff56"
-                    android:layout_margin="0dp" android:progressBackgroundTint="@android:color/white"/>
+                    android:layout_margin="0dp" android:progressBackgroundTint="@android:color/white"
+            />
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:gravity="center" android:background="@color/black_pr">
+                    android:layout_height="match_parent" android:gravity="center"
+                    android:background="@color/black_pr"
+                    android:backgroundTintMode="src_over"
+            >
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/ThingCountTxt" android:layout_weight="20"
@@ -79,7 +85,8 @@
                 android:backgroundTintMode="add"/>
         <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:layout_margin="0dp" android:layout_weight="1">
+                android:layout_height="match_parent" android:layout_margin="0dp" android:layout_weight="1"
+        >
 
             <ProgressBar
                     style="@style/MsProg"
@@ -93,7 +100,10 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:gravity="center" android:background="@color/black_pr">
+                    android:layout_height="match_parent" android:gravity="center"
+                    android:background="@color/black_pr"
+                    android:backgroundTintMode="src_over"
+            >
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:id="@+id/ThingNameTxt"
