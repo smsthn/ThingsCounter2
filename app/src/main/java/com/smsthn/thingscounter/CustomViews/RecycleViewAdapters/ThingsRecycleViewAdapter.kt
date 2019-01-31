@@ -162,7 +162,7 @@ class ThingsRecycleViewAdapter(
             moreDetailsBtn = view.MoreDetailsBtn
             handler = Handler(Looper.getMainLooper())
             view.setBackgroundColor(Color.WHITE)
-            view.elevation = 10f
+            view.elevation = 20f
 
 
         }

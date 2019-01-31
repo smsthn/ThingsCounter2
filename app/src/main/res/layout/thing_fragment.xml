@@ -135,5 +135,5 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent" android:id="@+id/AllThingsRecycleView"
 			android:visibility="visible" app:layout_scrollFlags="scroll|exitUntilCollapsed"
-			android:background="@color/gray_trans"/>
+			android:background="@color/black_pr"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

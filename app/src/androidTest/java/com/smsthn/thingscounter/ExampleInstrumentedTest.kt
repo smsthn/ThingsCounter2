@@ -1,3 +1,4 @@
+/*
 package com.smsthn.thingscounter
 
 
@@ -16,29 +17,38 @@ import org.junit.runner.RunWith
 import org.junit.Assert.*
 import org.junit.Before
 
+*/
 /**
  * Instrumented test, which will execute on an Android device.
  *
  * See [testing documentation](http://d.android.com/tools/testing).
- */
+ *//*
+
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
     @Before
     fun launchActivity(){
+*/
 /*
         ActivityScenario.launch(MainActivity::class.java)
-*/
+*//*
+
 
     }
     @Test
     fun useAppContext() {
-        /*val ctx =  InstrumentationRegistry.getInstrumentation().context
+        */
+/*val ctx =  InstrumentationRegistry.getInstrumentation().context
         val pref = PreferenceManager.getDefaultSharedPreferences(ctx)
-        assert(pref.contains(ctx.getString(R.string.settings_allow_notificaitons_key)))*/
-        /*ActivityScenario.launch(MainActivity::class.java)
+        assert(pref.contains(ctx.getString(R.string.settings_allow_notificaitons_key)))*//*
+
+        */
+/*ActivityScenario.launch(MainActivity::class.java)
             .use({ scenario -> scenario.onActivity({ activity ->
                 val pref = PreferenceManager.getDefaultSharedPreferences(activity)
                 assert(pref.contains(activity.getString(R.string.settings_allow_notificaitons_key)))
-            }) })*/
+            }) })*//*
+
     }
 }
+*/

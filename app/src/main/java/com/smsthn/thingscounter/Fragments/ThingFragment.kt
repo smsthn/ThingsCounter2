@@ -66,13 +66,13 @@ class ThingFragment : ThingAbsFragment() {
     }
 
 
-   /* private var currentCatagories:ThingObservalbeList? =null
+    private var currentCatagories:ThingObservalbeList? =null
     private var currentTypes:ThingObservalbeList? =null
         init {
 
             currentCatagories= ThingObservalbeList(this::filterThings,this::filterThings)
             currentTypes= ThingObservalbeList(this::filterThings,this::filterThings)
-        }*/
+        }
 
 
     private var isEnabled: Boolean by Delegates.observable(true) { d, old, new ->
@@ -176,10 +176,10 @@ class ThingFragment : ThingAbsFragment() {
         pr3 = view.progBar3
         thingRecyclerView = view.AllThingsRecycleView
 
-        ctgsPopup = CtgChipsPopup(view.context!!,localCtgs!!.toList(),currentCatagories!!)
+        /*ctgsPopup = CtgChipsPopup(view.context!!,localCtgs!!.toList(),currentCatagories!!)
         view.thing_ctg_btn.setOnClickListener {
             ctgsPopup.openPopup(it,currentCatagories!!.theMutableList)
-        }
+        }*/
         /*typerad = view.findViewById(R.id.HomeTypeRadioGroup)
         ctgSpinner = view.findViewById(R.id.MainCatagoriesSpinner)*/
 

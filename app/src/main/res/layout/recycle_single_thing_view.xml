@@ -5,8 +5,8 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content" android:id="@+id/ThingMainLayout"
               android:visibility="visible"
-              android:layout_marginBottom="10dp" android:layout_marginEnd="2dp" android:layout_marginStart="2dp"
-              android:layout_marginTop="10dp" android:background="@android:color/transparent"
+              android:layout_marginBottom="10dp" android:layout_marginEnd="5dp" android:layout_marginStart="5dp"
+              android:layout_marginTop="10dp"
 >
 
     <LinearLayout
@@ -25,7 +25,8 @@
                 android:layout_marginBottom="7dp"/>
         <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:layout_margin="0dp" android:layout_weight="1">
+                android:layout_height="match_parent" android:layout_margin="0dp" android:layout_weight="1"
+                android:background="@color/black_pr">
 
             <ProgressBar
                     style="@style/MsProg"
@@ -38,20 +39,20 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:gravity="center">
+                    android:layout_height="match_parent" android:gravity="center" android:background="@color/black_pr">
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/ThingCountTxt" android:layout_weight="20"
-                        android:gravity="end" android:textColor="@android:color/black" android:layout_margin="0dp"/>
+                        android:gravity="end" android:textColor="@color/gray_lt1" android:layout_margin="0dp"/>
                 <TextView
                         android:text="@string/slash"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/SlashTxt" android:layout_weight="20"
-                        android:gravity="center" android:textColor="@android:color/black" android:layout_margin="0dp"/>
+                        android:gravity="center" android:textColor="@color/gray_lt1" android:layout_margin="0dp"/>
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/ThingGoalTxt" android:layout_weight="20"
-                        android:textColor="@android:color/black" android:layout_margin="0dp"/>
+                        android:textColor="@color/gray_lt1" android:layout_margin="0dp"/>
             </LinearLayout>
         </FrameLayout>
         <Button
@@ -72,9 +73,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:layout_weight="0"
                 style="@style/Widget.AppCompat.Button.Borderless" android:textSize="30sp"
-                android:background="@color/gray_trans" android:layout_margin="0dp"
+                android:background="@color/black_lt" android:layout_margin="0dp"
                 android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_marginTop="7dp"
-                android:layout_marginBottom="7dp" android:text="|||" android:id="@+id/thing_priority_btn1"/>
+                android:layout_marginBottom="7dp" android:text="|||" android:id="@+id/thing_priority_btn1"
+                android:backgroundTintMode="add"/>
         <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:layout_margin="0dp" android:layout_weight="1">
@@ -91,12 +93,12 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:gravity="center">
+                    android:layout_height="match_parent" android:gravity="center" android:background="@color/black_pr">
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:id="@+id/ThingNameTxt"
                         android:foregroundGravity="center" android:gravity="center" android:textSize="18sp"
-                        android:textColor="@android:color/black" android:layout_margin="0dp"
+                        android:textColor="@color/gray_lt1" android:layout_margin="0dp"
                         android:textAlignment="center"
                         tools:text="@string/app_name"/>
             </LinearLayout>
@@ -105,10 +107,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:layout_weight="0"
                 style="@style/Widget.AppCompat.Button.Borderless" android:textSize="30sp"
-                android:background="@color/gray_trans" android:layout_margin="0dp"
+                android:layout_margin="0dp"
                 android:paddingTop="10dp" android:paddingBottom="10dp" android:layout_marginTop="7dp"
                 android:layout_marginBottom="7dp"
-                android:text="|||" android:id="@+id/thing_priority_btn2"/>
+                android:text="|||" android:id="@+id/thing_priority_btn2"
+                android:backgroundTintMode="add" android:background="@color/black_lt"/>
     </LinearLayout>
     <Button
             android:text="@string/more_details"
