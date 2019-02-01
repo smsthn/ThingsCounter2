@@ -23,6 +23,8 @@ import com.smsthn.thingscounter.SharedData.MiscSharedData
 import com.smsthn.thingscounter.SharedData.changeLang
 import java.util.*
 import android.widget.Toast
+import androidx.navigation.NavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.smsthn.thingscounter.Data.Entities.Thing
 import com.smsthn.thingscounter.Data.ThingsDb
 import com.smsthn.thingscounter.SharedData.resetThingsAndAddCycle
@@ -79,10 +81,10 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
         val host: NavHostFragment = supportFragmentManager.findFragmentById(R.id.host_fragment) as NavHostFragment
 
         val navController = host.navController
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.thing_frag_dest, R.id.charts_frag_dest))
-        /*setupActionBarWithNavController(navController, appBarConfiguration)
-
-        bar.setupWithNavController(navController)*/
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.thing_frag_dest))
+       setupActionBarWithNavController(navController, appBarConfiguration)
+        /*
+               bar.setupWithNavController(navController)*/
         /*navigation.setupWithNavController(navController)*/
 
         /*initappbar()*/
@@ -129,7 +131,7 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
         val nav = findNavController(R.id.host_fragment)
         when (nav.currentDestination?.id) {
             R.id.thing_frag_dest -> nav.navigate(R.id.thing_frag_dest)
-            R.id.charts_frag_dest -> nav.navigate(R.id.action_charts_things)
+           /* R.id.charts_frag_dest -> nav.navigate(R.id.action_charts_things)*/
             R.id.option_frag_dest -> nav.navigate(R.id.action_options_thing)
             else ->nav.navigate(R.id.thing_frag_dest)
         }
@@ -168,23 +170,24 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
 
     }
 
-    override fun onBackPressed() {
+   /* override fun onBackPressed() {
         if(findNavController(R.id.host_fragment).currentDestination!!.id != R.id.thing_frag_dest){
-            /*goHome()*/
+            *//*goHome()*//*
             findNavController(R.id.host_fragment).navigate(R.id.thing_frag_dest)
-            /*bar.alpha = 1f
+            *//*bar.alpha = 1f
             fab.alpha = 1f
             bar.isClickable = true
-            fab.isClickable = true*/
+            fab.isClickable = true*//*
         } else super.onBackPressed()
-    }
+    }*/
 
-    override fun onSupportNavigateUp():Boolean{
+    override fun onSupportNavigateUp() = findNavController(R.id.host_fragment).navigateUp()
+    /*:Boolean{
         if(findNavController(R.id.host_fragment).currentDestination!!.id == R.id.thing_frag_dest){
             this.finish()
         } else goHome()
         return true
-    }
+    }*/
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

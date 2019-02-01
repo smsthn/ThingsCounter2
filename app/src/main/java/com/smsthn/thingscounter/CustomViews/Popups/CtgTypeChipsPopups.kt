@@ -21,7 +21,7 @@ import com.smsthn.thingscounter.CustomViews.CustomStyles.getTransparantColor
 import com.smsthn.thingscounter.Fragments.ThingObservalbeList
 import com.smsthn.thingscounter.R
 
-class CtgChipsPopup(context: Context, lst:Collection<String>, checkedCtgs: ThingObservalbeList, resetTouchFunc :()->Unit, isType:Boolean = false){
+class CtgTypeChipPopup(context: Context, lst:Collection<String>, checkedCtgs: ThingObservalbeList, resetTouchFunc :(()->Unit)? = null, isType:Boolean = false,isSingleChoice:Boolean = false){
     val popup:PopupWindow
     val layout:LinearLayout
     val chipGroup:ChipGroup
@@ -31,7 +31,7 @@ class CtgChipsPopup(context: Context, lst:Collection<String>, checkedCtgs: Thing
         layout = infl.inflate(R.layout.mat_lin_lay,null) as LinearLayout
         chipGroup = ChipGroup(layout.context).apply {
             chipSpacingHorizontal = 50
-            isSingleSelection = false
+            isSingleSelection = isSingleSelection
             for (item in lst){
                 val chip = Chip((layout.context)).apply {
                     isCheckable = true
@@ -71,7 +71,7 @@ class CtgChipsPopup(context: Context, lst:Collection<String>, checkedCtgs: Thing
 
         popup.setOnDismissListener {
            Handler(Looper.getMainLooper()).postDelayed(
-               {resetTouchFunc.invoke()}
+               {resetTouchFunc?.invoke()}
            ,100)
         }
 

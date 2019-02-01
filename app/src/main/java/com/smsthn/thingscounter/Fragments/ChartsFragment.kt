@@ -1,5 +1,6 @@
 package com.smsthn.thingscounter.Fragments
 
+import android.content.DialogInterface
 import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.razerdp.widget.animatedpieview.AnimatedPieView
 import com.smsthn.thingscounter.CustomViews.Charts.makePie
 import com.smsthn.thingscounter.CustomViews.CustomStyles.getPrimColor
@@ -17,7 +19,7 @@ import com.smsthn.thingscounter.Data.Entities.PrevHistories
 import com.smsthn.thingscounter.Fragments.ViewModels.ChartsViewModel
 import com.smsthn.thingscounter.R
 
-class ChartsFragment :ThingAbsFragment()  {
+class ChartsFragment : BottomSheetDialogFragment()  {
 	val args:ChartsFragmentArgs by navArgs()
 	private lateinit var poscounts:TextView
 	private lateinit var posgoals:TextView
@@ -70,6 +72,10 @@ class ChartsFragment :ThingAbsFragment()  {
 	    return view
     }
 
+    override fun onDismiss(dialog: DialogInterface?) {
+        super.onDismiss(dialog)
+
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ChartsViewModel::class.java).apply {

@@ -75,7 +75,9 @@ dependencies {
 
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version" // use -ktx for Kotlin
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
-    implementation 'androidx.viewpager:viewpager:1.0.0'//
+    implementation 'androidx.viewpager:viewpager:1.0.0'
+
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
 
     /*testImplementation "org.robolectric:robolectric:3.3.2"*/
     /*testImplementation 'org.hamcrest:hamcrest-library:1.3'

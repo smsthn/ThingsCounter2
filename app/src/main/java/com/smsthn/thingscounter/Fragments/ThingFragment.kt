@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.widget.ProgressBar
 import android.widget.RadioGroup
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,8 +27,9 @@ import kotlinx.android.synthetic.main.thing_fragment.view.*
 import kotlin.properties.Delegates
 import android.util.Log
 import android.view.*
-import com.smsthn.thingscounter.CustomViews.Popups.CtgChipsPopup
-import com.smsthn.thingscounter.Fragments.BottomNavigationDrawerFragment.Companion.newInstance
+import androidx.navigation.fragment.findNavController
+import com.smsthn.thingscounter.CustomViews.Popups.CtgTypeChipPopup
+import com.smsthn.thingscounter.Fragments.SecondaryFragments.AddThingFragment
 import com.smsthn.thingscounter.SharedData.MiscSharedData
 
 
@@ -40,13 +40,12 @@ class ThingFragment : ThingAbsFragment() {
     private lateinit var thingRecyclerView: RecyclerView
     private lateinit var viewModel: ThingViewModel
     private lateinit var recAdapter: ThingsRecycleViewAdapter
-    /*private lateinit var thingDetailsPopup: ThingDetailsPopup*/
     private lateinit var thingDetailsBtmSheet:BottomNavigationDrawerFragment
     private lateinit var typerad: RadioGroup
     private lateinit var ctgSpinner: CustomCtgSpinner
     private lateinit var prefs:SharedPreferences
-    private lateinit var ctgsPopup:CtgChipsPopup
-    private lateinit var typesPopup:CtgChipsPopup
+    private lateinit var ctgsPopup:CtgTypeChipPopup
+    private lateinit var typesPopup:CtgTypeChipPopup
     private var isposnegneu = true
 
 
@@ -71,7 +70,6 @@ class ThingFragment : ThingAbsFragment() {
     private var currentCatagories:ThingObservalbeList? =null
     private var currentTypes:ThingObservalbeList? =null
         init {
-
             currentCatagories= ThingObservalbeList(this::filterThings,this::filterThings)
             currentTypes= ThingObservalbeList(this::filterThings,this::filterThings)
         }
@@ -79,25 +77,11 @@ class ThingFragment : ThingAbsFragment() {
 
     private var isEnabled: Boolean by Delegates.observable(true) { d, old, new ->
         if (isVisible) try {
-            recAdapter.filterThings(this.currentCatagory, this.currentType, new)
+            recAdapter.filterThings(this.currentCatagories!!.theMutableList, currentTypes!!.theMutableList, new)
         } catch (e: Exception) {
         }
     }
-    private var currentCatagory: String by Delegates.observable("All") { d, old, new ->
-        if (isVisible) try {
-            recAdapter.filterThings(new, this.currentType, isEnabled)
-        } catch (e: Exception) {
-        }
-    }
-    val getCurrentCtg get() = currentCatagory
 
-    private var currentType: String   by Delegates.observable("All") { d, old, new ->
-        if (isVisible) try {
-            recAdapter.filterThings(this.currentCatagory, new, isEnabled)
-        } catch (e: Exception) {
-        }
-    }
-    val getCurrentType get() = currentType
 
     private var localCtgs: Array<String>? = arrayOf()
     private var engCtgs: Array<String>? = arrayOf()
@@ -108,9 +92,6 @@ class ThingFragment : ThingAbsFragment() {
     var pr1: ProgressBar? = null
     var pr2: ProgressBar? = null
     var pr3: ProgressBar? = null
-    var prtxt1: TextView? = null
-    var prtxt2: TextView? = null
-    var prtxt3: TextView? = null
 
 
     /**
@@ -120,15 +101,12 @@ class ThingFragment : ThingAbsFragment() {
         super.onSaveInstanceState(outState)
         outState.apply {
             putBoolean("isEnabled", isEnabled)
-            putString("currentCatagory", currentCatagory)
-            putString("currentType", currentType)
+            putStringArray("currentCatagories", currentCatagories?.theMutableList?.toTypedArray())
+            putStringArray("currentTypes", currentTypes?.theMutableList?.toTypedArray())
         }
     }
 
-    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-    }*/
     /**
      * onAttach
      */
@@ -159,8 +137,8 @@ class ThingFragment : ThingAbsFragment() {
         super.onViewStateRestored(savedInstanceState)
         savedInstanceState?.apply {
             isEnabled = getBoolean("isEnabled")
-            currentCatagory = getString("currentCatagory") ?: "All"
-            currentType = getString("currentType") ?: "All"
+            currentCatagories?.theMutableList?.addAll(getStringArray("currentCatagories")?: arrayOf())
+            currentTypes?.theMutableList?.addAll(getStringArray("currentTypes")?: arrayOf())
         }
     }
 
@@ -178,8 +156,8 @@ class ThingFragment : ThingAbsFragment() {
         pr3 = view.progBar3
         thingRecyclerView = view.AllThingsRecycleView
 
-        ctgsPopup = CtgChipsPopup(view.context!!,localCtgs!!.toList(),currentCatagories!!,this::restartRecTouch)
-        typesPopup = CtgChipsPopup(view.context!!,localTypes!!.toList(),currentTypes!!,this::restartRecTouch,true)
+        ctgsPopup = CtgTypeChipPopup(view.context!!,localCtgs!!.toList(),currentCatagories!!,this::restartRecTouch)
+        typesPopup = CtgTypeChipPopup(view.context!!,localTypes!!.toList(),currentTypes!!,this::restartRecTouch,true)
         view.thing_ctg_btn.setOnClickListener {
             stopRecTouch()
             ctgsPopup.openPopup(it,currentCatagories!!.theMutableList)
@@ -188,8 +166,21 @@ class ThingFragment : ThingAbsFragment() {
             stopRecTouch()
             typesPopup.openPopup(it,currentTypes!!.theMutableList)
         }
-        /*typerad = view.findViewById(R.id.HomeTypeRadioGroup)
-        ctgSpinner = view.findViewById(R.id.MainCatagoriesSpinner)*/
+
+        view.add_fab.setOnClickListener {
+            AddThingFragment().show(fragmentManager,"Add Thing")
+        }
+
+
+        view.thing_bottom_nav.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.charts_nav-> ChartsFragment().show(fragmentManager,"Charts")
+                R.id.options_nav2->findNavController().navigate(R.id.settings_fragment_dest)
+            }
+
+            view.thing_bottom_nav.selectedItemId = R.id.things_nav
+            true
+        }
 
         return view
     }
@@ -199,7 +190,6 @@ class ThingFragment : ThingAbsFragment() {
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        currentType = args.Type ?: "All"
 
 
         viewModel = ViewModelProviders.of(this).get(ThingViewModel::class.java).apply {
@@ -207,13 +197,13 @@ class ThingFragment : ThingAbsFragment() {
             enabledThngs.observe(this@ThingFragment, object : Observer<MutableList<Thing>> {
                 override fun onChanged(t: MutableList<Thing>?) {
                     recAdapter.refreshThings(t ?: return, true)
-                    if (isEnabled) recAdapter.filterThings(currentCatagory, currentType, true)
+                    if (isEnabled) recAdapter.filterThings(currentCatagories!!.get(), currentTypes!!.get(), true)
                 }
             })
             disabledThngs.observe(this@ThingFragment, object : Observer<MutableList<Thing>> {
                 override fun onChanged(t: MutableList<Thing>?) {
                     recAdapter.refreshThings(t ?: return, false)
-                    if (!isEnabled) recAdapter.filterThings(currentCatagory, currentType, false)
+                    if (!isEnabled) recAdapter.filterThings(currentCatagories!!.get(), currentTypes!!.get(), false)
                 }
             })
             typesAndCounts.observe(this@ThingFragment, object : Observer<List<TypeAndCount>> {
@@ -223,8 +213,7 @@ class ThingFragment : ThingAbsFragment() {
 
             })
         }
-        /*thingDetailsPopup =
-            ThingDetailsPopup(context, viewModel::updateThing, viewModel::deleteThing, viewModel::resetOneHis)*/
+
 
         thingRecyclerView.apply {
             layoutManager = LinearLayoutManager(view!!.context)
@@ -234,23 +223,7 @@ class ThingFragment : ThingAbsFragment() {
             adapter = recAdapter
         }
 
-       /* typerad.apply {
-            when (currentType) {
-                "All" -> check(R.id.HomeTypeAllBtn)
-                "Positive" -> check(R.id.HomeTypePosBtn)
-                "Negative" -> check(R.id.HomeTypeNegBtn)
-                "Neutral" -> check(R.id.HomeTypeNeuBtn)
-            }
-            setOnCheckedChangeListener { g, id ->
-                when (id) {
-                    R.id.HomeTypePosBtn -> currentType = "Positive"
-                    R.id.HomeTypeNegBtn -> currentType = "Negative"
-                    R.id.HomeTypeNeuBtn -> currentType = "Neutral"
-                    R.id.HomeTypeAllBtn -> currentType = "All"
-                }
-            }
-        }
-        ctgSpinner.setup(null, localCtgs!!, engCtgs!!, { s -> currentCatagory = s }, true)*/
+
 
     }
 
@@ -265,18 +238,21 @@ class ThingFragment : ThingAbsFragment() {
     private fun makeSumsAndStuf(lst: List<TypeAndCount>) {
 
         val pr = arrayOf(pr1, pr2, pr3)
-        val prtxt = arrayOf(prtxt1, prtxt2, prtxt3)
+
         if (isposnegneu) {
-            listOf("Negative", "Positive", "Neutral").forEachIndexed { i, s ->
-                lst.firstOrNull { tc -> tc.type == s } ?: TypeAndCount("").apply {
-                    pr[i]?.apply { max = goalsum;progress = countsum }
-                    prtxt[i]?.apply { setText("" + countsum + " / " + goalsum) }
+            listOf( "Positive", "Neutral","Negative").forEachIndexed { i, s ->
+                val sth = lst.firstOrNull { tc -> tc.type == s } ?: TypeAndCount("")
+                    sth.apply {
+                    Log.e("$countsum","$goalsum")
+                    pr[i]!!.max = this.goalsum
+                    pr[i]!!.progress = this.countsum
+
                 }
             }
         } else {
             val notZero = { tc: TypeAndCount -> tc.countsum > 0 && tc.goalsum > 0 }
             if (lst.isNullOrEmpty()) {
-                prtxt1?.setText(getString(R.string.no_data_to_show))
+
                 val clr = ColorStateList.valueOf(Color.LTGRAY)
                 pr.forEachIndexed { i, p ->
 
@@ -288,7 +264,7 @@ class ThingFragment : ThingAbsFragment() {
                 val l = lst.filter(notZero).sortedByDescending { it.countsum.toDouble() / it.goalsum.toDouble()  }.take(3)
                 val i = 3 - l.size
                 l.forEachIndexed { i2, tc2 ->
-                    prtxt[i2]?.apply { setText("" + tc2.countsum + " / " + tc2.goalsum) }
+
                     pr[i2]?.apply {
                         visibility = View.VISIBLE
                         max = tc2.goalsum;progress = tc2.countsum
@@ -301,17 +277,18 @@ class ThingFragment : ThingAbsFragment() {
                     for (ii in i..2) {
                         if (ii == 0) {
                             pr[ii]?.apply { progress = 0;progressBackgroundTintList = clr }
-                            prtxt1?.setText(getString(R.string.no_data_to_show))
+
                         } else {
                             pr[ii]?.visibility = View.INVISIBLE
                         }
                     }
                 }
 
-                view?.invalidate()
+
 
             }
         }
+        view?.main_collapsing?.invalidate()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -344,6 +321,7 @@ class ThingFragment : ThingAbsFragment() {
 
 class ThingObservalbeList(private val addFunc:()->Unit, private val removeFunc:()->Unit){
     val theMutableList = mutableListOf<String>()
+    fun get() = theMutableList
     fun add(value:String){theMutableList.add(value);addFunc.invoke()}
     fun remove(value:String){theMutableList.remove(value);removeFunc.invoke()}
     fun contains(element:String)=theMutableList.contains(element)

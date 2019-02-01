@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.smsthn.thingscounter.CustomViews.CustomStyles.*
 import com.smsthn.thingscounter.Data.Entities.SumHistory
 import com.smsthn.thingscounter.Data.Entities.Thing
@@ -31,10 +32,10 @@ import kotlinx.android.synthetic.main.thing_color_picker_popup.view.*
 import kotlin.Exception
 import kotlin.properties.Delegates
 
-class AddThingFragment : Fragment()
+class AddThingFragment : BottomSheetDialogFragment()
 {
 	//args
-	val args: AddThingFragmentArgs by navArgs()
+
 	private var isEdit: Boolean = false
 	private var typeIndex = 0
 	private lateinit var plusbtn:Button

@@ -11,4 +11,5 @@ data class SumHistory(
     var sumCount:Int = 0,
     @ColumnInfo(name = "sum_goal")
     var sumGoal:Int
+
 )

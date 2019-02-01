@@ -101,7 +101,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:clickable="true" app:srcCompat="@android:drawable/ic_menu_search"
-                                android:id="@+id/searchFloatingBtn" android:layout_weight="0"
+                                android:id="@+id/search_fab" android:layout_weight="0"
                                 app:backgroundTint="@color/gray_dk"
                                 app:elevation="5dp"
                                 android:tint="@color/gray_lt2" android:layout_marginTop="9dp"
@@ -152,7 +152,8 @@
             android:id="@+id/rel" app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior">
         <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" app:menu="@menu/navigation" android:background="@color/black_lt">
+                android:layout_height="wrap_content" app:menu="@menu/navigation" android:background="@color/black_lt"
+                android:id="@+id/thing_bottom_nav">
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     </RelativeLayout>
@@ -169,7 +170,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true" app:srcCompat="@drawable/black_add"
-            android:id="@+id/fab" app:layout_anchor="@id/rel"
+            android:id="@+id/add_fab" app:layout_anchor="@id/rel"
             app:layout_anchorGravity="center_horizontal" android:maxHeight="10dp"
             app:backgroundTint="@color/gray_dk" android:tint="@color/black_dk"
             app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"/>

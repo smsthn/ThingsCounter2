@@ -16,7 +16,9 @@
 		          app:argType="string"
 		          android:defaultValue="All" app:nullable="true"/>
 		<action android:id="@+id/action_things_charts" app:destination="@+id/charts_frag_dest"
-		        app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left">
+				app:enterAnim="@anim/slide_in_right" app:popEnterAnim="@anim/slide_in_left"
+				app:exitAnim="@anim/nav_default_enter_anim" app:popExitAnim="@anim/nav_default_enter_anim"
+				app:popUpTo="@+id/thing_frag_dest" app:popUpToInclusive="true" app:launchSingleTop="true">
 			<argument android:defaultValue="All" android:name="catagory"/>
 		</action>
 		<action android:id="@+id/action_thing_frag_dest_to_option_frag_dest" app:destination="@id/option_frag_dest"
@@ -39,9 +41,10 @@
 	          tools:layout="@layout/charts_fragment">
 		<action android:id="@+id/action_charts_frag_dest_to_option_frag_dest" app:destination="@id/option_frag_dest"
 		        app:enterAnim="@anim/slide_in_right" app:exitAnim="@anim/slide_out_left"/>
-		<action android:id="@+id/action_charts_things" app:destination="@+id/thing_frag_dest"
-		        app:enterAnim="@anim/slide_in_left" app:exitAnim="@anim/slide_out_right"
-		/>
+		<action android:id="@+id/action_charts_thing" app:destination="@+id/thing_frag_dest"
+				app:exitAnim="@anim/slide_out_right"
+				app:popExitAnim="@anim/slide_out_right" app:popEnterAnim="@anim/fade_out"
+				app:enterAnim="@anim/popup_hide" app:popUpTo="@+id/thing_frag_dest" app:popUpToInclusive="true"/>
 		<argument android:name="catagory" app:argType="string" android:defaultValue="All"/>
 	</fragment>
 	<fragment android:id="@+id/option_frag_dest"
@@ -65,9 +68,9 @@
 		<argument android:name="thingId" app:argType="long" android:defaultValue="-1L"/>
 		<argument android:name="isEdit" app:argType="boolean" android:defaultValue="false"/>
 	</fragment>
-	<action android:id="@+id/action_main_nav_comp_pop" app:popUpTo="@id/main_nav_comp" app:popUpToInclusive="true"
-	        app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"
-	        app:launchSingleTop="true"/>
+	<action android:id="@+id/action_main_nav_comp_pop" app:popUpTo="@id/thing_frag_dest" app:popUpToInclusive="true"
+			app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"
+			app:launchSingleTop="true"/>
     <fragment android:id="@+id/perference_activity_dest" android:name="com.smsthn.thingscounter.NorificationSettings"
               android:label="NorificationSettings"/>
     <action android:id="@+id/go_to_perfer" app:destination="@id/perference_activity_dest" app:enterAnim="@anim/fade_in"
@@ -79,4 +82,6 @@
 			app:launchSingleTop="true" app:popUpTo="@+id/thing_frag_dest"
 			app:popEnterAnim="@anim/nav_default_enter_anim" app:popExitAnim="@anim/nav_default_exit_anim"
 			app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"/>
+	<fragment android:id="@+id/chartsFragment" android:name="com.smsthn.thingscounter.Fragments.ChartsFragment"
+			  android:label="ChartsFragment"/>
 </navigation>

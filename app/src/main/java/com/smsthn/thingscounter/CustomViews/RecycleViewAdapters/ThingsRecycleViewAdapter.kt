@@ -58,7 +58,7 @@ class ThingsRecycleViewAdapter(
         }
     }
 
-    fun filterThings(ctg: String, type: String, enabled: Boolean = true) {
+    /*fun filterThings(ctg: String, type: String, enabled: Boolean = true) {
         val backupThings = if (enabled) backupEnabled else backupDisabled
         val c = if (ctg == "All") "" else ctg
         val t = if (type == "All") "" else type
@@ -72,7 +72,7 @@ class ThingsRecycleViewAdapter(
         )
         diff.dispatchUpdatesTo(this)
         displayedThings = lst
-    }
+    }*/
 
     fun filterThings(ctgs: MutableList<String>, types: MutableList<String>, enabled: Boolean = true) {
         val backupThings = if (enabled) backupEnabled else backupDisabled
