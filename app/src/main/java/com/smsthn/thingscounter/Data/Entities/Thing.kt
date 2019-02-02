@@ -52,7 +52,8 @@ class Thing constructor(
     }
     fun resetThing(){
         sumHistory.sumCount+=count
-        sumHistory.cycleCount++
+        sumHistory.total++
+        if(count >= goal)sumHistory.completed++
         sumHistory.sumGoal+=goal
         count = 0
         currentCycle++
@@ -87,8 +88,9 @@ class Thing constructor(
         val cc = currentCycle == thing.currentCycle
         val shc = sumHistory.sumCount == thing.sumHistory.sumCount
         val shg = sumHistory.sumGoal == thing.sumHistory.sumGoal
-        val shcc = sumHistory.cycleCount == thing.sumHistory.cycleCount
-        return n && c  && t && co && go && re  &&cc  && shc  && shg  && shcc
+        val sht = sumHistory.total == thing.sumHistory.total
+        val shcmpl = sumHistory.completed == thing.sumHistory.completed
+        return n && c  && t && co && go && re  &&cc  && shc  && shg  && sht && shcmpl
     }
 
 
@@ -106,7 +108,8 @@ fun cloneThing(thing: Thing): Thing {
         repeatFreq = thing.repeatFreq,
         currentDate = thing.currentDate,
         sumHistory = SumHistory(
-            cycleCount = thing.sumHistory.cycleCount,
+            total = thing.sumHistory.total,
+            completed = thing.sumHistory.completed,
             sumCount = thing.sumHistory.sumGoal,
             sumGoal = thing.sumHistory.sumGoal
         )

@@ -15,7 +15,7 @@
                 android:key="@string/settings_notoficaiton_ongoing_key"
                 android:title="@string/ongoing"
                 android:defaultValue="true"/>
-        <Preference android:dependency="@string/settings_notoficaiton_ongoing_key"
+        <Preference android:dependency="@string/settings_allow_notificaitons_key"
                     android:title="@string/notification_time"
                     android:key="@string/setting_notification_time_key"
                     android:selectable="true" android:icon="@android:drawable/ic_lock_idle_alarm"/>

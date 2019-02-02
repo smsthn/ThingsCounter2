@@ -21,12 +21,12 @@ import java.util.*
 class OneHistoryPopup(context: Context?) {
     val popup: PopupWindow
     private val oneHistoryMainLayout: LinearLayout
-    private val currentDateTxt: TextView
-    private val currentDateCountGoal: TextView
+    /*private val currentDateTxt: TextView
+    private val currentDateCountGoal: TextView*/
     private val oneHistoryRecyclerView: RecyclerView
     private var oneHistoryLive: LiveData<List<OneHistory>>?
     private val oneHistoryRecAdp: OneHistoryRecyclerAdapter
-    private val backBtn:Button
+    /*private val backBtn:Button*/
 
     init {
         oneHistoryLive = null
@@ -35,8 +35,10 @@ class OneHistoryPopup(context: Context?) {
         val infl = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = infl.inflate(R.layout.one_history_popup, null)
 
+        /*backBtn = view.findViewById(R.id.OneHisBackBtn)*/
+
         oneHistoryRecAdp = OneHistoryRecyclerAdapter(context)
-        backBtn = view.findViewById(R.id.OneHisBackBtn)
+
 
         val layManager = LinearLayoutManager(context)
         oneHistoryRecyclerView = view.findViewById(R.id.OneHistoryRecyclerView)
@@ -59,21 +61,21 @@ class OneHistoryPopup(context: Context?) {
         }
 
         oneHistoryMainLayout = view.findViewById(R.id.OneHistoryPopupMainLayout)
-        currentDateCountGoal = view.findViewById(R.id.CurrentCycleCountGoalTxt)
+        /*currentDateCountGoal = view.findViewById(R.id.CurrentCycleCountGoalTxt)
         currentDateTxt = view.findViewById(R.id.CurrentCycleDateTxt)
         backBtn.setOnClickListener {
             popup.dismiss()
         }
 
-        view.findViewById<Button>(R.id.OneHisBackBtn).setOnClickListener { popup.dismiss() }
+        view.findViewById<Button>(R.id.OneHisBackBtn).setOnClickListener { popup.dismiss() }*/
 
 
     }
 
     fun openPopup(thing: Thing) {
-        currentDateCountGoal.setText("" + thing.count + " / " + thing.goal)
+       /* currentDateCountGoal.setText("" + thing.count + " / " + thing.goal)
 
-        currentDateTxt.setText(getDateFromLong(Calendar.getInstance().timeInMillis))
+        currentDateTxt.setText(getDateFromLong(Calendar.getInstance().timeInMillis))*/
 
         oneHistoryRecyclerView.adapter = oneHistoryRecAdp
 

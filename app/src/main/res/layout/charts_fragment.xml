@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              android:paddingTop="10dp" android:background="@android:color/white" android:isScrollContainer="true"
+              android:paddingTop="10dp" android:background="@color/black_pr" android:isScrollContainer="true"
               app:layout_scrollFlags="scroll">
 
 
@@ -28,31 +28,35 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:textAlignment="center" android:layout_marginLeft="1dp" android:layout_marginRight="1dp"
-                />
+                        android:textColor="@color/gray_lt1"/>
                 <TextView
                         android:text="@string/previous_counts"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:background="#01010101" android:textAlignment="center"
-                        android:layout_marginLeft="1dp" android:layout_marginRight="1dp"/>
+                        android:layout_marginLeft="1dp" android:layout_marginRight="1dp"
+                        android:textColor="@color/gray_lt1"/>
                 <TextView
                         android:text="@string/previous_goals"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:background="#01010101" android:textAlignment="center"
-                        android:layout_marginLeft="1dp" android:layout_marginRight="1dp"/>
+                        android:layout_marginLeft="1dp" android:layout_marginRight="1dp"
+                        android:textColor="@color/gray_lt1"/>
                 <TextView
                         android:text="@string/completed"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:background="#01010101" android:textAlignment="center"
-                        android:layout_marginLeft="1dp" android:layout_marginRight="1dp"/>
+                        android:layout_marginLeft="1dp" android:layout_marginRight="1dp"
+                        android:textColor="@color/gray_lt1"/>
                 <TextView
                         android:text="@string/total_number"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:background="#01010101" android:textAlignment="center"
-                        android:layout_marginLeft="1dp" android:layout_marginRight="1dp" android:id="@+id/textView20"/>
+                        android:layout_marginLeft="1dp" android:layout_marginRight="1dp" android:id="@+id/textView20"
+                        android:textColor="@color/gray_lt1"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="horizontal"
@@ -64,35 +68,36 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1" android:text="@string/positive"
                         android:background="#01010101" android:textAlignment="center"
-                        android:layout_marginLeft="1dp" android:layout_marginRight="1dp"/>
+                        android:layout_marginLeft="1dp" android:layout_marginRight="1dp"
+                        android:textColor="@color/gray_lt1"/>
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:id="@+id/Prev_His_Pos_Count"
                         android:background="@android:color/white" android:textAlignment="center"
                         android:backgroundTint="@color/green_trans"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@color/gray_lt2"/>
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:id="@+id/Prev_His_Pos_Goal"
                         android:background="@android:color/white" android:textAlignment="center"
                         android:backgroundTint="@color/green_trans"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@color/gray_lt2"/>
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:id="@+id/Prev_His_Pos_Completed"
                         android:background="@android:color/white" android:textAlignment="center"
                         android:backgroundTint="@color/green_trans"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@color/gray_lt2"/>
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:id="@+id/Prev_His_Pos_Total_Num"
                         android:background="@android:color/white" android:textAlignment="center"
                         android:backgroundTint="@color/green_trans"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@color/gray_lt2"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="horizontal"
@@ -104,29 +109,30 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1" android:text="@string/negative"
                         android:background="#01010101" android:textAlignment="center"
-                        android:layout_marginLeft="1dp" android:layout_marginRight="1dp"/>
+                        android:layout_marginLeft="1dp" android:layout_marginRight="1dp"
+                        android:textColor="@color/gray_lt1"/>
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:id="@+id/Prev_His_Neg_Count"
                         android:background="@color/red_trans" android:textAlignment="center"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@color/gray_lt2"/>
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:id="@+id/Prev_His_Neg_Goal"
                         android:background="@color/red_trans" android:textAlignment="center"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@color/gray_lt2"/>
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:background="@color/red_trans" android:textAlignment="center"
-                        android:id="@+id/Prev_His_Neg_Completed" android:textColor="@android:color/black"/>
+                        android:id="@+id/Prev_His_Neg_Completed" android:textColor="@color/gray_lt2"/>
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:background="@color/red_trans" android:textAlignment="center"
-                        android:id="@+id/Prev_His_Neg_Total_Num" android:textColor="@android:color/black"
+                        android:id="@+id/Prev_His_Neg_Total_Num" android:textColor="@color/gray_lt2"
                 />
             </LinearLayout>
             <LinearLayout
@@ -139,31 +145,32 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1" android:text="@string/neutral"
                         android:background="#01010101" android:textAlignment="center"
-                        android:layout_marginLeft="1dp" android:layout_marginRight="1dp"/>
+                        android:layout_marginLeft="1dp" android:layout_marginRight="1dp"
+                        android:textColor="@color/gray_lt1"/>
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:id="@+id/Prev_His_Neu_Count"
                         android:background="@color/gray_trans" android:textAlignment="center"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@color/gray_lt2"/>
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:id="@+id/Prev_His_Neu_Goal"
                         android:background="@color/gray_trans" android:textAlignment="center"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@color/gray_lt2"/>
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:id="@+id/Prev_His_Neu_Completed"
                         android:background="@color/gray_trans" android:textAlignment="center"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@color/gray_lt2"/>
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" android:layout_weight="1"
                         android:id="@+id/Prev_His_Neu_Total_Number"
                         android:background="@color/gray_trans" android:textAlignment="center"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@color/gray_lt2"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="horizontal"
@@ -172,25 +179,35 @@
                 <com.razerdp.widget.animatedpieview.AnimatedPieView android:layout_width="wrap_content"
                                                                     android:id="@+id/PosPieView"
                                                                     android:layout_weight="1"
-                                                                    android:layout_height="wrap_content"/>
+                                                                    android:layout_height="wrap_content"
+                                                                    android:theme="@style/AppTheme.WhiteText"/>
                 <com.razerdp.widget.animatedpieview.AnimatedPieView android:layout_width="wrap_content"
                                                                     android:id="@+id/NegPieView"
                                                                     android:layout_weight="1"
-                                                                    android:layout_height="wrap_content"/>
+                                                                    android:layout_height="wrap_content"
+                                                                    android:theme="@style/AppTheme.WhiteText"/>
                 <com.razerdp.widget.animatedpieview.AnimatedPieView android:layout_width="wrap_content"
                                                                     android:id="@+id/NeuPieView"
                                                                     android:layout_weight="1"
-                                                                    android:layout_height="wrap_content"/>
+                                                                    android:layout_height="wrap_content"
+                                                                    android:theme="@style/AppTheme.WhiteText"/>
             </LinearLayout>
             <TextView
                     android:text="@string/completion_ratio"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/PopUpThingNameTxt" android:textAlignment="center"
+                    android:layout_height="wrap_content" android:id="@+id/PopUpThingNameTxt"
+                    android:textAlignment="center"
                     android:textSize="18sp" android:textColor="@android:color/black"/>
             <com.razerdp.widget.animatedpieview.AnimatedPieView android:layout_width="match_parent"
                                                                 android:layout_height="500dp"
                                                                 android:id="@+id/AllPieView"
             />
+            <Button
+                    android:text="Reset All History"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/reset_prev_his"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored" android:background="@color/gray_lt1"
+                    android:textColor="@android:color/black" android:textStyle="bold"/>
 
         </LinearLayout>
     </ScrollView>

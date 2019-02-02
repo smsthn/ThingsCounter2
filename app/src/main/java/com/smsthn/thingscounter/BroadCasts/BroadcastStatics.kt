@@ -42,6 +42,7 @@ fun setRepeatedPendingIntent(context: Context, c:Class<*>, h:Int, m:Int, request
     if(requestCode != DAILY_REM_REQ_CODE){
         intent1.setAction(intentAction)
     }
+
     val pendingIntent =
         PendingIntent.getBroadcast(context, requestCode, intent1, PendingIntent.FLAG_UPDATE_CURRENT)
 
@@ -58,7 +59,7 @@ fun setRepeatedPendingIntent(context: Context, c:Class<*>, h:Int, m:Int, request
 }
 
 
-fun cancelRepeatedPendingIntent(context: Context, c: Class<*>) {
+fun cancelRepeatedPendingIntent(context: Context, c: Class<*>,requestCode: Int = DAILY_REM_REQ_CODE,intentAction: String = "") {
 
     val receiver = ComponentName(context, c)
     val pm = context.packageManager
@@ -69,10 +70,10 @@ fun cancelRepeatedPendingIntent(context: Context, c: Class<*>) {
         PackageManager.DONT_KILL_APP
     )
 
-    val intent1 = Intent(context, c)
+    val intent1 = Intent(context, c).apply { if(!intentAction.isNullOrBlank())action = intentAction }
     val pendingIntent =
         PendingIntent.getBroadcast(context,
-            DAILY_REM_REQ_CODE, intent1, PendingIntent.FLAG_UPDATE_CURRENT)
+            requestCode, intent1, PendingIntent.FLAG_UPDATE_CURRENT)
     val am = context.getSystemService(ALARM_SERVICE) as AlarmManager
     am.cancel(pendingIntent)
 

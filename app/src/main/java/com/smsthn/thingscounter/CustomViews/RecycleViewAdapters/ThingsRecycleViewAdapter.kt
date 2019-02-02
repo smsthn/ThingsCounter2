@@ -13,20 +13,21 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.smsthn.thingscounter.Data.Entities.Thing
-import kotlinx.android.synthetic.main.disabled_recycle_one_thing_view.view.*
 import kotlinx.android.synthetic.main.recycle_single_thing_view.view.*
-import android.graphics.Paint
 import android.os.AsyncTask
 import android.os.Looper
 import com.smsthn.thingscounter.*
 import com.smsthn.thingscounter.CustomViews.CustomStyles.*
 import com.smsthn.thingscounter.SharedData.LanguageSharedData
 import com.smsthn.thingscounter.SharedData.MiscSharedData
+import kotlinx.android.synthetic.main.new_diabled_thing.view.*
 
 class ThingsRecycleViewAdapter(
     allThingss: MutableList<Thing>/*, private val context: Context*/,
     private val countFunc: (Long, Int) -> Unit,
-    private val detailsFunc: (Thing, View) -> Unit
+    private val detailsFunc: (Thing, View) -> Unit,
+    private val reviveFunc:(Thing)->Unit,
+    private val discardFunc:(Thing)->Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var displayedThings: MutableList<Thing>
@@ -41,10 +42,13 @@ class ThingsRecycleViewAdapter(
     private val VIEW_TYPE_ENABLED = 1
     private val VIEW_TYPE_DISABLED = 2
 
+    private lateinit var localCtgs: Array<String>
+    private lateinit var engCtgs: Array<String>
 
     init {
 
         displayedThings = allThingss
+
     }
 
     fun refreshThings(newThings: MutableList<Thing>, enabled: Boolean = true) {
@@ -74,11 +78,12 @@ class ThingsRecycleViewAdapter(
         displayedThings = lst
     }*/
 
-    fun filterThings(ctgs: MutableList<String>, types: MutableList<String>, enabled: Boolean = true) {
+    fun filterThings(ctgs: MutableList<String>, types: MutableList<String>,name:String ="", enabled: Boolean = true) {
         val backupThings = if (enabled) backupEnabled else backupDisabled
         val lst = backupThings.filter {
             (ctgs.isNullOrEmpty().or(ctgs.contains(it.catagory)))
-                .and(types.isNullOrEmpty().or(types.contains(it.type)))
+                .and(types.isNullOrEmpty().or(types.contains(it.type))
+                    .and(name.isBlank().or(it.name.trim().toLowerCase().contains(name.trim().toLowerCase()))))
         }
             .toMutableList()
         val diff = DiffUtil.calculateDiff(
@@ -99,6 +104,17 @@ class ThingsRecycleViewAdapter(
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         isOverCountingAllowed = MiscSharedData(recyclerView.context!!).is_over_counting_allowed()
+        localCtgs = getStringArrayInLocale(
+            recyclerView.context,
+            "Catagories"
+        )!!
+        if (LanguageSharedData(recyclerView.context).get_lang_code() == "en") {
+            engCtgs = localCtgs;
+        } else engCtgs = getStringArrayInLocale(
+            recyclerView.context,
+            "Catagories",
+            "en"
+        )!!
 
     }
 
@@ -106,7 +122,7 @@ class ThingsRecycleViewAdapter(
         if (viewType == VIEW_TYPE_DISABLED) {
             return DisabledThingsViewHolder(
                 LayoutInflater.from(parent.context).inflate(
-                    R.layout.disabled_recycle_one_thing_view,
+                    R.layout.new_diabled_thing,
                     parent,
                     false
                 )
@@ -319,68 +335,59 @@ class ThingsRecycleViewAdapter(
     }
 
     inner class DisabledThingsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val mainlay:View
         val nameTxt: TextView
-        val ctgTxt: TextView
-        val goalTxt: TextView
-        val showHistoryBtn: Button
-        val disabledThingMainLay: LinearLayout
-        val enableThngBtn: Button
+        val bodyTxt:TextView
+        /*val ctgTxt: TextView
+        val goalTxt: TextView*/
+        /*val showHistoryBtn: Button
+        val disabledThingMainLay: LinearLayout*/
+        val reviveThingBtn: Button
+        val discardThingBtn: Button
         var thing: Thing?
-        val localCtgs: Array<String>
-        val engCtgs: Array<String>
-        var engIsLocale: Boolean = false
+
+
 
         init {
             thing = null
-            nameTxt = view.DisabledThingNameTxt.apply { paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG }
-            ctgTxt = view.DisabledThingCatagoryTxt.apply { paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG }
-            goalTxt = view.DisabledThingGoal.apply { paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG }
-            showHistoryBtn = view.DisabledThingShowHistoryBtn
-            disabledThingMainLay = view.DisabledThingMainLayout
-            enableThngBtn = view.DisabledThingEnableBtn.apply {
-                setOnClickListener {
-                    /* organizer.enableThing(thing)*/
-                }
-            }
-            view.setBackgroundColor(Color.WHITE)
+            mainlay = view.disabled_main_layout
+            nameTxt = view.disabled_main_name_txt.apply { setOnClickListener { detailsFunc.invoke(thing!!,view) } }
+            bodyTxt = view.disabled_body_text.apply { setOnClickListener { detailsFunc.invoke(thing!!,view) } }
+            reviveThingBtn = view.disabled_revive_button.apply { setOnClickListener{reviveFunc.invoke(thing!!)} }
+            discardThingBtn = view.disabled_discard_btn.apply { setOnClickListener{
+                discardFunc.invoke(thing!!)} }
+
+
             view.elevation = 10f
-            localCtgs = getStringArrayInLocale(
-                this.itemView.context,
-                "Catagories"
-            )!!
-            if (LanguageSharedData(this.itemView.context).get_lang_code() == "en") {
-                engCtgs = localCtgs;engIsLocale = true
-            } else engCtgs = getStringArrayInLocale(
-                this.itemView.context,
-                "Catagories",
-                "en"
-            )!!
+
         }
 
         private fun getCtgEngToLocale(ctg: String): String {
-            if (engIsLocale) return ctg
+            if (localCtgs.contains(ctg)) return ctg
             return localCtgs[engCtgs.indexOf(ctg)]
         }
 
         private fun getCtgLocaleToEng(ctg: String): String {
-            if (engIsLocale) return ctg
+            if (engCtgs.contains(ctg)) return ctg
             return engCtgs[localCtgs.indexOf(ctg)]
         }
 
         fun setup(thing: Thing) {
             this.thing = thing
-            disabledThingMainLay.setBackgroundColor(
-                getTransparantColor(
-                    this.itemView.context,
-                    thing.type
-                )
-            )
-            nameTxt.setText(thing.name)
-            ctgTxt.setText(getCtgEngToLocale(thing.catagory))
-            goalTxt.setText("" + thing.goal)
-            showHistoryBtn.setOnClickListener {
-                /*organizer.openOneHistoryPopup(thing)*/
+            bodyTxt.setBackgroundColor(getTransparantColor(mainlay.context!!,thing.type))
+            nameTxt.apply { setText(thing.name);setTextColor(getLightColor(context!!,thing.type)) }
+            /*val zeroth = "I am a Thing.\n"*/
+            var first = "Formerly known as "// +name
+            first += thing.name
+            var second = ".\nI used to be a " // + type
+            second += thing.type
+            var third = "\nwho belonged to " // + catagory
+            third += thing.catagory
+            var fourth = ""
+            if(thing.currentCycle >1){
+                fourth += ".\nI completed "+thing.sumHistory.completed + " from " + thing.sumHistory.total + " goals"
             }
+            bodyTxt.setText(/*zeroth +*/ first + second + third + fourth)
         }
     }
 }

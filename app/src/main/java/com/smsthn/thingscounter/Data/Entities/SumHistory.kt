@@ -5,11 +5,13 @@ import androidx.versionedparcelable.VersionedParcelize
 
 @VersionedParcelize
 data class SumHistory(
-    @ColumnInfo(name = "cycle_count")
-    var cycleCount:Int = 0,
+    @ColumnInfo(name = "total")
+    var total:Int = 0,
     @ColumnInfo(name = "sum_count")
     var sumCount:Int = 0,
     @ColumnInfo(name = "sum_goal")
-    var sumGoal:Int
+    var sumGoal:Int,
+    @ColumnInfo(name = "completed")
+    var completed:Int = 0
 
 )

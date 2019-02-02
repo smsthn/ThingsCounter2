@@ -19,7 +19,7 @@
                 android:background="?attr/colorPrimary"
                 android:theme="?attr/actionBarTheme"
                 android:minHeight="?attr/actionBarSize" android:id="@+id/toolbar"
-        />
+                app:titleTextColor="@color/gray_lt2"/>
         <com.google.android.gms.ads.AdView
                 app:adSize="SMART_BANNER"
                 android:layout_width="match_parent"

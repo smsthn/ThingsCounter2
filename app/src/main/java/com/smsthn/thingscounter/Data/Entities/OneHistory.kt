@@ -4,7 +4,7 @@ import androidx.room.*
 import androidx.versionedparcelable.VersionedParcelize
 
 @VersionedParcelize
-@Entity(tableName = "OneHistory",indices = [Index("thing_id")],foreignKeys = [ForeignKey(entity = Thing::class,
+@Entity(tableName = "OneHistory",indices = [Index("thing_id","date",unique = true)],foreignKeys = [ForeignKey(entity = Thing::class,
         parentColumns = ["id"], childColumns = ["thing_id"],onDelete = ForeignKey.CASCADE,onUpdate = ForeignKey.NO_ACTION)])
 data class OneHistory(
     @PrimaryKey(autoGenerate = true)

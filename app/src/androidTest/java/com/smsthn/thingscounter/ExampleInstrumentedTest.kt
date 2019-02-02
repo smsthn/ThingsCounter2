@@ -40,13 +40,13 @@ class ExampleInstrumentedTest {
         */
 /*val ctx =  InstrumentationRegistry.getInstrumentation().context
         val pref = PreferenceManager.getDefaultSharedPreferences(ctx)
-        assert(pref.contains(ctx.getString(R.string.settings_allow_notificaitons_key)))*//*
+        assert(pref.containsLocal(ctx.getString(R.string.settings_allow_notificaitons_key)))*//*
 
         */
 /*ActivityScenario.launch(MainActivity::class.java)
             .use({ scenario -> scenario.onActivity({ activity ->
                 val pref = PreferenceManager.getDefaultSharedPreferences(activity)
-                assert(pref.contains(activity.getString(R.string.settings_allow_notificaitons_key)))
+                assert(pref.containsLocal(activity.getString(R.string.settings_allow_notificaitons_key)))
             }) })*//*
 
     }

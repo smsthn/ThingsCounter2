@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@android:drawable/screen_background_light_transparent"
+              android:paddingBottom="9dp" android:id="@+id/disabled_main_layout" android:layout_marginBottom="30dp"
+              android:layout_marginEnd="15dp" android:layout_marginStart="15dp">
+
+    <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/disabled_main_name_txt" android:textSize="20sp"
+            android:textStyle="italic" android:textAlignment="center" android:background="@color/gray_trans"
+            android:textColor="@color/green_lt1"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/disabled_body_text" android:textSize="18sp"
+            android:textAlignment="center"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:paddingLeft="25dp" android:paddingRight="25dp"
+    >
+        <Button
+                android:text="Revive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/disabled_revive_button" android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored" android:background="@drawable/outline_gray"
+                android:layout_marginEnd="15dp" android:layout_marginStart="15dp"
+                android:backgroundTint="@color/green_trans" android:textColor="@color/darkGreen_dk"
+                android:layout_marginTop="3dp"/>
+        <Button
+                android:text="Discard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/disabled_discard_btn" android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored" android:background="@drawable/outline_gray"
+                android:layout_marginStart="15dp" android:layout_marginEnd="15dp"
+                android:backgroundTint="@color/red_trans" android:textColor="@color/darkRed_dk"
+                android:layout_marginTop="3dp"/>
+    </LinearLayout>
+</LinearLayout>

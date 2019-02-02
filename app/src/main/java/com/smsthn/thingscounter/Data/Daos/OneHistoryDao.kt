@@ -6,7 +6,7 @@ import com.smsthn.thingscounter.Data.Entities.OneHistory
 
 @Dao
 interface OneHistoryDao{
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addOneHistory(oneHistory: OneHistory)
     @Insert
     fun addManyOneHistory(histories:Collection<OneHistory>)
@@ -22,6 +22,8 @@ interface OneHistoryDao{
     fun getAllHistoryOfAsLive(thingId:Long):LiveData<List<OneHistory>>
     @Query("SELECT SUM(countTxt) as countsum,SUM(goalTxt) as goalsum,SUM(CASE WHEN countTxt >= goalTxt THEN 1 ELSE 0 END) as completed,COUNT(id) as total FROM onehistory WHERE thing_id = :thingId")
     fun getCountsGoalsCompletedTotalFromOneHisNotLive(thingId: Long): SumOfOneHis?
+    @Query("DELETE FROM onehistory")
+    fun deleteAllOneHistory()
 }
 
 

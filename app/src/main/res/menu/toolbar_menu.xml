@@ -9,5 +9,7 @@
                 <item android:title="testaddmanythings" android:id="@+id/testaddmanythings"/>
                 <item android:title="testresetthing" android:id="@+id/testresetthing"/>
                 <item android:title="testdeleteall" android:id="@+id/testdeleteall"/>
+                <item android:title="check not reminder" android:id="@+id/checknotreminder"/>
+                <item android:title="checkcyclereminder" android:id="@+id/checkcyclereminder"/>
         </group>
 </menu>

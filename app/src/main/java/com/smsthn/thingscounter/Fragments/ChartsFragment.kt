@@ -14,10 +14,12 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.razerdp.widget.animatedpieview.AnimatedPieView
 import com.smsthn.thingscounter.CustomViews.Charts.makePie
+import com.smsthn.thingscounter.CustomViews.CustomStyles.getLightColor
 import com.smsthn.thingscounter.CustomViews.CustomStyles.getPrimColor
 import com.smsthn.thingscounter.Data.Entities.PrevHistories
 import com.smsthn.thingscounter.Fragments.ViewModels.ChartsViewModel
 import com.smsthn.thingscounter.R
+import kotlinx.android.synthetic.main.charts_fragment.view.*
 
 class ChartsFragment : BottomSheetDialogFragment()  {
 	val args:ChartsFragmentArgs by navArgs()
@@ -68,6 +70,10 @@ class ChartsFragment : BottomSheetDialogFragment()  {
 	    neugoals = view.findViewById(R.id.Prev_His_Neu_Goal)
 	    neucompleted = view.findViewById(R.id.Prev_His_Neu_Completed)
 	    neutotal = view.findViewById(R.id.Prev_His_Neu_Total_Number)
+
+        view.reset_prev_his.setOnClickListener {
+            viewModel.resetAllPrevHistories()
+        }
 	    
 	    return view
     }
@@ -96,11 +102,11 @@ class ChartsFragment : BottomSheetDialogFragment()  {
                         neucompleted.setText(""+neuCompleteds);neutotal.setText(""+neuTotals)
                         val names2 = resources.getString(R.string.counts_goals).split("/",limit = 2).toTypedArray()
                         val clrs = arrayOf("Positive","Negative","Neutral","Black").map {
-                            getPrimColor(context!!,it)
+                           if(it != "Black") getLightColor(context!!,it) else Color.BLACK
                         }.toTypedArray()
-                        makePie(posPie, arrayOf(posCompleteds,posTotals), names2, arrayOf(clrs[0], Color.BLACK),true,14)
-                        makePie(negPie, arrayOf(negCompleteds,negTotals), names2, arrayOf(clrs[1], Color.BLACK),true,14)
-                        makePie(neuPie, arrayOf(neuCompleteds,neuTotals), names2, arrayOf(clrs[2], Color.BLACK),true,14)
+                        makePie(posPie, arrayOf(posCompleteds,posTotals), names2, arrayOf(clrs[0], Color.WHITE),true,14)
+                        makePie(negPie, arrayOf(negCompleteds,negTotals), names2, arrayOf(clrs[1], Color.WHITE),true,14)
+                        makePie(neuPie, arrayOf(neuCompleteds,neuTotals), names2, arrayOf(clrs[2], Color.WHITE),true,14)
                         val allcmpl = posCompleteds+negCompleteds+negCompleteds
                         val alltotal = posTotals+negTotals+neuTotals
                         val pos = if(posTotals == 0)0 else ((posCompleteds.toDouble()/ posTotals.toDouble())*100).toInt()

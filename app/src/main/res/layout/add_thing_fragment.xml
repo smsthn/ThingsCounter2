@@ -2,8 +2,12 @@
 
 <ScrollView
 		xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="match_parent" android:layout_height="match_parent"
-		android:background="@color/black_pr">
+		xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="@color/black_pr"
+		android:backgroundTintMode="src_over"
+		android:foregroundTintMode="src_over" android:backgroundTint="@color/red_trans"
+		android:id="@+id/add_main_layout">
 
 
 	<LinearLayout
@@ -28,7 +32,7 @@
 					android:ems="10"
 					android:id="@+id/AddThingNameTxt" android:hint="@string/name_hint" android:autofillHints=""
 					android:textColor="@color/gray_lt2"
-					android:layout_weight="1" android:textAlignment="center"/>
+					android:layout_weight="1" android:textAlignment="center" android:textColorHint="@color/gray_dk"/>
 		</LinearLayout>
 		<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
 					  android:layout_margin="5dp" android:paddingBottom="9dp" android:paddingTop="9dp">
@@ -38,69 +42,12 @@
 					android:layout_height="wrap_content" android:id="@+id/textView12"
 					android:textColor="@color/gray_lt1" android:textSize="18sp"
 					android:layout_weight="0" android:paddingLeft="7dp"/>
-			<FrameLayout
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:background="@android:drawable/screen_background_light_transparent">
-
-				<com.smsthn.thingscounter.CustomViews.Spinners.CustomCtgSpinner
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content" android:id="@+id/AddCatagorySpinner"
-						style="@style/MsSpins"
-
-						android:spinnerMode="dialog"
-						android:backgroundTint="@android:color/black" android:textAlignment="center"
-				/>
-				<TextView
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content" android:id="@+id/AddCatagoryTxt"
-						android:textSize="18sp"
-						android:textColor="@android:color/transparent"/>
-			</FrameLayout>
-		</LinearLayout>
-		<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-					  android:layout_marginEnd="5dp" android:layout_marginStart="5dp"
-					  android:layout_marginTop="5dp" android:paddingTop="9dp" android:id="@+id/AddTypeRow"
-					  android:paddingBottom="9dp">
-			<TextView
-					android:text="@string/type_doublepoint"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:textColor="@color/gray_lt1" android:textSize="18sp"
-					android:layout_weight="0" android:paddingLeft="7dp"/>
-			<RadioGroup
-					android:layout_width="match_parent"
-					android:layout_height="match_parent" android:id="@+id/AddThingTypeRadGroup"
-					android:orientation="horizontal" android:checkedButton="@+id/AddPositiveRad"
-					android:paddingBottom="2dp" android:paddingTop="1dp"
-					android:paddingEnd="1dp" android:paddingStart="1dp" android:layout_weight="1"
-			>
-				<RadioButton
-						android:text="@string/positive"
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent" android:id="@+id/AddPositiveRad"
-						android:layout_weight="1"
-						android:textColor="@color/gray_lt2"
-						android:paddingStart="3dp"
-						android:paddingEnd="3dp"/>
-				<RadioButton
-						android:text="@string/negative"
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent" android:id="@+id/AddNegativeRad"
-						android:layout_weight="1"
-						android:textColor="@color/gray_lt2"
-						android:paddingStart="3dp"
-						android:paddingEnd="3dp"/>
-				<RadioButton
-						android:text="@string/neutral"
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent" android:id="@+id/AddNeutralRad"
-						android:layout_weight="1"
-						android:textColor="@color/gray_lt2"
-						android:paddingStart="3dp"
-						android:paddingEnd="3dp"/>
-			</RadioGroup>
+			<com.google.android.material.chip.Chip
+					android:layout_width="140dp"
+					android:layout_height="wrap_content" android:id="@+id/add_main_ctg_chip" android:layout_weight="1"
+					android:theme="@style/Base.Theme.MaterialComponents" android:layout_marginEnd="25dp"
+					android:layout_marginStart="25dp" style="@style/Widget.MaterialComponents.Chip.Action"
+					android:backgroundTint="@color/black_lt" android:textColor="@color/gray_lt2"/>
 		</LinearLayout>
 		<LinearLayout
 				android:layout_width="match_parent"
@@ -108,28 +55,18 @@
 				android:layout_marginEnd="5dp" android:layout_marginTop="5dp" android:layout_marginStart="5dp"
 				android:visibility="visible" android:paddingBottom="9dp" android:paddingTop="9dp">
 			<TextView
-					android:text="@string/color_doublepoint"
+					android:text="@string/type_doublepoint"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content" android:id="@+id/textView10" android:textSize="18sp"
 					android:textColor="@color/gray_lt1" android:layout_weight="0"
 					android:paddingTop="9dp" android:paddingStart="7dp"/>
-			<LinearLayout
-					android:orientation="horizontal"
-					android:layout_width="wrap_content"
-					android:layout_height="match_parent" android:layout_weight="1"
-					android:background="@android:drawable/screen_background_light_transparent">
-				<com.smsthn.thingscounter.CustomViews.Spinners.CustomTypeSpinner
-						android:layout_width="match_parent"
-						android:layout_height="match_parent" android:id="@+id/AddTypeSpinner"
-						android:backgroundTint="@android:color/black" style="@style/Widget.AppCompat.Spinner"
-						android:layout_weight="3" android:textAlignment="center"
-				/>
-				<Button
-						android:text="@string/preview"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content" android:id="@+id/OpenColorPickerButton"
-						android:background="#2029b6f6" android:layout_weight="1" android:visibility="gone"/>
-			</LinearLayout>
+			<com.google.android.material.chip.Chip
+					android:layout_width="140dp"
+					android:layout_height="match_parent" android:id="@+id/add_main_type_chip" android:layout_weight="1"
+					style="@style/Widget.MaterialComponents.Chip.Action"
+					android:theme="@style/Base.Theme.MaterialComponents" android:layout_marginEnd="25dp"
+					android:layout_marginStart="55dp" android:backgroundTint="@color/black_lt"
+					android:textColor="@color/gray_lt2"/>
 		</LinearLayout>
 		<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
 					  android:layout_marginBottom="3dp" android:layout_marginEnd="5dp"
@@ -150,6 +87,34 @@
 					android:importantForAutofill="no" android:layout_weight="1" android:textAlignment="center"/>
 		</LinearLayout>
 		<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/BtnsLinLay">
+			<Button
+					android:text="@string/cancel"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:id="@+id/AddThingCancelBtn"
+					android:paddingEnd="3dp"
+					style="@style/Widget.AppCompat.Button"
+					android:paddingStart="3dp" android:layout_weight="1"
+					android:background="@color/colorPrimary" android:layout_marginBottom="15dp"
+					android:layout_marginTop="15dp" android:layout_marginEnd="3dp"
+					android:layout_marginStart="7dp" android:textColor="@color/gray_lt1"
+					android:backgroundTint="@color/red_trans"/>
+			<Button
+					android:text="@string/add"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:id="@+id/AddThingBtn"
+					style="@style/Widget.AppCompat.Button.Borderless"
+					android:layout_marginStart="3dp"
+					android:layout_weight="1"
+					android:background="@color/colorPrimary"
+					android:layout_marginBottom="15dp" android:layout_marginTop="15dp"
+					android:layout_marginEnd="7dp" android:textColor="@color/gray_lt1"
+					android:backgroundTint="@color/red_trans"/>
+		</LinearLayout>
+		<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content" android:baselineAligned="false">
 			<LinearLayout
@@ -164,32 +129,6 @@
 				 android:id="@+id/ColorPickerIncludedLay" android:visibility="visible">
 
 		</include>
-		<LinearLayout
-				android:orientation="horizontal"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/BtnsLinLay">
-			<Button
-					android:text="@string/cancel"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content" android:id="@+id/AddThingCancelBtn"
-					android:paddingEnd="3dp"
-					style="@style/Widget.AppCompat.Button"
-					android:paddingStart="3dp" android:layout_weight="1"
-					android:background="@color/colorPrimary" android:layout_marginBottom="15dp"
-					android:layout_marginTop="15dp" android:layout_marginEnd="3dp"
-					android:layout_marginStart="7dp"/>
-			<Button
-					android:text="@string/add"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content" android:id="@+id/AddThingBtn"
-					style="@style/Widget.AppCompat.Button.Borderless"
-					android:layout_marginStart="3dp"
-					android:layout_weight="1"
-					android:background="@color/colorPrimary"
-					android:layout_marginBottom="15dp" android:layout_marginTop="15dp"
-					android:layout_marginEnd="7dp"/>
-		</LinearLayout>
 	</LinearLayout>
 
 

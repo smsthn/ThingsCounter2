@@ -8,6 +8,7 @@ private const val CYCLE_SHARED_PREFS = "CycleSharedPrefs"
 private const val cycleHour = "CycleHour"
 private const val cycleMinute = "CycleMinute"
 private const val cycleNextDate = "CycleNextDate"
+private const val cycleAllowCycle = "cycleAllowCycle"
 
 class CycleSharedData(context: Context){
     private val appSharedPrefs: SharedPreferences
@@ -39,7 +40,12 @@ class CycleSharedData(context: Context){
         prefsEditor.commit()
     }
 
+    fun get_allowed_cycle() = appSharedPrefs.getBoolean(cycleAllowCycle,true)
 
+    fun set_allowed_cycle(a:Boolean){
+        prefsEditor.putBoolean(cycleAllowCycle, a)
+        prefsEditor.commit()
+    }
 
     fun set_cycle_next_date() {
         val cal = Calendar.getInstance()

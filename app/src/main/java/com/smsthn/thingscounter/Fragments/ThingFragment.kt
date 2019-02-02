@@ -28,9 +28,15 @@ import kotlin.properties.Delegates
 import android.util.Log
 import android.view.*
 import androidx.navigation.fragment.findNavController
+import com.smsthn.thingscounter.BroadCasts.buildNotificationGeneral
+import com.smsthn.thingscounter.BroadCasts.showNotification
+import com.smsthn.thingscounter.CustomViews.CustomStyles.getPrimColor
 import com.smsthn.thingscounter.CustomViews.Popups.CtgTypeChipPopup
+import com.smsthn.thingscounter.Data.Entities.cloneThing
 import com.smsthn.thingscounter.Fragments.SecondaryFragments.AddThingFragment
+import com.smsthn.thingscounter.MainActivity
 import com.smsthn.thingscounter.SharedData.MiscSharedData
+import com.smsthn.thingscounter.SharedData.NotificationSharedData
 
 
 class ThingFragment : ThingAbsFragment() {
@@ -40,16 +46,16 @@ class ThingFragment : ThingAbsFragment() {
     private lateinit var thingRecyclerView: RecyclerView
     private lateinit var viewModel: ThingViewModel
     private lateinit var recAdapter: ThingsRecycleViewAdapter
-    private lateinit var thingDetailsBtmSheet:BottomNavigationDrawerFragment
+    private lateinit var thingDetailsBtmSheet: ThingDetailsFragment
     private lateinit var typerad: RadioGroup
     private lateinit var ctgSpinner: CustomCtgSpinner
-    private lateinit var prefs:SharedPreferences
-    private lateinit var ctgsPopup:CtgTypeChipPopup
-    private lateinit var typesPopup:CtgTypeChipPopup
+    private lateinit var prefs: SharedPreferences
+    private lateinit var ctgsPopup: CtgTypeChipPopup
+    private lateinit var typesPopup: CtgTypeChipPopup
     private var isposnegneu = true
 
 
-    private fun filterThings(){
+    private fun filterThings() {
         try {
             val c = mutableListOf<String>()
             val t = mutableListOf<String>()
@@ -59,25 +65,40 @@ class ThingFragment : ThingAbsFragment() {
             currentTypes!!.theMutableList.forEach {
                 t.add(engTypes!![localTypes!!.indexOf(it)])
             }
-            if (isVisible)recAdapter.filterThings(c,
+            if (isVisible) recAdapter.filterThings(
+                c,
                 t,
-                    isEnabled
-                )
-        }catch (e:java.lang.Exception){Log.d("ThingFragment","Tries to access the adapter befor init")}
+                currentName,
+                isEnabled
+            )
+        } catch (e: java.lang.Exception) {
+            Log.d("ThingFragment", "Tries to access the adapter befor init")
+        }
     }
 
 
-    private var currentCatagories:ThingObservalbeList? =null
-    private var currentTypes:ThingObservalbeList? =null
-        init {
-            currentCatagories= ThingObservalbeList(this::filterThings,this::filterThings)
-            currentTypes= ThingObservalbeList(this::filterThings,this::filterThings)
+    private var currentCatagories: ThingObservalbeList? = null
+    private var currentTypes: ThingObservalbeList? = null
+    private var currentName: String by Delegates.observable("") { d, old, new ->
+        kotlin.runCatching {
+            recAdapter.filterThings(
+                this.currentCatagories!!.get()
+                , this.currentTypes!!.get(), new, isEnabled
+            )
         }
+    }
 
 
     private var isEnabled: Boolean by Delegates.observable(true) { d, old, new ->
         if (isVisible) try {
-            recAdapter.filterThings(this.currentCatagories!!.theMutableList, currentTypes!!.theMutableList, new)
+            val clr = if (new) getPrimColor(context!!, "Black") else getDarkColor(context!!, "Gray")
+            thingRecyclerView.setBackgroundColor(clr)
+            recAdapter.filterThings(
+                this.currentCatagories!!.theMutableList,
+                currentTypes!!.theMutableList,
+                currentName,
+                new
+            )
         } catch (e: Exception) {
         }
     }
@@ -114,8 +135,8 @@ class ThingFragment : ThingAbsFragment() {
         super.onAttach(context)
         context?.also {
 
-            prefs= PreferenceManager.getDefaultSharedPreferences(context)
-            Log.e("THE CURRENT LANGUAGE IS",prefs.getString(getString(R.string.settings_languagees_key),"English"))
+            prefs = PreferenceManager.getDefaultSharedPreferences(context)
+            Log.e("THE CURRENT LANGUAGE IS", prefs.getString(getString(R.string.settings_languagees_key), "English"))
             isposnegneu = MiscSharedData(context).is_pos_neg_neu_allowed()
             localCtgs = getStringArrayInLocale(it, "Catagories")
 
@@ -126,6 +147,9 @@ class ThingFragment : ThingAbsFragment() {
             engTypes = if (isposnegneu) {
                 arrayOf("Positive", "Negative", "Neutral")
             } else getStringArrayInLocale(it, "colors_arr", "en")
+
+            currentCatagories = ThingObservalbeList(this::filterThings, this::filterThings, localCtgs!!, engCtgs!!)
+            currentTypes = ThingObservalbeList(this::filterThings, this::filterThings, localTypes!!, engTypes!!)
         }
 
     }
@@ -137,8 +161,8 @@ class ThingFragment : ThingAbsFragment() {
         super.onViewStateRestored(savedInstanceState)
         savedInstanceState?.apply {
             isEnabled = getBoolean("isEnabled")
-            currentCatagories?.theMutableList?.addAll(getStringArray("currentCatagories")?: arrayOf())
-            currentTypes?.theMutableList?.addAll(getStringArray("currentTypes")?: arrayOf())
+            currentCatagories?.theMutableList?.addAll(getStringArray("currentCatagories") ?: arrayOf())
+            currentTypes?.theMutableList?.addAll(getStringArray("currentTypes") ?: arrayOf())
         }
     }
 
@@ -156,31 +180,42 @@ class ThingFragment : ThingAbsFragment() {
         pr3 = view.progBar3
         thingRecyclerView = view.AllThingsRecycleView
 
-        ctgsPopup = CtgTypeChipPopup(view.context!!,localCtgs!!.toList(),currentCatagories!!,this::restartRecTouch)
-        typesPopup = CtgTypeChipPopup(view.context!!,localTypes!!.toList(),currentTypes!!,this::restartRecTouch,true)
+        ctgsPopup = CtgTypeChipPopup(view.context!!, localCtgs!!.toList(), currentCatagories!!, this::restartRecTouch)
+        typesPopup =
+            CtgTypeChipPopup(view.context!!, localTypes!!.toList(), currentTypes!!, this::restartRecTouch, true)
         view.thing_ctg_btn.setOnClickListener {
             stopRecTouch()
-            ctgsPopup.openPopup(it,currentCatagories!!.theMutableList)
+            ctgsPopup.openPopup(it, currentCatagories!!.theLocalMutableList)
         }
         view.thing_type_btn.setOnClickListener {
             stopRecTouch()
-            typesPopup.openPopup(it,currentTypes!!.theMutableList)
+            typesPopup.openPopup(it, currentTypes!!.theLocalMutableList)
         }
 
         view.add_fab.setOnClickListener {
-            AddThingFragment().show(fragmentManager,"Add Thing")
+            AddThingFragment().show(fragmentManager, "Add Thing")
+        }
+
+        view.search_fab.setOnClickListener {
+            view.search_thing_txt.visibility = View.VISIBLE
+            view.search_thing_txt.requestFocus()
+        }
+        view.search_thing_txt.setOnFocusChangeListener { v, hasFocus ->
+            if(!hasFocus)view.search_thing_txt.visibility = View.GONE
         }
 
 
         view.thing_bottom_nav.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.charts_nav-> ChartsFragment().show(fragmentManager,"Charts")
-                R.id.options_nav2->findNavController().navigate(R.id.settings_fragment_dest)
+            when (it.itemId) {
+                R.id.charts_nav -> ChartsFragment().show(fragmentManager, "Charts")
+                R.id.options_nav2 -> findNavController().navigate(R.id.go_to_perfer)
+                R.id.disabled_nav -> isEnabled = false
+                R.id.things_nav -> isEnabled = true
             }
 
-            view.thing_bottom_nav.selectedItemId = R.id.things_nav
             true
         }
+
 
         return view
     }
@@ -197,18 +232,29 @@ class ThingFragment : ThingAbsFragment() {
             enabledThngs.observe(this@ThingFragment, object : Observer<MutableList<Thing>> {
                 override fun onChanged(t: MutableList<Thing>?) {
                     recAdapter.refreshThings(t ?: return, true)
-                    if (isEnabled) recAdapter.filterThings(currentCatagories!!.get(), currentTypes!!.get(), true)
+                    if (isEnabled) recAdapter.filterThings(
+                        currentCatagories!!.get(),
+                        currentTypes!!.get(),
+                        currentName,
+                        true
+                    )
                 }
             })
             disabledThngs.observe(this@ThingFragment, object : Observer<MutableList<Thing>> {
                 override fun onChanged(t: MutableList<Thing>?) {
                     recAdapter.refreshThings(t ?: return, false)
-                    if (!isEnabled) recAdapter.filterThings(currentCatagories!!.get(), currentTypes!!.get(), false)
+                    if (!isEnabled) recAdapter.filterThings(
+                        currentCatagories!!.get(),
+                        currentTypes!!.get(),
+                        currentName,
+                        false
+                    )
                 }
             })
             typesAndCounts.observe(this@ThingFragment, object : Observer<List<TypeAndCount>> {
                 override fun onChanged(t: List<TypeAndCount>?) {
                     makeSumsAndStuf(t ?: return)
+
                 }
 
             })
@@ -218,11 +264,14 @@ class ThingFragment : ThingAbsFragment() {
         thingRecyclerView.apply {
             layoutManager = LinearLayoutManager(view!!.context)
             recAdapter =
-                ThingsRecycleViewAdapter(mutableListOf(), viewModel::updateThingCount, {thing, view -> BottomNavigationDrawerFragment
-                    .newInstance(thing).show(fragmentManager,thing.name) })
+                ThingsRecycleViewAdapter(mutableListOf(), viewModel::updateThingCount, { thing, view ->
+                    ThingDetailsFragment
+                        .newInstance(thing).show(fragmentManager, thing.name)
+                },
+                    { viewModel.updateThing(cloneThing(it).apply { enabled = true }) },
+                    { viewModel.deleteThing(it) })
             adapter = recAdapter
         }
-
 
 
     }
@@ -240,13 +289,13 @@ class ThingFragment : ThingAbsFragment() {
         val pr = arrayOf(pr1, pr2, pr3)
 
         if (isposnegneu) {
-            listOf( "Positive", "Neutral","Negative").forEachIndexed { i, s ->
+            listOf("Positive", "Neutral", "Negative").forEachIndexed { i, s ->
                 val sth = lst.firstOrNull { tc -> tc.type == s } ?: TypeAndCount("")
-                    sth.apply {
-                    Log.e("$countsum","$goalsum")
+                sth.apply {
+                    Log.e("$countsum", "$goalsum")
                     pr[i]!!.max = this.goalsum
                     pr[i]!!.progress = this.countsum
-
+                    if (NotificationSharedData(context!!).get_allow_nots()) buildNotificationGeneral(context!!)
                 }
             }
         } else {
@@ -260,18 +309,48 @@ class ThingFragment : ThingAbsFragment() {
                         progress = 0;progressBackgroundTintList = clr
                     } else p?.visibility = View.INVISIBLE
                 }
+                buildNotificationGeneral(context!!)
             } else {
-                val l = lst.filter(notZero).sortedByDescending { it.countsum.toDouble() / it.goalsum.toDouble()  }.take(3)
+                val l =
+                    lst.filter(notZero).sortedByDescending { it.countsum.toDouble() / it.goalsum.toDouble() }.take(3)
                 val i = 3 - l.size
+                val tps = mutableListOf<String>()
+                val intdata = mutableListOf<Int>()
                 l.forEachIndexed { i2, tc2 ->
-
+                    tps.add(tc2.type)
+                    intdata.add(tc2.countsum)
+                    intdata.add(tc2.goalsum)
                     pr[i2]?.apply {
                         visibility = View.VISIBLE
                         max = tc2.goalsum;progress = tc2.countsum
-                        progressBackgroundTintList = ColorStateList.valueOf(if(tc2.type != "Black")getDarkColor(context!!, tc2.type) else Color.WHITE )
+                        progressBackgroundTintList = ColorStateList.valueOf(
+                            if (tc2.type != "Black") getDarkColor(
+                                context!!,
+                                tc2.type
+                            ) else Color.WHITE
+                        )
                         progressTintList = ColorStateList.valueOf(getLightColor(context!!, tc2.type))
                     }
                 }
+                NotificationSharedData(context!!).apply {
+                    if (get_allow_nots()) {
+                        if (get_ongoing()) {
+                            showNotification(
+                                context!!,
+                                MainActivity::class.java,
+                                "sadaa",
+                                "dadsa",
+                                tps.toTypedArray(),
+                                true,
+                                false,
+                                intdata.toTypedArray()
+                            )
+                        } else {
+                            buildNotificationGeneral(context!!)
+                        }
+                    }
+                }
+
                 if (i != 0) {
                     val clr = ColorStateList.valueOf(Color.LTGRAY)
                     for (ii in i..2) {
@@ -285,17 +364,17 @@ class ThingFragment : ThingAbsFragment() {
                 }
 
 
-
             }
         }
         view?.main_collapsing?.invalidate()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater!!.inflate(R.menu.toolbar_menu,menu)
+        inflater!!.inflate(R.menu.toolbar_menu, menu)
     }
 
-    val lsnr = object : RecyclerView.OnItemTouchListener{
+    val lsnr = object : RecyclerView.OnItemTouchListener {
         override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
 
         }
@@ -309,21 +388,40 @@ class ThingFragment : ThingAbsFragment() {
         }
     }
 
-    fun stopRecTouch(){
+    fun stopRecTouch() {
         thingRecyclerView.addOnItemTouchListener(lsnr)
     }
-    fun restartRecTouch(){
+
+    fun restartRecTouch() {
         thingRecyclerView.removeOnItemTouchListener(lsnr)
     }
 
 
 }
 
-class ThingObservalbeList(private val addFunc:()->Unit, private val removeFunc:()->Unit){
+class ThingObservalbeList(
+    private val addFunc: () -> Unit, private val removeFunc: () -> Unit, private val localRep: Array<String>,
+    private val englishRep: Array<String>
+) {
     val theMutableList = mutableListOf<String>()
+    val theLocalMutableList = mutableListOf<String>()
     fun get() = theMutableList
-    fun add(value:String){theMutableList.add(value);addFunc.invoke()}
-    fun remove(value:String){theMutableList.remove(value);removeFunc.invoke()}
-    fun contains(element:String)=theMutableList.contains(element)
-    fun clear(){theMutableList.clear();removeFunc.invoke()}
+    fun getLocal() = theLocalMutableList
+    fun add(value: String) {
+        theLocalMutableList.add(value);theMutableList.add(englishRep[localRep.indexOf(value)])
+        addFunc.invoke()
+    }
+
+    fun remove(value: String) {
+        val i = theLocalMutableList.indexOf(value)
+        theLocalMutableList.removeAt(i);theMutableList.removeAt(i)
+        removeFunc.invoke()
+    }
+
+    fun containsLocal(element: String) = theMutableList.contains(element)
+    fun containsEng(element: String) = theMutableList.contains(element)
+    fun clear() {
+        theMutableList.clear();theLocalMutableList.clear()
+        ;removeFunc.invoke()
+    }
 }

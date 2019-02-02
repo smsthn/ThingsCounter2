@@ -33,6 +33,8 @@ interface PrevHistoriesDao{
     fun getPrevHisofCtgAllNotLive(): PrevHistories?
 	@Query("SELECT * FROM previous_histories WHERE catagory = 'All' LIMIT 1")
 	fun getPrevHisofCtgAllLive(): LiveData<List<PrevHistories>>
+    @Query("UPDATE previous_histories AS p SET positive_counts = 0,positive_goals = 0,positive_completed = 0,positive_total = 0,negative_counts = 0,negative_goals = 0,negative_completed = 0,negative_total = 0,neutral_counts = 0,neutral_goals = 0,neutral_completed = 0,neutral_total = 0")
+    fun resetAllPrevHis()
     /*@Query("SELECT * FROM previous_histories")
     fun deleteValuesFromAll()
     @Query("SELECT * FROM previous_histories")

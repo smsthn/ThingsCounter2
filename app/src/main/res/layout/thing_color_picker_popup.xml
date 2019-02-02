@@ -4,30 +4,14 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:id="@+id/ColorPickerMainLayout">
-    
-    <TextView
-            android:text="@string/choose_color"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView14" android:textAlignment="center"
-            android:textColor="@android:color/black" android:textSize="18sp"
-            android:background="@color/gray_trans" android:visibility="gone"/>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
-                  android:orientation="horizontal" android:id="@+id/PickersColorsHolderLayout"
-                  android:layout_marginTop="25dp" android:visibility="gone">
-    </LinearLayout>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/PickersColorsHolderLayoutDarker"
-            android:layout_marginTop="10dp" android:gravity="center" android:visibility="gone">
-    </LinearLayout>
+
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:layout_marginTop="15dp"
     >
         <TextView
-                android:text="@string/enabled_preview"
+                android:text="@string/preview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/textView23" android:textAlignment="center"
                 android:textSize="18sp" android:textColor="@android:color/white" android:layout_marginTop="25dp"
@@ -36,42 +20,5 @@
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content" android:layout_marginEnd="25dp"
                  android:layout_marginStart="25dp" android:layout_marginBottom="25dp" android:layout_marginTop="25dp"/>
-        <TextView
-                android:text="@string/disabled_preview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/textView24" android:textAlignment="center"
-                android:textSize="18sp" android:textColor="@android:color/white" android:layout_marginTop="25dp"
-                android:background="@android:color/black" android:visibility="gone"/>
-        <include layout="@layout/disabled_recycle_one_thing_view"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content" android:layout_marginBottom="25dp"
-                 android:layout_marginEnd="25dp" android:layout_marginStart="25dp" android:layout_marginTop="25dp"
-                 android:visibility="gone"/>
-    </LinearLayout>
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="2dp" android:id="@+id/textView25" android:background="@android:color/darker_gray"
-            android:layout_marginTop="4dp"/>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:visibility="gone">
-        <Button
-                android:text="@string/cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/ColorPickerCancelBtn" android:layout_weight="1"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:background="@drawable/outline_gray_trans_not_round"
-                android:backgroundTint="@color/gray_trans" android:layout_marginTop="1dp"
-                android:layout_marginBottom="2dp"/>
-        <Button
-                android:text="@string/ok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/ColorPickerOkBtn" android:layout_weight="1"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:textSize="12sp"
-                android:background="@drawable/outline_gray_trans_not_round"
-                android:backgroundTint="@color/gray_trans" android:layout_marginTop="1dp"
-                android:layout_marginBottom="2dp"/>
     </LinearLayout>
 </LinearLayout>

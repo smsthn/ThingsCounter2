@@ -151,6 +151,6 @@ interface ThingDao_NotPosNegNeu: ThingDao {
     override fun getAllDisabledThingsNotLiveData():MutableList<Thing>
     @Query ("SELECT type , COUNT(id) AS total,SUM(count) AS countsum,SUM(goal) AS goalsum,SUM(CASE WHEN count >= goal THEN 1 ELSE 0 END) as completed  FROM thing WHERE type NOT IN ('Positive','Negative','Neutral') AND enabled = 1 GROUP BY type ")
     override fun getTypesAndCountsLive():LiveData<List<TypeAndCount>>
-    @Query ("SELECT type , COUNT(id) AS total,SUM(count) AS countsum,SUM(goal) AS goalsum,SUM(CASE WHEN count >= goal THEN 1 ELSE 0 END) as completed  FROM thing WHERE type NOT IN ('Positive','Negative','Neutral') AND enabled = 1 GROUP BY type ")
+    @Query ("SELECT type , COUNT(id) AS total,SUM(count) AS countsum,SUM(goal) AS goalsum,SUM(CASE WHEN count >= goal THEN 1 ELSE 0 END) as completed  FROM thing WHERE type NOT IN ('Positive','Negative','Neutral') AND enabled = 1 GROUP BY type")
     override fun getTypesAndCountsNotLive():List<TypeAndCount>
 }

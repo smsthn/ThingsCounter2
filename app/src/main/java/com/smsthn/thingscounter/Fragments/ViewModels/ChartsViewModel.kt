@@ -10,7 +10,7 @@ import com.smsthn.thingscounter.Data.ThingsDb
 
 class ChartsViewModel : ViewModel() {
     var prevHisLive:LiveData<PrevHistories>? = null
-
+    private lateinit var db:ThingsDb
 
     lateinit var prevHistoriesDao: PrevHistoriesDao
     init {
@@ -18,11 +18,18 @@ class ChartsViewModel : ViewModel() {
     }
     fun initThis(application: Application,ctg:String){
 	    ThingsDb.getAppDataBase(application)?.apply {
+            db = this
 		    prevHistoriesDao = prevHistoriesDao().apply {
 
 				    prevHisLive = getPrevHisForCatagory(ctg)
 
 		    }
 	    } ?: throw NullPointerException("ThingViewModel db Was null")
+    }
+    fun resetAllPrevHistories(){
+        db.runInTransaction {
+            db.prevHistoriesDao().resetAllPrevHis()
+            db.oneHistoryDao().deleteAllOneHistory()
+        }
     }
 }

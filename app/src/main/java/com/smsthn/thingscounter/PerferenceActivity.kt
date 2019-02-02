@@ -3,20 +3,27 @@ package com.smsthn.thingscounter
 import android.app.TimePickerDialog
 import android.content.Context
 import android.graphics.Color
+import android.os.AsyncTask
 import android.os.Bundle
 import android.widget.TimePicker
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreference
+import com.smsthn.thingscounter.BroadCasts.ThingBroadcastReciever
 import com.smsthn.thingscounter.BroadCasts.buildNotificationGeneral
+import com.smsthn.thingscounter.BroadCasts.cancelRepeatedPendingIntent
 import com.smsthn.thingscounter.CustomViews.CustomStyles.getLightColor
 import com.smsthn.thingscounter.CustomViews.CustomStyles.getPrimColor
 import com.smsthn.thingscounter.CustomViews.CustomStyles.getStringArrayInLocale
+import com.smsthn.thingscounter.CustomViews.Dialogs.buildAlertDialog
+import com.smsthn.thingscounter.CustomViews.Dialogs.buildYesNoDialog
+import com.smsthn.thingscounter.Data.ThingsDb
 import com.smsthn.thingscounter.Fragments.TimePickerReason
 import com.smsthn.thingscounter.SharedData.*
 
 
-class NorificationSettings : PreferenceFragmentCompat() {
+class ThingPreferenceFragment : PreferenceFragmentCompat() {
     private lateinit var lang: LanguageSharedData
     private lateinit var misc: MiscSharedData
     private lateinit var cycle: CycleSharedData
@@ -43,6 +50,26 @@ class NorificationSettings : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.pref_notification, rootKey)
 
+        (findPreference(getString(R.string.settings_allow_notificaitons_key))as SwitchPreference).apply {
+            isChecked = notif.get_allow_nots()
+            setOnPreferenceChangeListener { preference, newValue ->
+                notif.set_allow_nots(newValue as Boolean)
+                buildNotificationGeneral(context!!)
+                true
+            }
+        }
+        (findPreference(getString(R.string.settings_notoficaiton_ongoing_key)) as SwitchPreference).apply {
+            isChecked = notif.get_ongoing()
+            val time = (findPreference(getString(R.string.setting_notification_time_key)) as Preference)
+            time.isEnabled = !notif.get_ongoing()
+            setOnPreferenceChangeListener { preference, newValue ->
+                notif.set_ongoing(newValue as Boolean)
+                buildNotificationGeneral(context!!)
+                time.isEnabled = !(newValue as Boolean)
+                true
+            }
+        }
+
         (findPreference(getString(R.string.stng_posnegneu_key)) as ListPreference).apply {
             setValueIndex(
                 if( MiscSharedData(context!!).is_pos_neg_neu_allowed())0 else 1
@@ -55,7 +82,9 @@ class NorificationSettings : PreferenceFragmentCompat() {
                     )
                     else -> MiscSharedData(context!!).set_pos_neg_neu_allowed(false)
                 }
+                if(notif.get_allow_nots()) buildNotificationGeneral(context!!)
                 summary = value
+                activity!!.recreate()
 
                 true
             }
@@ -81,7 +110,13 @@ class NorificationSettings : PreferenceFragmentCompat() {
                 true
             }
         }
-        timepickerLsr = ThingsOnTimeSetListener(notif, cycle)
+        timepickerLsr = ThingsOnTimeSetListener(notif, cycle) { h, m->
+            arrayOf(R.string.setting_notification_time_key,R.string.settings_daily_reset_time_key).forEach {
+                var hs = "";var ms = ""
+                if(h<10)hs="0";hs = hs + h
+                if(m<10)ms="0";ms = ms + m
+                (findPreference(getString(it))as Preference).summary = hs + ":" + ms
+            }}
         timePickerDialog = TimePickerDialog(context!!, timepickerLsr, 0, 0, true)
         (findPreference(getString(R.string.setting_notification_time_key)) as Preference)
             .apply {
@@ -111,10 +146,41 @@ class NorificationSettings : PreferenceFragmentCompat() {
                     true
                 }
             }
+        (findPreference(getString(R.string.stng_allow_overcounting_key)) as SwitchPreference).apply {
+            isChecked = misc.is_over_counting_allowed()
+            fun stchk(value:Boolean){misc.set_overcounting_allowed(value)}
+            setOnPreferenceChangeListener { preference, newValue ->
+                if(!(newValue as Boolean)){
+                    buildAlertDialog(activity!!, R.string.allow_overcounting_diag_msg,
+                        R.string.allow_overcounting, {
+                            AsyncTask.execute {
+                                ThingsDb.INSTANCE!!.thingDao().setOvercountsToGoals()
+                            }
+                            stchk(newValue)
+                        }, { isChecked = true ;stchk(true) })
+                } else stchk(newValue)
+
+                true
+            }
+        }
+        (findPreference(getString(R.string.settings_allow_daily_reset_key)) as SwitchPreference).apply {
+            isChecked = cycle.get_allowed_cycle()
+            setOnPreferenceChangeListener{pref,newval->
+                newval as Boolean
+                if(newval != cycle.get_allowed_cycle()){
+                    if(newval) initCycleOrganizerBroadCast(context!!,cycle.get_hour(),cycle.get_minute())
+                    else cancelRepeatedPendingIntent(context!!,ThingBroadcastReciever::class.java,
+                        THING_CYCLE_REQ_CODE, THING_CYCLE_INTENT_ACTION)
+                    cycle.set_allowed_cycle(newval)
+                }
+                true
+            }
+        }
+        //TODO ADD THE DATA DISPLAY TYPE STUFF
     }
 
 
-    inner class ThingsOnTimeSetListener(private val notif: NotificationSharedData, private val cyc: CycleSharedData) :
+    inner class ThingsOnTimeSetListener(private val notif: NotificationSharedData, private val cyc: CycleSharedData,private val onSettime:(Int,Int)->Unit) :
         TimePickerDialog.OnTimeSetListener {
         var reason = TimePickerReason.Cycle
         override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
@@ -125,6 +191,7 @@ class NorificationSettings : PreferenceFragmentCompat() {
                 notif.apply { set_hour(hourOfDay);set_min(minute) }
                 buildNotificationGeneral(context!!)
             }
+            onSettime.invoke(hourOfDay,minute)
         }
 
     }

@@ -3,11 +3,16 @@ package com.smsthn.thingscounter.BroadCasts
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.Toast
+import com.smsthn.thingscounter.CustomViews.CustomStyles.getDarkColor
+import com.smsthn.thingscounter.CustomViews.CustomStyles.getLightColor
 import com.smsthn.thingscounter.Data.Entities.Thing
 import com.smsthn.thingscounter.Data.ThingsDb
 import com.smsthn.thingscounter.MainActivity
@@ -98,8 +103,17 @@ fun makeNotificationNotPosNegNeu(context: Context,
                                  ongoing: Boolean,
                                  notificationSharedData: NotificationSharedData
 ) {
-    val data = db.NotPosNegNeuThingDao().getTypesAndCountsNotLive().take(3)
-    if (data.isNullOrEmpty()) {
+    val lst = db.NotPosNegNeuThingDao().getTypesAndCountsNotLive()
+    val l = lst.filter{it.countsum != 0 && it.goalsum != 0}
+        .sortedByDescending { it.countsum.toDouble() / it.goalsum.toDouble()  }.take(3)
+
+
+
+
+
+
+
+    if (l.isNullOrEmpty()) {
         if ((context as? MainActivity?) != null)
             if (!context.isDestroyed) Handler(Looper.getMainLooper()).post {
             Toast.makeText(context, "There are Currently No Things To Show The Count", Toast.LENGTH_SHORT).show()
@@ -120,11 +134,11 @@ fun makeNotificationNotPosNegNeu(context: Context,
 
     }else {
         val index = 0
-        val intData = Array(data.size * 2) { v ->
-            if (v % 2 == 0) data[(v / 2)].countsum
-            else data[v / 2].goalsum
+        val intData = Array(l.size * 2) { v ->
+            if (v % 2 == 0) l[(v / 2)].countsum
+            else l[v / 2].goalsum
         }
-        val strData = Array(data.size) { v -> data[v].type }
+        val strData = Array(l.size) { v -> l[v].type }
         showNotification(
             context,
             MainActivity::class.java,

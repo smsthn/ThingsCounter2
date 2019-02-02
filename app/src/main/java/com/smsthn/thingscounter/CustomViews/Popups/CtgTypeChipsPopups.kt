@@ -17,7 +17,6 @@ import androidx.core.view.children
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.smsthn.thingscounter.CustomViews.CustomStyles.getDarkColor
-import com.smsthn.thingscounter.CustomViews.CustomStyles.getTransparantColor
 import com.smsthn.thingscounter.Fragments.ThingObservalbeList
 import com.smsthn.thingscounter.R
 
@@ -31,10 +30,11 @@ class CtgTypeChipPopup(context: Context, lst:Collection<String>, checkedCtgs: Th
         layout = infl.inflate(R.layout.mat_lin_lay,null) as LinearLayout
         chipGroup = ChipGroup(layout.context).apply {
             chipSpacingHorizontal = 50
-            isSingleSelection = isSingleSelection
+            isSingleSelection = isSingleChoice
             for (item in lst){
                 val chip = Chip((layout.context)).apply {
                     isCheckable = true
+
                     setTextAppearanceResource(android.R.style.TextAppearance_Material)
                     setText(item)
                     setTextColor(Color.BLACK)
@@ -48,18 +48,30 @@ class CtgTypeChipPopup(context: Context, lst:Collection<String>, checkedCtgs: Th
                     this.closeIconSize = 50f
                     this.chipIconSize = 50f
 
-                    setOnCheckedChangeListener { buttonView: CompoundButton?, isChecked: Boolean ->
-                       val c= this.text.toString()
-                        //TODO FIX IS CHECK NOT BEING RECOGNIZED
-                        if(!checkedCtgs.contains(c))checkedCtgs.add(c)
-                        else if(checkedCtgs.contains(c))checkedCtgs.remove(c)
-                        Log.d("DID STH TO CATAGORY $c","NOW THE LIST IS $checkedCtgs")
+                    if(!isSingleChoice){
+                        setOnCheckedChangeListener { buttonView: CompoundButton?, isChecked: Boolean ->
+                            val c= this.text.toString()
+                            //TODO FIX IS CHECK NOT BEING RECOGNIZED
+                            if(!checkedCtgs.containsLocal(c))checkedCtgs.add(c)
+                            else if(checkedCtgs.containsLocal(c))checkedCtgs.remove(c)
+                            Log.d("DID STH TO CATAGORY $c","NOW THE LIST IS $checkedCtgs")
+                        }
                     }
                 }
                 this.addView(chip)
-            }
-            setOnCheckedChangeListener { chipGroup, i ->
 
+            }
+
+            if(isSingleChoice){
+                this.setOnCheckedChangeListener { chipGroup, i ->
+                    val chip = this.findViewById<Chip>(i)
+                    if (chip == null) {
+                        return@setOnCheckedChangeListener
+                    }
+                    val c= chip.text.toString()
+                    if(!checkedCtgs.containsLocal(c))checkedCtgs.add(c)
+                    else if(checkedCtgs.containsLocal(c))checkedCtgs.remove(c)
+                }
             }
         }
         layout.addView(chipGroup)

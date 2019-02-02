@@ -43,5 +43,14 @@
         <item name="android:textColor">@drawable/settings_text_color</item>
 
     </style>
+    <style name="AppTheme.WhiteText" parent="Theme.MaterialComponents.Light">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="details_status_chip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@drawable/details_chips_bg</item>
+    </style>
+    <style name="thing_btm_nav" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="labelVisibilityMode">labeled</item>
+    </style>
 
 </resources>

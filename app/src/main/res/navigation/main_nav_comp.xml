@@ -71,7 +71,7 @@
 	<action android:id="@+id/action_main_nav_comp_pop" app:popUpTo="@id/thing_frag_dest" app:popUpToInclusive="true"
 			app:popEnterAnim="@anim/slide_in_left" app:popExitAnim="@anim/slide_out_right"
 			app:launchSingleTop="true"/>
-    <fragment android:id="@+id/perference_activity_dest" android:name="com.smsthn.thingscounter.NorificationSettings"
+    <fragment android:id="@+id/perference_activity_dest" android:name="com.smsthn.thingscounter.ThingPreferenceFragment"
               android:label="NorificationSettings"/>
     <action android:id="@+id/go_to_perfer" app:destination="@id/perference_activity_dest" app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"/>
