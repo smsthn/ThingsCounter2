@@ -1,0 +1,341 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "0f526d0e07852ba0deefa5ea794c0623",
+    "entities": [
+      {
+        "tableName": "Thing",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`count` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` TEXT NOT NULL, `name` TEXT NOT NULL, `catagory` TEXT NOT NULL, `enabled` INTEGER NOT NULL, `goal` INTEGER NOT NULL, `repeat_freq` INTEGER NOT NULL, `creation_date` INTEGER NOT NULL, `cycles_completed` INTEGER NOT NULL, `currentDate` INTEGER NOT NULL, `total` INTEGER NOT NULL, `sum_count` INTEGER NOT NULL, `sum_goal` INTEGER NOT NULL, `completed` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "count",
+            "columnName": "count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "catagory",
+            "columnName": "catagory",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "enabled",
+            "columnName": "enabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "goal",
+            "columnName": "goal",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "repeatFreq",
+            "columnName": "repeat_freq",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "creationDate",
+            "columnName": "creation_date",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currentCycle",
+            "columnName": "cycles_completed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currentDate",
+            "columnName": "currentDate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sumHistory.total",
+            "columnName": "total",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sumHistory.sumCount",
+            "columnName": "sum_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sumHistory.sumGoal",
+            "columnName": "sum_goal",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sumHistory.completed",
+            "columnName": "completed",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_Thing_id_name_type",
+            "unique": false,
+            "columnNames": [
+              "id",
+              "name",
+              "type"
+            ],
+            "createSql": "CREATE  INDEX `index_Thing_id_name_type` ON `${TABLE_NAME}` (`id`, `name`, `type`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "OneHistory",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `thing_id` INTEGER NOT NULL, `cycle_num` INTEGER NOT NULL, `cycle_freq` INTEGER NOT NULL, `countTxt` INTEGER NOT NULL, `goalTxt` INTEGER NOT NULL, `date` INTEGER NOT NULL, FOREIGN KEY(`thing_id`) REFERENCES `Thing`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "thingId",
+            "columnName": "thing_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cycleNum",
+            "columnName": "cycle_num",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cycleFreq",
+            "columnName": "cycle_freq",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "count",
+            "columnName": "countTxt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "goal",
+            "columnName": "goalTxt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_OneHistory_thing_id_date",
+            "unique": true,
+            "columnNames": [
+              "thing_id",
+              "date"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_OneHistory_thing_id_date` ON `${TABLE_NAME}` (`thing_id`, `date`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Thing",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "thing_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "AllCatagories",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ctg` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ctg",
+            "columnName": "ctg",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Previous_Histories",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `catagory` TEXT NOT NULL, `positive_counts` INTEGER NOT NULL, `negative_counts` INTEGER NOT NULL, `neutral_counts` INTEGER NOT NULL, `positive_goals` INTEGER NOT NULL, `negative_goals` INTEGER NOT NULL, `neutral_goals` INTEGER NOT NULL, `positive_completed` INTEGER NOT NULL, `negative_completed` INTEGER NOT NULL, `neutral_completed` INTEGER NOT NULL, `positive_total` INTEGER NOT NULL, `negative_total` INTEGER NOT NULL, `neutral_total` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ctg",
+            "columnName": "catagory",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "posCounts",
+            "columnName": "positive_counts",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "negCounts",
+            "columnName": "negative_counts",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "neuCounts",
+            "columnName": "neutral_counts",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "posGoals",
+            "columnName": "positive_goals",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "negGoals",
+            "columnName": "negative_goals",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "neuGoals",
+            "columnName": "neutral_goals",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "posCompleteds",
+            "columnName": "positive_completed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "negCompleteds",
+            "columnName": "negative_completed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "neuCompleteds",
+            "columnName": "neutral_completed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "posTotals",
+            "columnName": "positive_total",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "negTotals",
+            "columnName": "negative_total",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "neuTotals",
+            "columnName": "neutral_total",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_Previous_Histories_id_catagory",
+            "unique": false,
+            "columnNames": [
+              "id",
+              "catagory"
+            ],
+            "createSql": "CREATE  INDEX `index_Previous_Histories_id_catagory` ON `${TABLE_NAME}` (`id`, `catagory`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"0f526d0e07852ba0deefa5ea794c0623\")"
+    ]
+  }
+}
